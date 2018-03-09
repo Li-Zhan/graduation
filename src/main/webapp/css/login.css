@@ -1,0 +1,37 @@
+@charset "UTF-8";
+.am-container {
+  width: 1366px !important;
+  max-width: none;
+}
+#demo-slider-0{
+	width: 660px;
+    margin-top: 60px;
+    margin-left: 40px;
+    background: red;
+}
+#slider{
+	width: 660px;
+    margin-top: 60px;
+    margin-left: 40px;
+    float: left;
+}
+#panel {
+    width: 350px;
+    margin-top: 100px;
+    margin-right: 83px;
+    float: right;
+    height: 329px;
+}
+#panel-font{
+	text-align: center;;
+}
+#panel2 {
+    width: 370px;
+    margin-top: 75px;
+    margin-right: 93px;
+    float: right;
+    height: 340px;
+}
+#panel2 form{
+	margin: 18px;
+}
