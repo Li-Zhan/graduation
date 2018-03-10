@@ -28,61 +28,67 @@
   </div> 
 </header>
 
-<div class="am-u-lg-7" style="margin-top:  30px;margin-bottom: 60px">
-	<div class="am-slider am-slider-default" data-am-flexslider>
-	  <ul class="am-slides">
-	    <li><img src="http://s.amazeui.org/media/i/demos/bing-1.jpg" /></li>
-	    <li><img src="http://s.amazeui.org/media/i/demos/bing-2.jpg" /></li>
-	  </ul>
-	</div>
+<div id="login_imgDiv" class="am-panel am-panel-default am-u-lg-12">
+    <div class="am-panel-bd">
+<!-- 		<div class="am-u-lg-7" style="margin-top:  30px;">
+			<img src="http://s.amazeui.org/media/i/demos/bw-2014-06-19.jpg" class=" am-radius am-img-thumbnail" alt=""/>
+			<div class="am-slider am-slider-default" data-am-flexslider>
+			  <ul class="am-slides">
+			    <li><img src="http://s.amazeui.org/media/i/demos/bing-1.jpg" /></li>
+			    <li><img src="http://s.amazeui.org/media/i/demos/bing-2.jpg" /></li>
+			  </ul>
+			</div>
+		</div> -->
+		
+		<div id="login_div" class="am-u-lg-5 am-fr">
+			<section class="am-panel am-panel-default">
+			  <header class="am-panel-hd">
+			    <h3 class="am-panel-title" style="text-align: center;">账号密码登录</h3>
+			  </header>
+			  <div class="am-panel-bd">
+			       <form class="am-form tpl-form-line-form">
+			        <div class="am-form-group am-input-group">
+			        	<span class="am-input-group-label"><i class="am-icon-user am-icon-fw"></i></span>
+			            <input type="text" class="tpl-form-input" id="user-name" placeholder="请输入账号">
+			        </div>
+			        <div class="am-form-group am-input-group">
+			         	<span class="am-input-group-label"><i class="am-icon-lock am-icon-fw"></i></span>
+			            <input type="password" class="tpl-form-input" id="user-password" placeholder="请输入密码">
+			        </div>
+			        <div class="am-form-group am-cf">
+			          <div class="am-fl" style="width: 56%;">
+			          	<input type="text" class="tpl-form-input" placeholder="请输入验证码">
+			          </div>
+			          <div class="am-fl" style="margin: 3px 0 0 6px;">
+			          	<!-- <input type="text" class="tpl-form-input" placeholder="请输入账号"> -->
+			          	<img id="imgValidate" style="width: 86px;" src="code.jsp" onclick="refresh()" title="看不清可单击图片刷新">
+				        <a id="imgValidate_a" href="#" class="am-fr" style="margin: 3px 0 0 3px;" onclick="refresh()">看不清</a>
+			          </div>
+			        </div>
+			        <div class="am-form-group">
+			            <button type="button" class="am-btn am-btn-primary  am-btn-block tpl-btn-bg-color-success  tpl-login-btn">登录</button>
+			        </div>
+			        <div class="am-form-group tpl-login-remember-me" style="display: inline;">
+			            <input id="remember-me" type="checkbox">
+			            <label for="remember-me">记住密码</label>
+			        </div>
+			        <span class="am-fr detail-p" style="color: #999;">忘记密码请联系管理员</span>
+			    </form>
+			  </div>
+			</section>
+		</div>
+    </div>
 </div>
 
 
-<section class="am-panel am-panel-default" id="panel2">
-  <header class="am-panel-hd">
-    <h3 class="am-panel-title" style="text-align: center;">账号密码登录</h3>
-  </header>
-  <div class="am-panel-bd">
-       <form class="am-form tpl-form-line-form">
-        <div class="am-form-group am-input-group">
-        	<span class="am-input-group-label"><i class="am-icon-user am-icon-fw"></i></span>
-            <input type="text" class="tpl-form-input" id="user-name" placeholder="请输入账号">
-        </div>
-        <div class="am-form-group am-input-group">
-         	<span class="am-input-group-label"><i class="am-icon-lock am-icon-fw"></i></span>
-            <input type="password" class="tpl-form-input" id="user-password" placeholder="请输入密码">
-
-        </div>
-        <div class="am-form-group am-cf">
-          <div class="am-fl" style="width: 160px;">
-          	<input type="text" class="tpl-form-input" placeholder="请输入验证码">
-          </div>
-          <div class="am-fl" style="width: 86px;margin-left: 6px;margin-top: 3px;">
-          	<!-- <input type="text" class="tpl-form-input" placeholder="请输入账号"> -->
-          	<img id="imgValidate" style="width: 86px;" src="code.jsp" onclick="refresh()" title="看不清可单击图片刷新">
-          </div>
-          <a href="#" class="am-fr" style="margin-top: 6px;" onclick="refresh()">看不清</a>
-        </div>
-        <div class="am-form-group">
-            <button type="button" class="am-btn am-btn-primary  am-btn-block tpl-btn-bg-color-success  tpl-login-btn">登录</button>
-        </div>
-        <div class="am-form-group tpl-login-remember-me" style="display: inline;">
-            <input id="remember-me" type="checkbox">
-            <label for="remember-me">记住密码</label>
-        </div>
-        <span class="am-fr detail-p">忘记密码请联系管理员</span>
-    </form>
-  </div>
-</section>
-
-<div class="am-u-lg-7" >
-<div class="am-panel am-panel-default">
+<div class="am-u-lg-7" style="margin-top: 10px;" >
+<div class="am-panel am-panel-default" style="border-radius: 6px;">
 	  <header class="am-panel-hd">
 	    <h3 class="am-panel-title">通知公告</h3>
 	  </header>
 	  <!-- <div class="am-panel-bd"></div> -->
 	  <ul class="am-list am-list-border">
-	      <li><a href="#" class="am-text-truncate">111111111111</a></li>
+	      <li><a href="#" class="am-text-truncate">111111111111<span class="am-fr">2018-01-01</span></a></li>
 	      <li><a href="#" class="am-text-truncate">111111111111</a></li>
 	      <li><a href="#" class="am-text-truncate">111111111111</a></li>
 	      <li><a href="#" class="am-text-truncate">111111111111</a></li>
@@ -97,8 +103,8 @@
 	 </div>
 	</div>
 </div>
-<div class="am-u-lg-5" >
-<div class="am-panel am-panel-default">
+<div class="am-u-lg-5" style="margin-top: 10px;" >
+<div class="am-panel am-panel-default" style="border-radius: 6px;">
   <header class="am-panel-hd">
     <h3 class="am-panel-title">文件下载</h3>
   </header>
@@ -137,7 +143,7 @@
   </div>
 </div>
 
-<div data-am-widget="gotop" class="am-gotop am-gotop-fixed" style="z-index: -999;" >
+<div data-am-widget="gotop" class="am-gotop am-gotop-fixed" >
   <a href="#top" title="回到顶部">
       <span class="am-gotop-title">回到顶部</span>
         <i class="am-gotop-icon am-icon-chevron-up"></i>
@@ -156,14 +162,17 @@
 <script src="amazeui/js/amazeui.min.js"></script>
 <script>
 
-	//刷新验证码
-	function refresh(){
+  //刷新验证码
+  function refresh(){
 	    document.getElementById("imgValidate").src="code.jsp?"+new Date();
-	    return false;
-	   }
+  }
 
   $(function() {
-   
+	  
+	$('#imgValidate_a').click(function () {
+		refresh();
+		return false;
+	});
 
   });
 </script>
