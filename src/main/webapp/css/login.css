@@ -4,15 +4,29 @@
   max-width: none;
 }
 #login_imgDiv{
-	margin-top:  30px; 
-	background: url('../img/a.png') no-repeat; 
-	background-size:100% 100%;    
-	margin-left: 15px;
+ 	margin-top:  30px;
+	background: url('../img/a.png') no-repeat;
+ 	background-size:100% 100%;    
+ 	margin-left: 15px;
     width: 1307px;
     border-radius: 8px;
 }
 #login_div{
 	padding-top: 26px;
 	width: 383px;
+	float: right;
+}
+#inform_ul li span:nth-child(1){
+	display: inline-block;
+	float: left;
+}
+#inform_ul li span:nth-child(2){
+	float: right;
+}
+#down_ul li span:nth-child(1){
+	display: inline-block;
+	float: left;
+}
+#down_ul li span:nth-child(2){
 	float: right;
 }
