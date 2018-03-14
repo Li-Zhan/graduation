@@ -142,7 +142,7 @@
 						class="nav-link"> <i class="am-icon-home"></i> <span>首页</span>
 					</a></li>
 					<li class="tpl-left-nav-item"><a href="schoose.html"
-						class="nav-link active"> <i class="am-icon-check-square-o"></i> <span>选择课题</span>
+						class="nav-link"> <i class="am-icon-check-square-o"></i> <span>选择课题</span>
 					</a></li>
 
 					<li class="tpl-left-nav-item"><a href="javascript:;"
@@ -153,11 +153,9 @@
 						<ul class="tpl-left-nav-sub-menu" style="display: block;">
 							<li><a href="sktbg.html"> <i
 									class="am-icon-angle-right"></i> <span>开题报告</span>
-							</a> <a href="szqjc.html"> <i
+							</a> <a href="szqjc.html" class="nav-link active"> <i
 									class="am-icon-angle-right"></i> <span>中期检查</span>
-							</a><!--  <a href="form-news.html"> <i class="am-icon-angle-right"></i>
-									<span>上传论文</span>
-							</a>  --><a href="smdb.html"> <i
+							</a><a href="smdb.html"> <i
 									class="am-icon-angle-right"></i> <span>免答辩申请</span>
 							</a></li>
 						</ul></li>
@@ -208,198 +206,68 @@
 			</div>
 		</div>
 
+
 		<div class="tpl-content-wrapper am-g">
-		
-		<div class="teacher_search_title am-panel am-panel-default">
-		    <div class="am-panel-bd">
-				<div class="am-cf">
-				  <div class=" am-fl"><span class="tpl-content-page-title">教师列表</span></div>
-				  <div class="am-fr">
-				    <div class="am-input-group am-input-group-sm">
-				      <input type="text" class="am-form-field" placeholder="根据教师姓名搜索">
-				      <span class="am-input-group-btn" style="width: 30%;">
-				        <button class="am-btn am-btn-default" type="button">搜索</button>
-				      </span>
-				    </div>  
-				  </div>
+
+			<div class="tpl-content-page-title" style="margin-bottom: 10px;">填写中期检查反馈表</div>
+
+			<div class="am-panel am-panel-default">
+				<div class="am-panel-bd">
+					<div style="height: 800px;">
+							<table class="am-table am-table-bordered  am-table-centered am-table-compact">
+								<tbody>
+									<tr>
+										<td class="am-text-middle" style="width: 150px;">1.你是否按照计划进度进行工作?你的工作态度和遵守纪律情况如何?</td>
+										<td><textarea style="width: 100%; height: 200px;"></textarea></td>
+									</tr>
+									<tr>
+										<td class="am-text-middle" style="width: 150px;">2.在撰写开题报告的时候,你是否得到了指导老师的有力指导?</td>
+										<td>
+											<div class="am-fl">
+												<div class="am-radio">
+													<label class="am-fl"> <input type="radio"
+														name="doc-radio-1" value="option1" checked>得到有力的指导
+													</label>
+												</div>
+												<div class="am-radio">
+													<label class="am-fl"> <input type="radio"
+														name="doc-radio-1" value="option2">得到一般性的指导
+													</label>
+												</div>
+												<div class="am-radio">
+													<label class="am-fl"> <input type="radio"
+														name="doc-radio-1" value="option2">得到少许指导
+													</label>
+												</div>
+												<div class="am-radio">
+													<label class="am-fl"> <input type="radio"
+														name="doc-radio-1" value="option2">没有得到指导
+													</label>
+												</div>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td class="am-text-middle" style="width: 150px;">3.有何困难和要求?</td>
+										<td><textarea style="width: 100%; height: 200px;"></textarea></td>
+									</tr>
+									<tr>
+										<td class="am-text-middle" style="width: 150px;">4.平均每周与指导老师见面次数(或几小时)?</td>
+										<td><textarea style="width: 100%; height: 200px;"></textarea></td>
+									</tr>
+								</tbody>
+							</table>
+							<button id="zqjc_btn" type="button" class="am-btn am-btn-primary am-radius am-fr"
+								data-am-loading="{spinner: 'circle-o-notch', loadingText: '提交中...', resetText: '提交完成'}">
+								提交中期检查反馈表</button>
+					</div>
 				</div>
-		    </div>
+			</div>
+
 		</div>
-		
-				<div class="am-u-lg-3 am-u-md-3 am-u-sm-6">
-					<div class="am-thumbnail">
-						<p class="noChooseProjectNum">
-							<i class="am-icon-exclamation-triangle"></i>
-							<span>5</span>
-							个课题未选
-						</p>
-						<p>
-							<img class="am-circle am-center am-img-thumbnail"
-								src="http://s.amazeui.org/media/i/demos/bw-2014-06-19.jpg?imageView/1/w/1000/h/1000/q/80"
-								width="140" height="140" />
-						</p>
-						<div class="am-thumbnail-caption">
-							<p class="am-text-center">青蛙仙人</p>
-							<p>
-								<button class="am-btn am-btn-primary am-btn-block choose_btn">选择该老师的课题</button>
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="am-u-lg-3 am-u-md-3 am-u-sm-6">
-					<div class="am-thumbnail">
-						<p class="noChooseProjectNum">
-							<i class="am-icon-exclamation-triangle"></i>
-							<span>5</span>
-							个课题未选
-						</p>
-						<p>
-							<img class="am-circle am-center am-img-thumbnail"
-								src="../img/user02.png" width="140" height="140" />
-						</p>
-						<div class="am-thumbnail-caption">
-							<p class="am-text-center">xx老师</p>
-							<p>
-								<button class="am-btn am-btn-primary am-btn-block choose_btn">选择该老师的课题</button>
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="am-u-lg-3 am-u-md-3 am-u-sm-6">
-					<div class="am-thumbnail">
-						<p class="noChooseProjectNum">
-							<i class="am-icon-exclamation-triangle"></i>
-							<span>5</span>
-							个课题未选
-						</p>
-						<p>
-							<img class="am-circle am-center am-img-thumbnail"
-								src="http://s.amazeui.org/media/i/demos/bw-2014-06-19.jpg?imageView/1/w/1000/h/1000/q/80"
-								width="140" height="140" />
-						</p>
-						<div class="am-thumbnail-caption">
-							<p class="am-text-center">青蛙仙人</p>
-							<p>
-								<button class="am-btn am-btn-primary am-btn-block choose_btn">选择该老师的课题</button>
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="am-u-lg-3 am-u-md-3 am-u-sm-6">
-					<div class="am-thumbnail">
-						<p class="noChooseProjectNum">
-							<i class="am-icon-exclamation-triangle"></i>
-							<span>5</span>
-							个课题未选
-						</p>
-						<p>
-							<img class="am-circle am-center am-img-thumbnail"
-								src="../img/user02.png" width="140" height="140" />
-						</p>
-						<div class="am-thumbnail-caption">
-							<p class="am-text-center">xx老师</p>
-							<p>
-								<button class="am-btn am-btn-primary am-btn-block choose_btn">选择该老师的课题</button>
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="am-u-lg-3 am-u-md-3 am-u-sm-6">
-					<div class="am-thumbnail">
-						<p class="noChooseProjectNum">
-							<i class="am-icon-exclamation-triangle"></i>
-							<span>5</span>
-							个课题未选
-						</p>
-						<p>
-							<img class="am-circle am-center am-img-thumbnail"
-								src="http://s.amazeui.org/media/i/demos/bw-2014-06-19.jpg?imageView/1/w/1000/h/1000/q/80"
-								width="140" height="140" />
-						</p>
-						<div class="am-thumbnail-caption">
-							<p class="am-text-center">青蛙仙人</p>
-							<p>
-								<button class="am-btn am-btn-primary am-btn-block choose_btn">选择该老师的课题</button>
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="am-u-lg-3 am-u-md-3 am-u-sm-6">
-					<div class="am-thumbnail">
-						<p class="noChooseProjectNum">
-							<i class="am-icon-exclamation-triangle"></i>
-							<span>5</span>
-							个课题未选
-						</p>
-						<p>
-							<img class="am-circle am-center am-img-thumbnail"
-								src="../img/user02.png" width="140" height="140" />
-						</p>
-						<div class="am-thumbnail-caption">
-							<p class="am-text-center">xx老师</p>
-							<p>
-								<button class="am-btn am-btn-primary am-btn-block choose_btn">选择该老师的课题</button>
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="am-u-lg-3 am-u-md-3 am-u-sm-6">
-					<div class="am-thumbnail">
-						<p class="noChooseProjectNum">
-							<i class="am-icon-exclamation-triangle"></i>
-							<span>5</span>
-							个课题未选
-						</p>
-						<p>
-							<img class="am-circle am-center am-img-thumbnail"
-								src="http://s.amazeui.org/media/i/demos/bw-2014-06-19.jpg?imageView/1/w/1000/h/1000/q/80"
-								width="140" height="140" />
-						</p>
-						<div class="am-thumbnail-caption">
-							<p class="am-text-center">青蛙仙人</p>
-							<p>
-								<button class="am-btn am-btn-primary am-btn-block choose_btn">选择该老师的课题</button>
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="am-u-lg-3 am-u-md-3 am-u-sm-6">
-					<div class="am-thumbnail">
-						<p class="noChooseProjectNum">
-							<i class="am-icon-exclamation-triangle"></i>
-							<span>5</span>
-							个课题未选
-						</p>
-						<p>
-							<img class="am-circle am-center am-img-thumbnail"
-								src="../img/user02.png" width="140" height="140" />
-						</p>
-						<div class="am-thumbnail-caption">
-							<p class="am-text-center">xx老师</p>
-							<p>
-								<button class="am-btn am-btn-primary am-btn-block choose_btn">选择该老师的课题</button>
-							</p>
-						</div>
-					</div>
-				</div>
-				
- 				  <div class="am-fr" style="margin-right: 15px;">
-				    <ul class="am-pagination admin-content-pagination">
-							                <li class="am-disabled"><a href="#">«</a></li>
-							                <li class="am-active"><a href="#">1</a></li>
-							                <li><a href="#">2</a></li>
-							                <li><a href="#">3</a></li>
-							                <li><a href="#">4</a></li>
-							                <li><a href="#">5</a></li>
-							                <li><a href="#">»</a></li>
-					</ul>
-				  </div>
-		        
-		</div>
-		
 	</div>
 	<div>
-		<div class="am-g" style="position: fixed; bottom: 0;z-index: 999;">
+		<div class="am-g" style="position: fixed; bottom: 0; z-index: 999;">
 			<div class="am-u-lg-12">
 				<footer data-am-widget="footer" class="am-footer am-footer-default"
 					style="border-radius: 6px;">
@@ -415,7 +283,6 @@
 			</div>
 		</div>
 	</div>
-
 
 	<div class="am-modal am-modal-no-btn" tabindex="-1" id="file-modal">
 		<div class="am-modal-dialog">
@@ -442,7 +309,7 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<script src="../js/jquery.min.js"></script>
 	<script src="../amazeui/js/amazeui.min.js"></script>
 	<script src="../js/iscroll.js"></script>
@@ -450,11 +317,17 @@
 	<script type="text/javascript">
 		$(function() {
 			
-			//点击按钮后选择课题
-			$('.choose_btn').click(function() {
-				window.location.href='sproject.html';
+			//查询数据库是否应该禁用提交按钮disableBtn(id)
+			//提交中期检查
+			$('#zqjc_btn').click(function () {
+				  var $btn = $(this);
+				  $btn.button('loading');
+				    setTimeout(function(){
+				    	disableBtn('zqjc_btn','提交完成');
+				  }, 3000);
+				    
 			});
-
+			
 		});
 	</script>
 </body>

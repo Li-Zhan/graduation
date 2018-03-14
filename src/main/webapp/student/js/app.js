@@ -10,12 +10,12 @@ $(function() {
         });
 
 
-        var dataType = $('body').attr('data-type');
+/*        var dataType = $('body').attr('data-type');
         for (key in pageData) {
             if (key == dataType) {
                 pageData[key]();
             }
-        }
+        }*/
 
         $('.tpl-switch').find('.tpl-switch-btn-view').on('click', function() {
             $(this).prev('.tpl-switch-btn').prop("checked", function() {
@@ -25,7 +25,6 @@ $(function() {
                         return true
                     }
                 })
-                // console.log('123123123')
 
         })
     })
@@ -48,7 +47,7 @@ $('.tpl-header-nav-hover-ico').on('click', function() {
 })
 
 
-// 页面数据
+/*// 页面数据
 var pageData = {
     // ===============================================
     // 首页
@@ -381,4 +380,42 @@ var pageData = {
         };
         echartsA.setOption(option);
     }
+}*/
+
+//禁用提交按钮(按钮id 成功信息)
+function disableBtn(id,text){
+	$('#'+id).text(text);
+    $('#'+id).removeClass('am-btn-primary').addClass('am-disabled am-btn-danger');
 }
+
+$(function(){
+	
+	//点击文件上传按钮出现模态框
+	$('#open_file_btn').click(function() {
+		$('#file-modal').modal('open');
+	});
+
+	//显示上传文件名
+	$('#doc-ipt-file-2').on(
+			'change',
+			function() {
+				var fileNames = '';
+				$.each(this.files, function() {
+					fileNames += '<span class="am-badge">' + this.name
+							+ '</span> ';
+				});
+				$('#file-list').html(fileNames);
+	});
+	
+	//查询数据库是否应该禁用上传按钮disableBtn(id)
+	//提交论文
+	$('#lunwen_uploadBtn').click(function () {
+		  var $btn = $(this);
+		  $btn.button('loading');
+		    setTimeout(function(){
+		    	disableBtn('lunwen_uploadBtn','上传完成');
+		  }, 3000);
+		    
+	});
+	
+});
