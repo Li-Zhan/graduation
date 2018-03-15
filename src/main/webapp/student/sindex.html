@@ -140,7 +140,7 @@
 			<div class="tpl-left-nav-title">功能列表</div>
 			<div class="tpl-left-nav-list">
 				<ul class="tpl-left-nav-menu">
-					<li class="tpl-left-nav-item"><a href="right.html"
+					<li class="tpl-left-nav-item"><a href="content.html"
 						class="nav-link active link_a" target="iframe_a"> <i class="am-icon-home"></i> <span>首页</span>
 					</a></li>
 					<li class="tpl-left-nav-item"><a href="schoose.html"
@@ -213,7 +213,7 @@
 
 		<!--begin  -->
 		<div class="tpl-content-wrapper">
-		<iframe id="iframepage" name="iframe_a" src="right.html" style="width: 100%;height: 530px;" seamless></iframe>
+		<iframe id="iframepage" name="iframe_a" src="content.html" style="width: 100%;height: 530px;" seamless></iframe>
 		</div>
 		<!--end  -->
 		
@@ -270,11 +270,11 @@
 			
 			//网页刷新回到首页
 			$(window).on('unload',function(){
-				window.location.href='sindex2.html';
+				window.location.href='sindex.html';
 			});
 			
 			$('#iframepage').on('load',function(){
-				  // “ref_page”为引用页面DIV的ID，获取DIV的外部宽度、外部高度。
+				  //"ref_page"为引用页面DIV的ID，获取DIV的外部宽度、外部高度。
 				 // var width = $(this).contents().find('#ref_page').outerWidth();
 				///alert(width);
 				  var height = $(this).contents().find('#ref_page').outerHeight();
