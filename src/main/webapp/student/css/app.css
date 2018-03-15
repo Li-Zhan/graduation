@@ -72,7 +72,9 @@ a:hover {
     border-bottom: none;
 }
 
-.am-topbar-inverse .am-topbar-nav>li>a {}
+.am-topbar-inverse .am-topbar-nav>li>a {
+	outline: none;
+}
 
 .am-nav-pills>li+li {
     margin-left: 0;
@@ -512,6 +514,7 @@ ul.tpl-dropdown-content li>a.tpl-dropdown-content-message:last-child {
     text-decoration: none;
     color: #485a6a;
     font-size: 14px;
+    outline: none;
 }
 
 .tpl-left-nav-item .nav-link span,
@@ -603,6 +606,7 @@ ul.tpl-dropdown-content li>a.tpl-dropdown-content-message:last-child {
 .tpl-left-nav-sub-menu a.active {
     color: #5b9bd1;
     background: #f2f6f9!important;
+    outline: none;
 }
 
 .tpl-left-nav-sub-menu a.active i,
