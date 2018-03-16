@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>学生界面</title>
+<meta name="description" content="这是学生主页">
+<meta name="keywords" content="index">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<link rel="icon" type="image/png" href="../img/lysf.ico">
+<link rel="stylesheet" href="../amazeui/css/amazeui.min.css" />
+<link rel="stylesheet" href="css/admin.css">
+<link rel="stylesheet" href="css/app.css">
+</head>
+
+<body style="margin-left: 10px; overflow: hidden;">
+
+	<div id="ref_page" class="am-g">
+
+		<div class="tpl-content-page-title" style="margin-bottom: 10px;">下载表格</div>
+		<div class="am-panel am-panel-default">
+			  <div class="am-panel-bd">
+				   <table class="am-table am-table-bordered am-table-radius am-table-compact">
+				     <tr>
+				     	<th>开题报告</th>
+				     	<th>中期检查</th>
+				     	<th>免答辩申请表</th>
+				     </tr>
+				     <tr>
+				     	<td>
+					     	<button id="ktbg_down" class="am-btn am-btn-primary am-btn-sm">
+							  下载
+							  <i class="am-icon-cloud-download"></i>
+							</button>
+				     	</td>
+				     	<td>
+				     		<button id="zqjc_down" class="am-btn am-btn-primary am-btn-sm">
+							  下载
+							  <i class="am-icon-cloud-download"></i>
+							</button>
+				     	</td>
+				     	<td>
+				     		<button id="mdb_down" class="am-btn am-btn-primary am-btn-sm">
+							  下载
+							  <i class="am-icon-cloud-download"></i>
+							</button>
+				     	</td>
+				     </tr>
+				  </table>
+			  </div>
+		</div>
+
+	</div>
+
+	<script src="../js/jquery.min.js"></script>
+	<script src="../amazeui/js/amazeui.min.js"></script>
+	<script src="js/app.js"></script>
+	<script type="text/javascript">
+		$(function() {
+			//查数据库得出该学发是否已填写这些下载项信息,没有则下载空白表格。
+		});
+	</script>
+</body>
+
+</html>

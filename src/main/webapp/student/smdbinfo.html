@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>学生界面</title>
+<meta name="description" content="这是学生主页">
+<meta name="keywords" content="index">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<link rel="icon" type="image/png" href="../img/lysf.ico">
+<link rel="stylesheet" href="../amazeui/css/amazeui.min.css" />
+<link rel="stylesheet" href="css/admin.css">
+<link rel="stylesheet" href="css/app.css">
+</head>
+
+<body style="margin-left: 10px; overflow: hidden;">
+
+	<div id="ref_page" class="am-g">
+
+		<div class="tpl-content-page-title" style="margin-bottom: 10px;">免答辩申请结果</div>
+		<div class="am-panel am-panel-default">
+			  <div class="am-panel-bd">
+				  <blockquote>
+				  	<p id="mdb_result" class="am-text-xl">允许免答辩</p>
+				  </blockquote>
+			  </div>
+		</div>
+
+	</div>
+
+	<script src="../js/jquery.min.js"></script>
+	<script src="../amazeui/js/amazeui.min.js"></script>
+	<script src="js/app.js"></script>
+	<script type="text/javascript">
+		$(function() {
+			//查数据库得出免答辩结果
+			var result='aaa';
+			//允许绿色,不允许红色,没有结果为黄色
+			if(result==true){
+				$('#mdb_result').css('color','green').text('允许免答辩');
+			}if(result==false){
+				$('#mdb_result').css('color','red').text('不允许免答辩');
+			}else{
+				//还没有结果
+				$('#mdb_result').css('color','#FEC100').text('没有结果');
+			}
+		});
+	</script>
+</body>
+
+</html>

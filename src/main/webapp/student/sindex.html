@@ -140,7 +140,7 @@
 			<div class="tpl-left-nav-title">功能列表</div>
 			<div class="tpl-left-nav-list">
 				<ul class="tpl-left-nav-menu">
-					<li class="tpl-left-nav-item"><a href="content.html"
+					<li class="tpl-left-nav-item"><a href="scontent.html"
 						class="nav-link active link_a" target="iframe_a"> <i class="am-icon-home"></i> <span>首页</span>
 					</a></li>
 					<li class="tpl-left-nav-item"><a href="schoose.html"
@@ -148,7 +148,7 @@
 					</a></li>
 
 					<li class="tpl-left-nav-item"><a href="javascript:;"
-						class="nav-link tpl-left-nav-link-list"> <i
+						class="nav-link tpl-left-nav-link-list left-nav-link"> <i
 							class="am-icon-tasks"></i> <span>流程管理</span> <i
 							class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right tpl-left-nav-more-ico-rotate"></i>
 					</a>
@@ -165,44 +165,44 @@
 						</ul></li>
 
 					<li class="tpl-left-nav-item"><a href="javascript:;"
-						class="nav-link tpl-left-nav-link-list"> <i
+						class="nav-link tpl-left-nav-link-list left-nav-link"> <i
 							class="am-icon-wpforms"></i> <span>查看信息</span> <i
 							class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right"></i>
 					</a>
 						<ul class="tpl-left-nav-sub-menu">
-							<li><a href="form-amazeui.html" class="link_a"> <i
+							<li><a href="sdbinfo.html" class="link_a" target="iframe_a"> <i
 									class="am-icon-angle-right"></i> <span>答辩信息</span>
-							</a><a href="form-line.html" class="link_a"> <i class="am-icon-angle-right"></i>
+							</a><a href="score.html" class="link_a" target="iframe_a"> <i class="am-icon-angle-right"></i>
 									<span>得分信息</span>
-							</a><a href="form-line.html" class="link_a"> <i class="am-icon-angle-right"></i>
+							</a><a href="smdbinfo.html" class="link_a" target="iframe_a"> <i class="am-icon-angle-right"></i>
 									<span>免答辩申请结果</span>
 							</a></li>
 						</ul></li>
 
-					<li class="tpl-left-nav-item"><a href="login.html"
-						class="nav-link tpl-left-nav-link-list link_a"> <i
-							class="am-icon-table"></i> <span>表格材料打印</span>
+					<li class="tpl-left-nav-item"><a href="sdownload.html"
+						class="nav-link tpl-left-nav-link-list link_a" target="iframe_a"> <i
+							class="am-icon-table"></i> <span>表格材料下载</span>
 					</a></li>
 
 					<li class="tpl-left-nav-item"><a href="javascript:;"
-						class="nav-link tpl-left-nav-link-list"> <i
+						class="nav-link tpl-left-nav-link-list left-nav-link"> <i
 							class="am-icon-edit"></i> <span>修改申请</span> <i
 							class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right"></i>
 					</a>
 						<ul class="tpl-left-nav-sub-menu">
 							<li>
-								<a href="form-amazeui.html" class="link_a"> <i
+								<a href="form-amazeui.html" class="link_a" target="iframe_a"> <i
 										class="am-icon-angle-right"></i> <span>开题报告修改</span>
-								</a> <a href="form-line.html" class="link_a"> <i class="am-icon-angle-right"></i>
+								</a> <a href="form-line.html" class="link_a" target="iframe_a"> <i class="am-icon-angle-right"></i>
 										<span>论文修改</span>
-								</a><a href="form-line.html" class="link_a"> <i class="am-icon-angle-right"></i>
+								</a><a href="form-line.html" class="link_a" target="iframe_a"> <i class="am-icon-angle-right"></i>
 										<span>免答辩申请修改</span>
 								</a>
 							</li>
 						</ul></li>
 
 					<li class="tpl-left-nav-item"><a href="login.html"
-						class="nav-link tpl-left-nav-link-list link_a"> <i
+						class="nav-link tpl-left-nav-link-list link_a" target="iframe_a"> <i
 							class="am-icon-comments-o"></i> <span>互动交流</span>
 					</a></li>
 
@@ -213,7 +213,7 @@
 
 		<!--begin  -->
 		<div class="tpl-content-wrapper">
-		<iframe id="iframepage" name="iframe_a" src="content.html" style="width: 100%;height: 530px;" seamless></iframe>
+		<iframe id="iframepage" name="iframe_a" src="scontent.html" style="width: 100%;height: 530px;" seamless></iframe>
 		</div>
 		<!--end  -->
 		
@@ -278,7 +278,6 @@
 				 // var width = $(this).contents().find('#ref_page').outerWidth();
 				///alert(width);
 				  var height = $(this).contents().find('#ref_page').outerHeight();
-
 				  // 设置iframe的宽度、高度。
 				 // $(this).width(width);
 				  $(this).height(height);
@@ -291,6 +290,14 @@
 				});
 				$(this).addClass('active');
 			});
+			
+			//左侧选项收缩与展开
+	 		$('.left-nav-link').click(function() {
+			 	$('.tpl-left-nav-sub-menu').each(function() {
+					$(this).css('display','none');
+				}); 
+	 			$(this).parent().children('ul').css('display','block');
+			}); 
 			
 		});
 	</script>
