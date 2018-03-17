@@ -1,0 +1,97 @@
+<!doctype html>
+<html>
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>学生界面</title>
+<meta name="description" content="这是学生主页">
+<meta name="keywords" content="index">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<link rel="icon" type="image/png" href="../img/lysf.ico">
+<link rel="stylesheet" href="../amazeui/css/amazeui.min.css" />
+<link rel="stylesheet" href="css/admin.css">
+<link rel="stylesheet" href="css/app.css">
+</head>
+
+<body style="margin-left: 10px; overflow: hidden;">
+
+	<div id="ref_page" class="am-g">
+
+		<div class="tpl-content-page-title" style="margin-bottom: 10px;">给导师留言</div>
+		<div class="am-panel am-panel-default am-u-lg-6 am-u-md-12 am-u-sm-12">
+			  <div class="am-panel-bd">
+				
+				<ul class="am-comments-list am-comments-list-flip">
+				
+				  <li class="am-comment">
+					<article class="am-comment">
+					  <a href="#link-to-user-home">
+					    <img src="../img/user01.png" alt="" class="am-comment-avatar" width="48" height="48"/>
+					  </a>
+					
+					  <div class="am-comment-main">
+					    <header class="am-comment-hd">
+					      <!--<h3 class="am-comment-title">评论标题</h3>-->
+					      <div class="am-comment-meta">
+					        <a href="#link-to-user" class="am-comment-author">某人</a>
+					        评论于 <time datetime="2013-07-27T04:54:29-07:00" title="2013年7月27日 下午7:54 格林尼治标准时间+0800">2018-7-12 15:30</time>
+					      </div>
+					    </header>
+					
+					    <div class="am-comment-bd">
+					      ...
+					    </div>
+					  </div>
+					</article>
+				  </li>
+				
+				  <li class="am-comment am-comment-flip">
+				  	<article class="am-comment">
+					  <a href="#link-to-user-home">
+					    <img src="../img/user01.png" alt="" class="am-comment-avatar" width="48" height="48"/>
+					  </a>
+					
+					  <div class="am-comment-main">
+					    <header class="am-comment-hd">
+					      <!--<h3 class="am-comment-title">评论标题</h3>-->
+					      <div class="am-comment-meta">
+					        <a href="#link-to-user" class="am-comment-author">某人</a>
+					        评论于 <time datetime="2013-07-27T04:54:29-07:00" title="2013年7月27日 下午7:54 格林尼治标准时间+0800">2018-7-12 15:30</time>
+					      </div>
+					    </header>
+					
+					    <div class="am-comment-bd">
+					      ...
+					    </div>
+					  </div>
+					</article>
+				  </li>
+				  
+				</ul>
+				
+				<div class=" am-g">
+					<textarea class="am-u-lg-12 am-u-md-12 am-u-sm-12" style="margin-top: 30px;overflow-y:hidden;resize: none;"></textarea>
+					<button class="am-btn am-btn-primary am-btn-xs am-fr" style="margin-top: 5px;">发送</button>
+				</div>
+				
+			  </div>
+		</div>
+
+	</div>
+
+	<script src="../js/jquery.min.js"></script>
+	<script src="../amazeui/js/amazeui.min.js"></script>
+	<script src="js/app.js"></script>
+	<script type="text/javascript" src="../js/autosize.min.js"></script>
+	<script type="text/javascript">
+		$(function() {
+			//textarea高度自增
+			autosize(document.querySelectorAll('textarea'));
+		});
+	</script>
+</body>
+
+</html>

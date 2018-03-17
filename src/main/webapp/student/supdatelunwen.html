@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>学生界面</title>
+<meta name="description" content="这是学生主页">
+<meta name="keywords" content="index">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<link rel="icon" type="image/png" href="../img/lysf.ico">
+<link rel="stylesheet" href="../amazeui/css/amazeui.min.css" />
+<link rel="stylesheet" href="css/admin.css">
+<link rel="stylesheet" href="css/app.css">
+</head>
+
+<body style="margin-left: 10px; overflow: hidden;">
+
+	<div id="ref_page" class="am-g">
+
+		<div class="tpl-content-page-title" style="margin-bottom: 10px;">修改论文</div>
+		<div class="am-panel am-panel-default">
+			  <div class="am-panel-bd">
+				   <table class="am-table am-table-bordered am-table-radius">
+				     <tr>
+				     	<th>论文名</th>
+				     	<th>姓名</th>
+				     	<th>论文上传时间</th>
+				     	<th>操作</th>
+				     </tr>
+				     <tr>
+				     	<td class="am-text-middle">毕业设计管理系统</td>
+				     	<td class="am-text-middle">李展</td>
+				     	<td class="am-text-middle">2018-01-01</td>
+				     	<td class="am-text-middle">
+				     	<div class="am-form-group am-form-file" style="margin-bottom: 0px;">
+						  <button type="button" class="am-btn am-btn-primary" style="float: left;">
+						    <i class="am-icon-cloud-upload"></i> 上传新论文</button>
+						  <input id="doc-form-file" type="file" multiple>
+						  <div id="file-list" style="float: left;margin: 5px 0 0 20px;"></div>
+						</div>
+				     	</td>
+				     </tr>
+				  </table>
+			  </div>
+		</div>
+
+	</div>
+
+	<script src="../js/jquery.min.js"></script>
+	<script src="../amazeui/js/amazeui.min.js"></script>
+	<script src="js/app.js"></script>
+	<script type="text/javascript">
+		$(function() {
+		    $('#doc-form-file').on('change', function() {
+		        var fileNames = '';
+		        $.each(this.files, function() {
+		          fileNames += '<span class="am-badge">' + this.name + '</span> ';
+		        });
+		        $('#file-list').html(fileNames);
+		      });
+		});
+	</script>
+</body>
+
+</html>
