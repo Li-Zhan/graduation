@@ -295,8 +295,15 @@
 	 		$('.left-nav-link').click(function() {
 			 	$('.tpl-left-nav-sub-menu').each(function() {
 					$(this).css('display','none');
-				}); 
+				});
 	 			$(this).parent().children('ul').css('display','block');
+			 	$('.tpl-left-nav-sub-menu').each(function() {
+			 		if($(this).css('display')=='block'){
+			 			$(this).parent().children('a').children('i').eq(1).addClass('tpl-left-nav-more-ico-rotate');
+			 		}else{
+			 			$(this).parent().children('a').children('i').eq(1).removeClass('tpl-left-nav-more-ico-rotate');
+			 		}
+				});
 			}); 
 			
 		});

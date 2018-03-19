@@ -1990,3 +1990,14 @@ ul.tpl-dropdown-content li>a.tpl-dropdown-content-message:last-child {
 	height: 40px;
 	border-radius: 50%;
 }
+.am-thumbnail {
+    display: block;
+    padding: 2px;
+    margin-bottom: 2rem;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 0;
+    -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+    border-radius: 8px;
+}
