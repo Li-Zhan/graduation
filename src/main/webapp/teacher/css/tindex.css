@@ -1,0 +1,86 @@
+@charset "UTF-8";
+/* 
+	border-radius：0为正方形，0~N，由正方形向圆形转化，N越大越圆。
+	padding：图形的内边距
+	background：图形背景色
+	line-height：行高
+	position：定位
+	width：宽度
+	height：高度
+*/
+.stepInfo {
+/* 	position: relative;
+	background: #f2f2f2;
+	width: 800px;
+	z-inex: -1;
+	top: 100px;
+	margin-left: 60px; */
+	
+}
+
+.stepInfo li {
+	float: left;
+	width: 120%;
+	height: 2px;
+	background: #FFE500;
+}
+
+.stepIcoo {
+/* 	border-radius: 50%;
+	margin-left: -4em;
+	margin-top: 3.5px;
+	padding: 1.1em;
+	 background:url("circle1.png") no-repeat;
+	background: red;
+	text-align: center;
+	line-height: 1.5em;
+	color: #fff;
+	position: absolute;
+	width: 16px;
+	height: 16px;
+	z-index: 100; */
+	border-radius: 50%;
+    margin-top: 4%;
+    margin-left:7.5%;
+    padding: 15px;
+    background: #E9ECF3;
+/*     text-align: center;
+    line-height: 1.5em; */
+    color: #fff;
+    position: absolute;
+/*     width: 16px;
+    height: 16px;
+    z-index: 100; */
+}
+
+.stepIco_font {
+	font-size: 13px;
+    position: relative;
+    bottom: -63px;
+    padding-left: 26%;
+}
+
+.stepIco9 {
+	top: -17px;
+	left: 30%;
+}
+
+.stepIco10 {
+	top: -17px;
+	left: 55%;
+}
+
+.stepIco11 {
+	top: -17px;
+	left: 80%;
+}
+
+.stepIco12 {
+	top: -17px;
+	left: 105%;
+}
+
+.stepIco13 {
+	top: -17px;
+	left: 125%;
+}
