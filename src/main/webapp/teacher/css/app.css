@@ -1990,3 +1990,7 @@ ul.tpl-dropdown-content li>a.tpl-dropdown-content-message:last-child {
 	height: 40px;
 	border-radius: 50%;
 }
+.chooseStyle{
+	border-radius: 8px;
+	border-color: #0E90D2;
+}
