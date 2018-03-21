@@ -1,0 +1,110 @@
+<!doctype html>
+<html>
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>学生界面</title>
+<meta name="description" content="这是学生主页">
+<meta name="keywords" content="index">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<link rel="icon" type="image/png" href="../img/lysf.ico">
+<link rel="stylesheet" href="../amazeui/css/amazeui.min.css" />
+<link rel="stylesheet" href="css/admin.css">
+<link rel="stylesheet" href="css/app.css">
+</head>
+
+<body style="margin-left: 10px; overflow-x: hidden;">
+
+	<div id="ref_page" class="am-g">
+
+		<div class="tpl-content-page-title" style="margin-bottom: 10px;">填写系统验收表</div>
+		
+		<div class="am-panel am-panel-default">
+			  <div class="am-panel-bd">
+			  	<div class="am-scrollable-horizontal">
+				   <table class="am-table am-table-bordered am-table-radius am-table-centered">
+				     <thead>
+						<tr>
+							<th colspan="6">信息技术学院毕业设计验收情况表</th>
+						</tr>
+					</thead>
+					<tbody>
+				     <tr>
+				     	<td>姓名</td>
+				     	<td>李展</td>
+				     	<td>学号</td>
+				     	<td>110</td>
+				     	<td>专业</td>
+				     	<td>软件工程</td>
+				     </tr>
+				     <tr>
+				     	<td>指导老师</td>
+				     	<td>xxx</td>
+				     	<td>系统名称</td>
+				     	<td colspan="3">毕设管理系统</td>
+				     </tr>
+				     <tr>
+				     	<td>运行环境及平台</td>
+				     	<td colspan="5"><textarea style="width: 100%; height: 100px;"></textarea></td>
+				     </tr>
+				   	 <tr>
+				     	<td>系统简介</td>
+				     	<td colspan="5"><textarea style="width: 100%; height: 100px;"></textarea></td>
+				     </tr>
+				     <tr>
+				     	<td rowspan="4" class="am-text-middle">验收点</td>
+				     	<td colspan="5">验收点（功能点）名称</td>
+				     </tr>
+				     <tr>
+					     <td colspan="5">
+					     	<textarea style="width: 100%; height: 35px;"></textarea>
+					     </td>
+				     </tr>
+				      <tr>
+					     <td colspan="5">
+					     	<textarea style="width: 100%; height: 35px;"></textarea>
+					     </td>
+				     </tr>
+				      <tr>
+					     <td colspan="5">
+					     	<textarea style="width: 100%; height: 35px;"></textarea>
+					     </td>
+				     </tr>
+				     </tbody>
+				  </table>
+				  <button id="yansou_btn" type="button" class="am-btn am-btn-primary am-radius am-fr"
+								data-am-loading="{spinner: 'circle-o-notch', loadingText: '提交中...', resetText: '提交完成'}">
+								提交验收表</button>
+				</div>
+			  </div>
+		</div>
+
+	</div>
+
+	<script src="../js/jquery.min.js"></script>
+	<script src="../amazeui/js/amazeui.min.js"></script>
+	<script src="js/app.js"></script>
+	<script type="text/javascript">
+		$(function() {
+			
+			
+			//查询数据库是否应该禁用提交按钮disableBtn(id)
+			//点击提交验收按钮yansou_btn
+			$('#yansou_btn').click(function () {
+				  var $btn = $(this);
+				  $btn.button('loading');
+				    setTimeout(function(){
+				    	disableBtn('yansou_btn','提交完成');
+				  }, 3000);
+				    
+				});
+			
+			
+		});
+	</script>
+</body>
+
+</html>

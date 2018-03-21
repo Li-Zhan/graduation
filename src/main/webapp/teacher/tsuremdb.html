@@ -1,0 +1,110 @@
+<!doctype html>
+<html>
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>学生界面</title>
+<meta name="description" content="这是学生主页">
+<meta name="keywords" content="index">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<link rel="icon" type="image/png" href="../img/lysf.ico">
+<link rel="stylesheet" href="../amazeui/css/amazeui.min.css" />
+<link rel="stylesheet" href="css/admin.css">
+<link rel="stylesheet" href="css/app.css">
+</head>
+
+<body style="margin-left: 10px;overflow-x:hidden;" >
+
+	<div id="ref_page" class="am-g">
+	
+			<div class="tpl-content-page-title" style="margin-bottom: 10px;">评审免答辩申请表</div>
+
+			<ol class="am-breadcrumb">
+				<li><a href="tmdbstudentlist.html" class="am-icon-users">申请学生</a></li>
+				<li class="am-active">免答辩申请表</li>
+			</ol>
+			
+			<div class="am-panel am-panel-default">
+				<div class="am-panel-bd">
+					<div class="am-scrollable-horizontal">
+							<table class="am-table am-table-bordered  am-table-centered am-text-nowrap">
+								<thead>
+									<tr>
+										<th colspan="9">信息技术学院本科生毕业设计（论文）免答辩申请表</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td colspan="2">学 号</td>
+										<td colspan="2">110</td>
+										<td>姓 名</td>
+										<td colspan="2">李展</td>
+										<td>性 别</td>
+										<td>男</td>
+									</tr>
+									<tr>
+										<td colspan="2">专 业</td>
+										<td colspan="3">软件工程</td>
+										<td>年 级</td>
+										<td>14级</td>
+										<td>班 级</td>
+										<td>移动终端应用软件开发</td>
+									</tr>
+									<tr>
+										<td colspan="2">申请人签名</td>
+										<td colspan="3"></td>
+										<td colspan="2">联系电话</td>
+										<td colspan="2">111223345566</td>
+									</tr>
+									<tr>
+										<td colspan="2">论文题目</td>
+										<td colspan="3">毕设管理系统</td>
+										<td colspan="2">导师姓名</td>
+										<td colspan="2">xxx老师</td>
+									</tr>
+									<tr style="height: 260px;">
+										<td colspan="2" class="am-text-middle">申请理由</td>
+										<td colspan="7"><textarea
+												style="width: 100%; height: 260px;" disabled>不知道不知道不知道不知道不知道不知道不知道不知道不知道不知道</textarea></td>
+									</tr>
+									<tr style="height: 260px;">
+										<td colspan="2" class="am-text-middle">指导老师意见</td>
+										<td colspan="7"><textarea
+												style="width: 100%; height: 260px;"></textarea></td>
+									</tr>
+								</tbody>
+							</table>
+							<button id="mdb_btn" type="button" class="am-btn am-btn-primary am-radius am-fr"
+								data-am-loading="{spinner: 'circle-o-notch', loadingText: '提交中...', resetText: '提交完成'}">
+								提交审核意见</button>
+					</div>
+				</div>
+			</div>
+			  
+	</div>
+
+<script src="../js/jquery.min.js"></script>
+<script src="../amazeui/js/amazeui.min.js"></script>
+<script src="js/app.js"></script>
+<script type="text/javascript">
+	$(function() {
+		
+		//查询数据库是否应该禁用提交按钮disableBtn(id)
+		//提交免答辩
+		$('#mdb_btn').click(function () {
+			  var $btn = $(this);
+			  $btn.button('loading');
+			    setTimeout(function(){
+			    	disableBtn('mdb_btn','提交完成');
+			  }, 3000);
+			    
+		});
+
+	});
+</script>
+</body>
+
+</html>
