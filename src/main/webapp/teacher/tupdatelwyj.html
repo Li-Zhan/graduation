@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>教师界面</title>
+<meta name="description" content="这是教师主页">
+<meta name="keywords" content="index">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<link rel="icon" type="image/png" href="../img/lysf.ico">
+<link rel="stylesheet" href="../amazeui/css/amazeui.min.css" />
+<link rel="stylesheet" href="css/admin.css">
+<link rel="stylesheet" href="css/app.css">
+</head>
+
+<body style="margin-left: 10px;overflow:hidden;" >
+
+	<div id="ref_page" class="am-g">
+	
+		<div class="tpl-content-page-title" style="margin-bottom: 10px;">修该论文意见</div>
+			
+		<ol class="am-breadcrumb">
+			<li><a href="tstudentlistupdate.html" class="am-icon-users">学生列表</a></li>
+			<li class="am-active">论文</li>
+		</ol>
+		<div class="am-panel am-panel-default">
+			<div class="am-form-group" style="margin: 20px;">
+			  <h3>修改意见</h3>
+			  <label class="am-radio-inline">
+			    <input type="radio" name="radio10" value="male" data-am-ucheck>退回修改
+			  </label>
+			  <label class="am-radio-inline">
+			    <input type="radio" name="radio10" value="female" data-am-ucheck>审核评分
+			  </label>
+			  <button id="lunwen_btn" type="button" class="am-btn am-btn-primary am-radius" style="margin-left: 5px;"
+			  data-am-loading="{spinner: 'circle-o-notch', loadingText: '提交中...', resetText: '提交完成'}">修改</button>
+			</div>
+		</div>
+				  
+	</div>
+
+<script src="../js/jquery.min.js"></script>
+<script src="../amazeui/js/amazeui.min.js"></script>
+<script src="js/app.js"></script>
+<script type="text/javascript">
+	$(function() {
+		
+		//查询数据库是否应该禁用提交按钮disableBtn(id)
+		//点击提交评审论文按钮lunwen_btn
+		$('#lunwen_btn').click(function () {
+			  var $btn = $(this);
+			  $btn.button('loading');
+			    setTimeout(function(){
+			    	disableBtn('lunwen_btn','修改完成');
+			  }, 3000);
+			    
+			});
+		
+	});
+</script>
+</body>
+
+</html>

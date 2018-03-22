@@ -1,0 +1,136 @@
+<!doctype html>
+<html>
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>教师界面</title>
+<meta name="description" content="这是教师主页">
+<meta name="keywords" content="index">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<link rel="icon" type="image/png" href="../img/lysf.ico">
+<link rel="stylesheet" href="../amazeui/css/amazeui.min.css" />
+<link rel="stylesheet" href="css/admin.css">
+<link rel="stylesheet" href="css/app.css">
+</head>
+
+<body style="margin-left: 10px; overflow: hidden;">
+
+	<div id="ref_page" class="am-g">
+	
+	    <div class="tpl-content-page-title" style="margin-bottom: 10px;">修改免答辩意见</div>
+		<div class="am-panel am-panel-default">
+			<div class="am-panel-bd am-scrollable-horizontal">
+				
+				<div class="am-u-sm-12">
+                                <table class="am-table am-table-centered am-table-striped am-table-hover table-main">
+                                    <thead>
+                                        <tr>
+                                            <th class="table-id">编号</th>
+                                            <th class="table-title">姓名</th>
+                                            <th class="table-type">性别</th>
+                                            <th>专业</th>
+                                            <th>年级</th>
+                                            <th>班级</th>
+                                            <th>电话号码</th>
+                                            <th>选题</th>
+                                            <th>指导老师意见</th>
+                                            <th>操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="am-text-middle">1</td>
+                                            <td class="am-text-middle"><span>李展01</span></td>
+                                            <td class="am-text-middle"><span>男</span></td>
+                                            <td class="am-text-middle"><span>软件工程</span></td>
+                                            <td class="am-text-middle"><span>2014级</span></td>
+                                            <td class="am-text-middle"><span>移动终端班</span></td>
+                                            <td class="am-text-middle"><span>112233445566</span></td>
+                                            <td class="am-text-middle"><span>毕设管理系统</span></td>
+                                            <td class="am-text-middle">
+                                            	<textarea style="width: 100%; height: 66px;"></textarea>
+                                            </td>
+                                            <td class="am-text-middle">
+                                            	<button type="button" class="am-btn am-btn-primary am-radius updatemdb_btn" style="margin-left: 5px;">修改</button>
+                                            </td>
+                                        </tr>
+                                       <tr>
+                                            <td class="am-text-middle">2</td>
+                                            <td class="am-text-middle"><span>李展02</span></td>
+                                            <td class="am-text-middle"><span>男</span></td>
+                                            <td class="am-text-middle"><span>软件工程</span></td>
+                                            <td class="am-text-middle"><span>2014级</span></td>
+                                            <td class="am-text-middle"><span>移动终端班</span></td>
+                                            <td class="am-text-middle"><span>112233445566</span></td>
+                                            <td class="am-text-middle"><span>毕设管理系统</span></td>
+                                            <td class="am-text-middle">
+                                            	<textarea style="width: 100%; height: 66px;"></textarea>
+                                            </td>
+                                            <td class="am-text-middle">
+                                            	<button type="button" class="am-btn am-btn-primary am-radius updatemdb_btn" style="margin-left: 5px;">修改</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="am-text-middle">3</td>
+                                            <td class="am-text-middle"><span>李展03</span></td>
+                                            <td class="am-text-middle"><span>男</span></td>
+                                            <td class="am-text-middle"><span>软件工程</span></td>
+                                            <td class="am-text-middle"><span>2014级</span></td>
+                                            <td class="am-text-middle"><span>移动终端班</span></td>
+                                            <td class="am-text-middle"><span>112233445566</span></td>
+                                            <td class="am-text-middle"><span>毕设管理系统</span></td>
+                                            <td class="am-text-middle">
+                                            	<textarea style="width: 100%; height: 66px;"></textarea>
+                                            </td>
+                                            <td class="am-text-middle">
+                                            	<button type="button" class="am-btn am-btn-primary am-radius updatemdb_btn" style="margin-left: 5px;">修改</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                        </div>
+			</div>
+		</div>
+	</div>
+	
+<!-- 修改成功后提示框 -->
+<div class="am-modal am-modal-alert" tabindex="-1" id="my-alert">
+  <div class="am-modal-dialog">
+    <div class="am-modal-bd">
+     修改成功
+    </div>
+    <div class="am-modal-footer">
+      <span class="am-modal-btn">确定</span>
+    </div>
+  </div>
+</div>
+
+	<script src="../js/jquery.min.js"></script>
+	<script src="../amazeui/js/amazeui.min.js"></script>
+	<script src="js/app.js"></script>
+	<script type="text/javascript">
+		$(function() {
+			
+			//点击修改class(updatemdb_btn)
+			$('.updatemdb_btn').click(function () {
+				  //改数据库
+				  	var $btn = $(this);
+			  		$btn.button('loading');
+				    setTimeout(function(){
+						$('#my-alert').modal({
+							'dimmer':false,
+						});
+				    	$('#my-alert').modal('open');
+				    	$btn.button('reset');
+				  }, 3000);
+				    
+				});
+			
+		});
+	</script>
+</body>
+
+</html>
