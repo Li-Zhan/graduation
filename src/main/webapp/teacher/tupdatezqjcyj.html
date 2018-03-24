@@ -36,7 +36,7 @@
 			    <input type="radio" name="radio10" value="female" data-am-ucheck>否
 			  </label>
 			  <button id="ktbg_btn" type="button" class="am-btn am-btn-primary am-radius" style="margin-left: 5px;"
-			  data-am-loading="{spinner: 'circle-o-notch', loadingText: '提交中...', resetText: '提交完成'}">修改</button>
+			  data-am-loading="{spinner: 'circle-o-notch', loadingText: '修改中...', resetText: '完成'}">修改</button>
 			</div>
 		</div>
 				  
@@ -54,7 +54,7 @@
 			  var $btn = $(this);
 			  $btn.button('loading');
 			    setTimeout(function(){
-			    	disableBtn('ktbg_btn','修改完成');
+			    	disableBtn('ktbg_btn','完成');
 			  }, 3000);
 			    
 			});
