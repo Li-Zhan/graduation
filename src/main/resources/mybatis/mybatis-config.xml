@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+  <!-- settings -->
+  <settings>
+	<!-- 开启驼峰命名规范 -->
+	  <setting name="mapUnderscoreToCamelCase" value="true"/>
+	  <!--  应用二级缓存,默认开启-->
+	  <setting name="cacheEnabled" value="true"/>
+  </settings>
+
+  <!--配置别名  -->
+  <typeAliases>
+  	<package name="cn.lynu.model"/>
+  </typeAliases>
+  
+    <!-- 配置PageHelper -->
+  	<plugins>
+		<plugin interceptor="com.github.pagehelper.PageInterceptor">
+		<!-- 可以配置让分页参数合理化(就是不会出现负数和大于最大页数的情况) -->
+		  <property name="reasonable" value="true"/>
+		</plugin>
+	</plugins>
+
+</configuration>
