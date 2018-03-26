@@ -225,4 +225,21 @@
       student_id = #{studentId,jdbcType=CHAR}
     where project_id = #{projectId,jdbcType=INTEGER}
   </update>
+  
+  <select id="noChooseProject" resultType="int">
+  	select count(*) from project where teacher_id=#{teacherId} and student_id is null
+  </select>
+  
+  <resultMap type="cn.lynu.model.Project" id="projectPlus" extends="BaseResultMap">
+  	<association property="teacher" column="teacher_id" select="cn.lynu.mapper.TeacherMapper.findTeacherByTeacherId"></association>
+  	<association property="projectFrom" column="project_from_id" select="cn.lynu.mapper.ProjectFromMapper.selectByPrimaryKey"></association>
+  </resultMap>
+  <select id="getProjectListByTeacherId" resultMap="projectPlus">
+  	select 
+    <include refid="Base_Column_List" />
+    from project
+    where teacher_id = #{teacherId}
+  </select>
+  
+  
 </mapper>

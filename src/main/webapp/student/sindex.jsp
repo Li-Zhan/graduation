@@ -275,11 +275,11 @@
 			
 			$('#iframepage').on('load',function(){
 				  //"ref_page"为引用页面DIV的ID，获取DIV的外部宽度、外部高度。
-				 // var width = $(this).contents().find('#ref_page').outerWidth();
-				///alert(width);
 				  var height = $(this).contents().find('#ref_page').outerHeight();
 				  // 设置iframe的宽度、高度。
-				 // $(this).width(width);
+				  if(height<300){
+					  height=800;
+				  }
 				  $(this).height(height);
 			});
 			

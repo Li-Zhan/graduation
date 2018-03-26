@@ -225,4 +225,24 @@
       dept_id = #{deptId,jdbcType=INTEGER}
     where teacher_id = #{teacherId,jdbcType=CHAR}
   </update>
+  
+  <resultMap type="cn.lynu.model.Teacher" id="teacherPlus" extends="BaseResultMap">
+  	<association property="user" column="user_id" select="cn.lynu.mapper.UserMapper.selectByPrimaryKey"></association>
+  </resultMap>
+  <resultMap type="cn.lynu.model.Teacher" id="teacherPlus2" extends="teacherPlus">
+  	<association property="noChooseProject" column="teacher_id" select="cn.lynu.mapper.ProjectMapper.noChooseProject"></association>
+  </resultMap>
+  
+  <select id="getAllTeacher" resultMap="teacherPlus2">
+  	 select 
+  	 <include refid="Base_Column_List" />
+    from teacher
+  </select>
+  
+  <select id="findTeacherByTeacherId" resultMap="teacherPlus">
+  	select 
+  	 <include refid="Base_Column_List" />
+    from teacher where teacher_id=#{teacherId}
+  </select>
+  
 </mapper>

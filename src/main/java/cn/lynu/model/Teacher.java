@@ -12,6 +12,11 @@ public class Teacher {
     private String userId;
 
     private Integer deptId;
+    
+    //级联属性
+    private User user;
+    
+    private Integer noChooseProject;
 
     public String getTeacherId() {
         return teacherId;
@@ -60,4 +65,21 @@ public class Teacher {
     public void setDeptId(Integer deptId) {
         this.deptId = deptId;
     }
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Integer getNoChooseProject() {
+		return noChooseProject;
+	}
+
+	public void setNoChooseProject(Integer noChooseProject) {
+		this.noChooseProject = noChooseProject;
+	}
+    
 }

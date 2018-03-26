@@ -36,55 +36,8 @@
 	              </tr>
 	              </thead>
 	              <tbody>
-	              <tr>
-	                <td><a href="#">Business management</a></td>
-	                <td>default</td>
-	                <td>测试1号</td>
-	                <td>2014年9月4日 7:28:47</td>
-	                <td>
-	                <button type="button" class="am-btn am-btn-primary am-btn-sm project_button">
-	                	<span class="am-icon-plus"></span> 选择
-	                </button>
-	                </td>
-	              </tr>
-	              <tr>
-	                <td><a href="#">Business management</a></td>
-	                <td>default</td>
-	                <td>测试2号</td>
-	                <td>2014年9月4日 7:28:47</td>
-	                <td>
-		                <button type="button" class="am-btn am-btn-primary am-btn-sm project_button">
-		                	<span class="am-icon-plus"></span> 选择
-		                </button>
-	                </td>
-	              </tr>
-	              <tr>
-	                <td><a href="#">Business management</a></td>
-	                <td>default</td>
-	                <td>测试3号</td>
-	                <td>2014年9月4日 7:28:47</td>
-	                <td>
-		              <button type="button" class="am-btn am-btn-primary am-btn-sm project_button">
-		                	<span class="am-icon-plus"></span> 选择
-		              </button> 
-	                </td>
-	              </tr>
 	              </tbody>
 	            </table>
-	            <div class="am-cf">
-	              共 3 条记录
-	              <div class="am-fr">
-	                <ul class="am-pagination">
-	                  <li class="am-disabled"><a href="#">«</a></li>
-	                  <li class="am-active"><a href="#">1</a></li>
-	                  <li><a href="#">2</a></li>
-	                  <li><a href="#">3</a></li>
-	                  <li><a href="#">4</a></li>
-	                  <li><a href="#">5</a></li>
-	                  <li><a href="#">»</a></li>
-	                </ul>
-	              </div>
-	            </div>
 	          </form>
 	        </div>
 				  
@@ -94,6 +47,51 @@
 <script src="../amazeui/js/amazeui.min.js"></script>
 <script type="text/javascript">
 		$(function() {
+			
+			//正则获得url参数
+			function getQueryString(name) { 
+				var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i"); 
+				var r = window.location.search.substr(1).match(reg); 
+				if (r != null) return unescape(r[2]); return null; 
+			} 
+			var teacherId=getQueryString("teacherId");
+			$.get('/graduation/projectController/getProjectListByTeacherId',{
+				teacherId:teacherId,
+				pageNum:1,
+				pageSize:8
+			},function(data){
+
+				for(var i=0;i<data.list.length;i++){
+					var tr=$('<tr>').append($('<td>').append($('<a>').attr('href','javascript:;').text(data.list[i].projectName)));
+	              	tr.append($('<td>').text(data.list[i].projectDescribe));
+	              	tr.append($('<td>').text(data.list[i].projectFrom.projectFromName));
+	              	tr.append($('<td>').text(data.list[i].teacher.user.userName));
+	              	var button=$('<button>').attr('type','button')
+	              				.addClass('am-btn am-btn-primary am-btn-sm project_button')
+	              				.append($('<span>').addClass('am-icon-plus').append(' 选择'))
+	              	
+	              				
+	              				
+	                //点击选择按钮,出现头像
+					$('.project_button').on('click',function() {
+						
+						var parent=$(this).parent('td').last();
+						parent.empty();
+						parent.append($('<img>').attr('src','../img/user01.png').attr('title','李展').addClass('project_choose_img'));
+						
+						//去写数据库
+						
+						
+						//不允许再点击其他课题
+						del_projectBtn();
+					});
+	              				
+	              	var td=$('<td>').append(button);
+	              	tr.append(td);
+	              	$('tbody').append(tr);
+              }
+				
+			});
 			
 			//student_project();
 			//查询数据库该学生是否已经选课
@@ -109,19 +107,7 @@
 				});
 			}
 			
-			//点击选择按钮,出现头像
-			$('.project_button').click(function() {
-				
-				var parent=$(this).parent('td').last();
-				parent.empty();
-				parent.append($('<img>').attr('src','../img/user01.png').attr('title','李展').addClass('project_choose_img'));
-				
-				//去写数据库
-				
-				
-				//不允许再点击其他课题
-				del_projectBtn();
-			});
+			
 
 		});
 </script>

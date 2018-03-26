@@ -27,4 +27,8 @@ public interface ProjectMapper {
     int updateByPrimaryKeySelective(Project record);
 
     int updateByPrimaryKey(Project record);
+    
+    int noChooseProject(String teacherId);
+    
+    List<Project> getProjectListByTeacherId(String teacherId);
 }

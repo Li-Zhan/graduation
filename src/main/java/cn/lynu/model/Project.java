@@ -12,6 +12,9 @@ public class Project {
     private String teacherId;
 
     private String studentId;
+    
+    private Teacher teacher;
+    private ProjectFrom projectFrom;
 
     public Integer getProjectId() {
         return projectId;
@@ -60,4 +63,21 @@ public class Project {
     public void setStudentId(String studentId) {
         this.studentId = studentId == null ? null : studentId.trim();
     }
+
+	public Teacher getTeacher() {
+		return teacher;
+	}
+
+	public void setTeacher(Teacher teacher) {
+		this.teacher = teacher;
+	}
+
+	public ProjectFrom getProjectFrom() {
+		return projectFrom;
+	}
+
+	public void setProjectFrom(ProjectFrom projectFrom) {
+		this.projectFrom = projectFrom;
+	}
+    
 }
