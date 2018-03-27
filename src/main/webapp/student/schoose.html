@@ -27,9 +27,9 @@
 				  <div class=" am-fl"><span class="tpl-content-page-title">教师列表</span></div>
 				  <div class="am-fr" style="width: 180px;">
 				    <div class="am-input-group am-input-group-sm">
-				      <input type="text" class="am-form-field" placeholder="根据教师姓名搜索">
+				      <input id="searchInput" type="text" class="am-form-field" placeholder="根据教师姓名搜索">
 				      <span class="am-input-group-btn" style="width: 30%;">
-				        <button class="am-btn am-btn-default" type="button">搜索</button>
+				        <button id="searchTeacher" class="am-btn am-btn-default" type="button">搜索</button>
 				      </span>
 				    </div>  
 				  </div>
@@ -51,6 +51,36 @@
 <script type="text/javascript">
 		$(function() {
 			
+			function chooseBody(data) {
+				for(var num=0;num<data.list.length;num++){
+					var div1=$('<div>').addClass('am-u-lg-3 am-u-md-3 am-u-sm-6');
+					var div2=$('<div>').addClass('am-thumbnail chooseStyle');
+					var p=$('<p>').addClass('noChooseProjectNum');
+					var i=$('<i>').addClass('am-icon-exclamation-triangle');
+					var span=$('<span>').addClass('ketiNum').text(data.list[num].noChooseProject).append($('<span>').text('个课题未选'));
+					p.append(i).append(span);
+					var imgPath=data.list[num].user.userPortrait;
+					if(imgPath==null){
+						imgPath='../img/user01.png';
+					}
+					var img=$('<img>').css({'width':'140px','height':'140px'}).attr({src:imgPath,width:'140',height:'140'}).addClass('am-circle am-center am-img-thumbnail');
+					var p2=$('<p>').append(img);
+					div2.append(p).append(p2);
+					var div3=$('<div>').addClass('am-thumbnail-caption').append($('<p>').addClass('am-text-center').text(data.list[num].user.userName));
+					var p3=$('<p>').append($('<button>').addClass('am-btn am-btn-primary am-btn-block choose_btn').text('选择该老师的课题'));
+					p3.append($('<input>').addClass('teacherId').attr('type','hidden').val(data.list[num].teacherId));
+					//点击按钮后选择课题
+					$('.choose_btn').on('click',function() {
+						var url='sproject.html?teacherId='+$(this).parent().find('input:hidden').val();
+						window.location.href=url;
+					});
+					div3.append(p3);
+					div2.append(div3);
+					div1.append(div2);
+					$('#chooseBody').append(div1);
+				}
+			}
+			
 			var pageNum=1;
 			var pageSize=8;
 			var j=1;
@@ -60,32 +90,7 @@
 					pageNum:pageNum,
 					pageSize:pageSize
 				},function(data){
-					for(var num=0;num<data.list.length;num++){
-						var div1=$('<div>').addClass('am-u-lg-3 am-u-md-3 am-u-sm-6');
-						var div2=$('<div>').addClass('am-thumbnail chooseStyle');
-						var p=$('<p>').addClass('noChooseProjectNum');
-						var i=$('<i>').addClass('am-icon-exclamation-triangle');
-						var span=$('<span>').addClass('ketiNum').text(data.list[num].noChooseProject).append($('<span>').text('个课题未选'));
-						p.append(i).append(span);
-						var imgPath=data.list[num].user.userPortrait;
-						if(imgPath==null){
-							imgPath='../img/user02.png';
-						}
-						var p2=$('<p>').append($('<img>').attr({src:imgPath,width:'140',height:'140'}).addClass('am-circle am-center am-img-thumbnail'));
-						div2.append(p).append(p2);
-						var div3=$('<div>').addClass('am-thumbnail-caption').append($('<p>').addClass('am-text-center').text(data.list[num].user.userName));
-						var p3=$('<p>').append($('<button>').addClass('am-btn am-btn-primary am-btn-block choose_btn').text('选择该老师的课题'));
-						p3.append($('<input>').addClass('teacherId').attr('type','hidden').val(data.list[num].teacherId));
-						//点击按钮后选择课题
-						$('.choose_btn').on('click',function() {
-							var url='sproject.html?teacherId='+$(this).parent().find('input:hidden').val();
-							window.location.href=url;
-						});
-						div3.append(p3);
-						div2.append(div3);
-						div1.append(div2);
-						$('#chooseBody').append(div1);
-					}
+						chooseBody(data);
 					if(j==1){
 						//第一次调用
 						j++;
@@ -111,6 +116,59 @@
  					$('#chooseBody').empty();
  					showTeacher(new_page_index+1,pageSize);
  					return false;
+ 				}
+				 function showPage2(total,pageSize){
+	 					//分页
+	 					$('#news-Pagination-1').pagination(total, {      //总记录数
+	 				        items_per_page:pageSize,          //每页显示多少条记录
+	 			  		    next_text:'下一页',
+	 			  		    prev_text:'上一页',
+	 			  		    num_display_entries:5,
+	 			  		  	//num_edge_entries:2,  //连接分页主体的条数
+	 				        callback:handlePaginationClick2
+	 				     });
+	 			  
+	 				  }
+	 				function handlePaginationClick2(new_page_index, pagination_container) {
+	 					//清除之前的数据
+	 					$('#chooseBody').empty();
+	 					searchBody(new_page_index+1,pageSize);
+	 					return false;
+	 				}
+ 				
+ 				//查询
+ 				var a=1;
+ 				$('#searchTeacher').click(function() {
+ 					var teacherName=$('#searchInput').val().trim();
+ 					if(teacherName==null||teacherName==''){
+ 						return false;
+ 					}
+ 					searchBody(teacherName,pageNum,pageSize);
+				});
+ 				$(document).keyup(function(event){
+ 					if(event.keyCode ==13){
+ 						searchBody($('#searchInput').val().trim(),pageNum,pageSize);
+ 						 }
+ 				});
+ 				function searchBody(teacherName,pageNum,pageSize){
+ 					$.get('/graduation/teacherController/findTeacherByTeacherName',{
+ 						teacherName:teacherName,
+ 						pageNum:pageNum,
+ 						pageSize:pageSize
+ 					},function(data){
+						//清除之前的数据
+	 					$('#chooseBody').empty();
+	 						chooseBody(data);
+	 						$('.choose_btn').on('click',function() {
+	 							var url='sproject.html?teacherId='+$(this).parent().find('input:hidden').val();
+	 							window.location.href=url;
+	 						});
+	 					 if(a==1){
+							//第一次调用
+							a++;
+							showPage2(data.total,pageSize);
+						} 
+					});
  				}
 
 		});

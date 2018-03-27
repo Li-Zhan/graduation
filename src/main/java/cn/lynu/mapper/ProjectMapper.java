@@ -31,4 +31,12 @@ public interface ProjectMapper {
     int noChooseProject(String teacherId);
     
     List<Project> getProjectListByTeacherId(String teacherId);
+    
+    Project getProjectByStudentId(String studentId);
+    
+    boolean updateProjectByStudentId(@Param("studentId")String studentId,@Param("projectId")String projectId);
+    
+    List<Project> getProjectAndStudent(String teacher_id);
+
+	boolean updateNoStudent(String projectId);
 }

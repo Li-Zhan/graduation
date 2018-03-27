@@ -20,5 +20,20 @@ public class ProjectService {
 	public List<Project> getProjectListByTeacherId(String teacherId){
 		return projectMapper.getProjectListByTeacherId(teacherId);
 	}
+	
+	@Transactional(propagation=Propagation.SUPPORTS)
+	public Project getProjectByStudentId(String studentId) {
+		return projectMapper.getProjectByStudentId(studentId);
+	}
+	
+	@Transactional(propagation=Propagation.REQUIRED)
+	public boolean updateStudentIdByProjectId(String studentId,String projectId) {
+		return projectMapper.updateProjectByStudentId(studentId, projectId);
+	}
+
+	@Transactional(propagation=Propagation.REQUIRED)
+	public boolean updateNoStudent(String projectId) {
+		return projectMapper.updateNoStudent(projectId);
+	}
 
 }

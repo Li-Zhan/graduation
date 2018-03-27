@@ -10,9 +10,9 @@
 
 	<context:component-scan base-package="cn.lynu.controller"></context:component-scan>
 
-  	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="/WEB-INF/views/"></property>
-		<property name="suffix" value=".jsp"></property>
+   	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	<!--	<property name="prefix" value="/WEB-INF/views/"></property>
+		<property name="suffix" value=".jsp"></property>--> 
 	</bean>  
 
 	<mvc:annotation-driven/>

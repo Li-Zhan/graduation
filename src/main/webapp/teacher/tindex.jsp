@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>
 <!doctype html>
 <html>
 
@@ -110,8 +111,15 @@
 				<li class="am-dropdown" data-am-dropdown data-am-dropdown-toggle>
 					<a class="am-dropdown-toggle tpl-header-list-link"
 					href="javascript:;"> <span class="tpl-header-list-user-nick">${sessionScope.user.userName }</span><span
-						class="tpl-header-list-user-ico"> <img
-							src="../img/user01.png"></span>
+						class="tpl-header-list-user-ico">
+						<c:choose>
+							<c:when test="${sessionScope.user.userPortrait!=''&&sessionScope.user.userPortrait!=null }">
+								<img id="userPortrait" src="${sessionScope.user.userPortrait }"></span>
+							</c:when>
+							<c:otherwise>
+								<img id="userPortrait" src="../img/user01.png"></span>
+							</c:otherwise>
+						</c:choose>
 				</a>
 					<ul class="am-dropdown-content">
 						<li><a href="#"><span class="am-icon-user"></span> 资料</a></li>
@@ -232,16 +240,16 @@
 			
 			//网页刷新回到首页
 			$(window).on('unload',function(){
-				window.location.href='tindex.html';
+				window.location.href='tindex.jsp';
 			});
 			
 			$('#iframepage').on('load',function(){
 				  //"ref_page"为引用页面DIV的ID，获取DIV的外部宽度、外部高度。
-				 // var width = $(this).contents().find('#ref_page').outerWidth();
-				///alert(width);
 				  var height = $(this).contents().find('#ref_page').outerHeight();
 				  // 设置iframe的宽度、高度。
-				 // $(this).width(width);
+				  if(height<300){
+					  height=800;
+				  }
 				  $(this).height(height);
 			});
 			

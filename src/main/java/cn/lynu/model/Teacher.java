@@ -1,5 +1,7 @@
 package cn.lynu.model;
 
+import java.util.List;
+
 public class Teacher {
     private String teacherId;
 
@@ -17,6 +19,8 @@ public class Teacher {
     private User user;
     
     private Integer noChooseProject;
+    
+    private List<Project> projectList;
 
     public String getTeacherId() {
         return teacherId;
@@ -80,6 +84,14 @@ public class Teacher {
 
 	public void setNoChooseProject(Integer noChooseProject) {
 		this.noChooseProject = noChooseProject;
+	}
+
+	public List<Project> getProjectList() {
+		return projectList;
+	}
+
+	public void setProjectList(List<Project> projectList) {
+		this.projectList = projectList;
 	}
     
 }

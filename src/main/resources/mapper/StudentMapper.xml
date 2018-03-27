@@ -273,4 +273,33 @@
       teacher_evaluate = #{teacherEvaluate,jdbcType=VARCHAR}
     where student_id = #{studentId,jdbcType=CHAR}
   </update>
+  
+  <resultMap type="cn.lynu.model.Student" id="studentPlus" extends="BaseResultMap">
+  	<association property="user" column="user_id" select="cn.lynu.mapper.UserMapper.selectByPrimaryKey"></association>
+  </resultMap>
+  <select id="getStudentByUserId" resultMap="studentPlus">
+  	select 
+  	 <include refid="Base_Column_List" />
+    from student
+    where user_id = #{userId}
+  </select>
+  <select id="getStudentByStudentId" resultMap="studentPlus">
+  	select 
+  	 <include refid="Base_Column_List" />
+    from student
+    where student_id = #{studentId}
+  </select>
+  
+  <select id="getUserByStudentId" resultType="cn.lynu.model.User">
+  	SELECT user.* from user,student WHERE user.user_id=student.user_id and student.student_id=#{studentId}
+  </select>
+  
+  <update id="updateProjectNum">
+  	update student set project_num=1,teacher_id=#{teacherId},project_id=#{projectId} where student_id=#{studentId}
+  </update>
+  
+  <update id="updateNoProjectNum">
+  	update student set project_num=0,teacher_id=NULL,project_id=NULL where student_id=#{studentId}
+  </update>
+  
 </mapper>

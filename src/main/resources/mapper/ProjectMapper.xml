@@ -241,5 +241,29 @@
     where teacher_id = #{teacherId}
   </select>
   
+  <select id="getProjectByStudentId" resultType="cn.lynu.model.Project">
+  	select 
+    <include refid="Base_Column_List" />
+    from project
+    where student_id = #{studentId}
+  </select>
+  
+  <update id="updateProjectByStudentId">
+  		update project set student_id=#{studentId} where project_id = #{projectId}
+  </update>
+  
+  <resultMap type="cn.lynu.model.Project" id="ps" extends="BaseResultMap">
+  	<association property="student" column="student_id" select="cn.lynu.mapper.StudentMapper.getStudentByStudentId"></association>
+  </resultMap>
+  <select id="getProjectAndStudent" resultMap="ps">
+  	select 
+  	<include refid="Base_Column_List" />
+    from project
+    where teacher_id = #{teacherId}
+  </select>
+  
+  <update id="updateNoStudent">
+  	update project set student_id=NULL where project_id=#{projectId}
+  </update>
   
 </mapper>

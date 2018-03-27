@@ -18,6 +18,9 @@ public class Student {
     private Integer studentSource;
 
     private String teacherEvaluate;
+    
+    //级联属性
+    private User user;
 
     public String getStudentId() {
         return studentId;
@@ -90,4 +93,14 @@ public class Student {
     public void setTeacherEvaluate(String teacherEvaluate) {
         this.teacherEvaluate = teacherEvaluate == null ? null : teacherEvaluate.trim();
     }
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+    
+    
 }

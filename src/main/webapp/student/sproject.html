@@ -29,7 +29,7 @@
 		
 			<div class="am-u-sm-12 am-panel am-panel-default am-scrollable-horizontal">
 	          <form class="am-form" style="margin-top: 30px;">
-	            <table class="am-table am-table-striped am-table-hover table-main am-text-nowrap">
+	            <table class="am-table am-table-striped am-table-hover table-main am-text-nowrap am-table-centered">
 	              <thead>
 	              <tr>
 	                <th>课题名</th><th>课题描述</th><th>课题来源</th><th>教师姓名</th><th>操作</th>
@@ -62,43 +62,85 @@
 			},function(data){
 
 				for(var i=0;i<data.list.length;i++){
-					var tr=$('<tr>').append($('<td>').append($('<a>').attr('href','javascript:;').text(data.list[i].projectName)));
-	              	tr.append($('<td>').text(data.list[i].projectDescribe));
-	              	tr.append($('<td>').text(data.list[i].projectFrom.projectFromName));
-	              	tr.append($('<td>').text(data.list[i].teacher.user.userName));
+					var tr=$('<tr>').css('height','60px').append($('<td>').addClass('am-text-middle').append($('<a>').attr('href','javascript:;').text(data.list[i].projectName)));
+	              	var textarea=$('<textarea>').attr('disabled','disabled').css('height','40px').text(data.list[i].projectDescribe);
+					tr.append($('<td>').addClass('am-text-middle').append(textarea));
+	              	tr.append($('<td>').addClass('am-text-middle').text(data.list[i].projectFrom.projectFromName));
+	              	tr.append($('<td>').addClass('am-text-middle').text(data.list[i].teacher.user.userName));
+	              	tr.append($('<input>').addClass('studentId').attr('type','hidden').val(data.list[i].studentId));
 	              	var button=$('<button>').attr('type','button')
 	              				.addClass('am-btn am-btn-primary am-btn-sm project_button')
 	              				.append($('<span>').addClass('am-icon-plus').append(' 选择'))
-	              	
-	              				
+	              	var studentId=data.list[i].studentId;
 	              				
 	                //点击选择按钮,出现头像
 					$('.project_button').on('click',function() {
 						
 						var parent=$(this).parent('td').last();
+						var projectId=parent.find('input').val();
 						parent.empty();
-						parent.append($('<img>').attr('src','../img/user01.png').attr('title','李展').addClass('project_choose_img'));
+						var src= $(window.parent.document).find('#userPortrait').attr('src');
+						if(src==''||src==null){
+							src='../img/user01.png';
+						}
+						parent.append($('<img>').attr('src',src).attr('title','李展').addClass('project_choose_img'));
 						
 						//去写数据库
-						
+						if(projectId!=undefined){
+							$.post('/graduation/studentController/updateProjectByStudentId/'+projectId,{
+								'_method':'put'
+							},function(data){});
+						}
 						
 						//不允许再点击其他课题
 						del_projectBtn();
 					});
-	              				
-	              	var td=$('<td>').append(button);
-	              	tr.append(td);
+	                
+					if(studentId!=null&&studentId!=''){
+						$.ajax({
+							   url: "/graduation/studentController/getUserByStudentId?studentId="+studentId,
+							   type:'get',
+							   async:false,
+							   success: function(data){
+			              		   var src=data.userPortrait;
+			              			if(src==null||src==''){
+			              				src='../img/user01.png';
+			              			}
+					              	var img=$('<img>').attr('src',src).attr('title',data.userName).addClass('project_choose_img');
+					              	var td=$('<td>').addClass('am-text-middle').append(img);
+						            tr.append(td);
+							   }
+							 });
+	              	}else{
+		              	var td=$('<td>').addClass('am-text-middle').append(button).append($('<input>').addClass('projectId').attr('type','hidden').val(data.list[i].projectId));
+		              	tr.append(td);
+	              	}
 	              	$('tbody').append(tr);
               }
 				
+				student_project();
+				
 			});
 			
-			//student_project();
+			
 			//查询数据库该学生是否已经选课
 			function student_project(){
-				if(true){
-					del_projectBtn();
-				}
+				//student_id $(window.parent.document).find('#hiddenText').val()
+				$.get('/graduation/studentController/hasChooseProject',function(data){
+					if(data!=null&&data!=''){
+						$('input:hidden').each(function(index,value){
+							if($(this).val()==data.studentId){
+								//清除按钮
+								del_projectBtn();
+							//	var src=data.user.userPortrait;
+							//	if(src==''||src==null){
+							//		src='../img/user01.png';
+							//	}
+							//	var td=$(this).parent().find('td:last').append($('<img>').attr('src',src).attr('title','李展').addClass('project_choose_img'));
+							}
+						});
+					}
+				},'json');
 			}
 			
 			function del_projectBtn(){

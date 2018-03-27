@@ -245,4 +245,23 @@
     from teacher where teacher_id=#{teacherId}
   </select>
   
+  <select id="findTeacherByTeacherName" resultMap="teacherPlus2">
+  	select teacher.* from user,teacher where user.user_id=teacher.user_id and user.user_name LIKE concat('%',#{teacherName},'%')
+  </select>
+  
+  <resultMap type="cn.lynu.model.Teacher" id="TAP" extends="teacherPlus">
+  	<collection property="projectList" column="teacher_id" select="cn.lynu.mapper.ProjectMapper.getProjectAndStudent"></collection>
+  </resultMap>
+  <select id="findTeacherAndProject" resultMap="TAP">
+  	select 
+  	 <include refid="Base_Column_List" />
+    from teacher where teacher_id=#{teacherId}
+  </select>
+  
+   <select id="findTeacherByUserId" resultType="cn.lynu.model.Teacher">
+  	select 
+  	 <include refid="Base_Column_List" />
+    from teacher where user_id=#{userId}
+  </select>
+  
 </mapper>

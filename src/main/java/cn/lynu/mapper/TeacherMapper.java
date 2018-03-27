@@ -31,4 +31,10 @@ public interface TeacherMapper {
     List<Teacher> getAllTeacher();
     
     Teacher findTeacherByTeacherId(String teacherId);
+    
+    List<Teacher> findTeacherByTeacherName(String teacherName);
+    
+    Teacher findTeacherAndProject(String teacherId);
+    
+    Teacher findTeacherByUserId(String userId);
 }

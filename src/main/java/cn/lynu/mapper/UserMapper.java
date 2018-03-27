@@ -31,4 +31,5 @@ public interface UserMapper {
     User isUser(String account);
     
     User login(@Param("account")String account,@Param("password")String password);
+
 }

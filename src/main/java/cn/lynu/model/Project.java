@@ -15,8 +15,17 @@ public class Project {
     
     private Teacher teacher;
     private ProjectFrom projectFrom;
+    private Student student;
+    
+    public Student getStudent() {
+		return student;
+	}
 
-    public Integer getProjectId() {
+	public void setStudent(Student student) {
+		this.student = student;
+	}
+
+	public Integer getProjectId() {
         return projectId;
     }
 

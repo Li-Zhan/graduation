@@ -2,6 +2,8 @@ package cn.lynu.mapper;
 
 import cn.lynu.model.Student;
 import cn.lynu.model.StudentExample;
+import cn.lynu.model.User;
+
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
@@ -27,4 +29,16 @@ public interface StudentMapper {
     int updateByPrimaryKeySelective(Student record);
 
     int updateByPrimaryKey(Student record);
+    
+    Student getStudentByUserId(String userId);
+    
+    User getUserByStudentId(String studentId);
+    
+    Student getStudentByStudentId(String studentId);
+
+	boolean updateProjectNum(@Param("studentId")String studentId,
+				@Param("teacherId")String teacherId,@Param("projectId")String projectId);
+	
+	boolean updateNoProjectNum(String studentId);
+
 }

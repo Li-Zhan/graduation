@@ -27,5 +27,4 @@ public class UserService {
 	public User login(String account,String password) {
 		return userMapper.login(account, password);
 	}
-
 }

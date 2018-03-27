@@ -1,5 +1,6 @@
 package cn.lynu.controller;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,5 +47,5 @@ public class UserController {
 			}
 		return "passwordError";
 	}
-
+	
 }

@@ -20,5 +20,20 @@ public class TeacherService {
 	public List<Teacher> getSubTeacher(){
 		return teacherMapper.getAllTeacher();
 	}
+	
+	@Transactional(propagation=Propagation.SUPPORTS)
+	public List<Teacher> findTeacherByTeacherName(String teacherName){
+		return teacherMapper.findTeacherByTeacherName(teacherName);
+	}
+	
+	@Transactional(propagation=Propagation.SUPPORTS)
+	public Teacher findTeacherAndProject(String teacherId) {
+		return teacherMapper.findTeacherAndProject(teacherId);
+	}
+	
+	@Transactional(propagation=Propagation.SUPPORTS)
+	public Teacher findTeacherByUserId(String userId) {
+		return teacherMapper.findTeacherByUserId(userId);
+	}
 
 }
