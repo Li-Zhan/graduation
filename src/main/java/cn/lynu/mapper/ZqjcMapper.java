@@ -27,4 +27,6 @@ public interface ZqjcMapper {
     int updateByPrimaryKeySelective(Zqjc record);
 
     int updateByPrimaryKey(Zqjc record);
+
+	Zqjc getzqjcByStudentId(String studentId);
 }

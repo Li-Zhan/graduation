@@ -41,4 +41,7 @@ public interface StudentMapper {
 	
 	boolean updateNoProjectNum(String studentId);
 
+	Student getStuAndProject(String studentId);
+	
+	Student getStuAndProjectAndTeacher(String studentId);
 }

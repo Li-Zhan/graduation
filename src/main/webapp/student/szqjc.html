@@ -30,40 +30,40 @@
 								<tr>
 									<th colspan="6" class="am-text-middle">洛阳师范学院本科毕业论文（设计）中期检查</th>
 								</tr>
-								<tr>
+								<tr id="tr1">
 										<td>院(系)：</td>
 										<td>信息技术学院</td>
 										<td>专业：</td>
-										<td class="am-text-left">软件工程（移动终端应用软件开发）</td>
+										<td class="am-text-left"></td>
 										<td>年级:</td>
-										<td>2014级</td>
+										<td></td>
 								</tr>
 							</thead>
 						 	<tbody>
-								<tr>
+								<tr id="tr2">
 									<td class="am-text-middle" colspan="2">题目</td>
-									<td colspan="4">毕设管理系统</td>
+									<td colspan="4"></td>
 								</tr>
-								<tr>
+								<tr id="tr3">
 									<td>学号</td>
-									<td colspan="2">141164514</td>
+									<td colspan="2"></td>
 									<td>姓名</td>
-									<td colspan="2">李展</td>
+									<td colspan="2"></td>
 								</tr>
-								<tr>
+								<tr id="tr4">
 									<td>指导老师</td>
-									<td colspan="2">xxx</td>
+									<td colspan="2"></td>
 									<td>职称</td>
-									<td colspan="2">副教授</td>
+									<td colspan="2"></td>
 								</tr>
 								<tr>
 									<td colspan="6">
-										<textarea style="width: 100%; height: 200px;" placeholder="已经完成的内容："></textarea>
+										<textarea id="column1" style="width: 100%; height: 200px;" placeholder="已经完成的内容："></textarea>
 									</td>
 								</tr>
 								<tr>
 									<td colspan="6">
-										<textarea style="width: 100%; height: 200px;" placeholder="未完成内容及原因："></textarea>
+										<textarea id="column2" style="width: 100%; height: 200px;" placeholder="未完成内容及原因："></textarea>
 									</td>
 								</tr>
 							</tbody> 
@@ -83,14 +83,61 @@
 <script type="text/javascript">
 	$(function() {
 		
-		//查询数据库是否应该禁用提交按钮disableBtn(id)
+		$.ajax({
+			   url: "/graduation/studentController/getStuAndProjectAndTeacher",
+			   type: 'get',
+			   dataType:'json',
+			   async:false,
+			   success: function(data){
+					$('#tr1').find('td').eq(3).text(data.classInfo.subject.subjectName);
+					$('#tr1').find('td').eq(5).text(data.classInfo.grade.gradeName);
+					$('#tr2').find('td').eq(1).text(data.project.projectName);
+					$('#tr3').find('td').eq(1).text(data.user.userAccount);
+					$('#tr3').find('td').eq(3).text(data.user.userName);
+					$('#tr4').find('td').eq(1).text(data.teacher.user.userName);
+					$('#tr4').find('td').eq(3).text(data.teacher.zhicheng);
+					$('#zqjc_btn').append($('<input>').attr('type','hidden').val(data.studentId));
+			   }
+			 });
+		
+		//查询数据库是否应该禁用提交按钮
+		$.ajax({
+			   url: "/graduation/zqjcController/getzqjcByStudentId",
+			   type: 'get',
+			   data:{
+				   studentId:$('#zqjc_btn').find('input:hidden').val()
+			   },
+			   dataType:'json',
+			   async:false,
+			   success: function(data){
+				   if(!isNull(data.studentId)){
+						$('#zqjc_btn').addClass('am-disabled');
+						$('#column1').attr('disabled','disabled').text(data.column1);
+						$('#column2').attr('disabled','disabled').text(data.column2);
+					}
+			   },
+			 }); 
+		
 		//提交中期检查
 		$('#zqjc_btn').click(function () {
+			var column1=$('#column1').val();
+			var column2=$('#column2').val();
+			if(isNull(column1)||isNull(column2)){
+				return;
+			}
 			  var $btn = $(this);
-			  $btn.button('loading');
-			    setTimeout(function(){
-			    	disableBtn('zqjc_btn','提交完成');
-			  }, 3000);
+			  $.post('/graduation/zqjcController/insertSelective',{
+				  studentId:$btn.find('input:hidden').val(),
+				  column1:column1,
+				  column2:column2
+			  },function(data){
+				  if(data){
+					  $btn.button('loading');
+					    setTimeout(function(){
+					    	disableBtn('zqjc_btn','提交完成');
+					  }, 3000);
+				  }
+			  });
 			    
 		});
 		

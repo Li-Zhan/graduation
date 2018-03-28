@@ -208,4 +208,12 @@
       ktbg_status = #{ktbgStatus,jdbcType=INTEGER}
     where ktbg_id = #{ktbgId,jdbcType=INTEGER}
   </update>
+  
+  <select id="getKtbgByStudentId" resultType="cn.lynu.model.Ktbg">
+  	select 
+    <include refid="Base_Column_List" />
+    from ktbg
+    where student_id = #{studentId}
+  </select>
+  
 </mapper>

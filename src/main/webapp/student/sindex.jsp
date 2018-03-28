@@ -222,7 +222,7 @@
 
 		<!--begin  -->
 		<div class="tpl-content-wrapper">
-		<iframe id="iframepage" name="iframe_a" src="scontent.html" style="width: 100%;height: 530px;" seamless></iframe>
+		<iframe id="iframepage" name="iframe_a" src="scontent.html" style="width: 100%;height: 850px;" seamless></iframe>
 		</div>
 		<!--end  -->
 		
@@ -286,7 +286,7 @@
 				  var height = $(this).contents().find('#ref_page').outerHeight();
 				  // 设置iframe的宽度、高度。
 				  if(height<300){
-					  height=800;
+					  height=850;
 				  }
 				  $(this).height(height);
 			});

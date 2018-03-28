@@ -8,8 +8,28 @@ public class ClassInfo {
     private Integer gradeId;
 
     private Integer subjectId;
+    
+    private Grade grade;
+    
+    private Subject subject;
+    
+    public Grade getGrade() {
+		return grade;
+	}
 
-    public Integer getClassId() {
+	public void setGrade(Grade grade) {
+		this.grade = grade;
+	}
+
+	public Subject getSubject() {
+		return subject;
+	}
+
+	public void setSubject(Subject subject) {
+		this.subject = subject;
+	}
+
+	public Integer getClassId() {
         return classId;
     }
 

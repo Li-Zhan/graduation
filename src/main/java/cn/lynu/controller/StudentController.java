@@ -94,4 +94,38 @@ public class StudentController {
 		return false;
 	}
 	
+	@ResponseBody
+	@RequestMapping("/getStuAndProject")
+	public Student getStuAndProject(HttpSession session,HttpServletResponse response) {
+		User user=(User) session.getAttribute("user");
+		if(user!=null) {
+			Student student = studentService.getStudentByUserId(user.getUserId());
+			if(student!=null) {
+				if(student.getProjectId()!=null&&student.getProjectId()!=0) {
+					Student newStu = studentService.getStuAndProject(student.getStudentId());
+					return newStu;
+				}
+			}
+			return null;
+		}
+		return null;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/getStuAndProjectAndTeacher")
+	public Student getStuAndProjectAndTeacher(HttpSession session,HttpServletResponse response) {
+		User user=(User) session.getAttribute("user");
+		if(user!=null) {
+			Student student = studentService.getStudentByUserId(user.getUserId());
+			if(student!=null) {
+				if(student.getProjectId()!=null&&student.getProjectId()!=0) {
+					Student newStu = studentService.getStuAndProjectAndTeacher(student.getStudentId());
+					return newStu;
+				}
+			}
+			return null;
+		}
+		return null;
+	}
+	
 }

@@ -419,3 +419,10 @@ $(function(){
 	});
 	
 });
+
+function isNull(data) {
+	if(data==null||data==''||data==' '||data=='undefined'){
+		return true;
+	}
+	return false;
+}

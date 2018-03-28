@@ -208,4 +208,12 @@
       student_id = #{studentId,jdbcType=CHAR}
     where mdb_id = #{mdbId,jdbcType=INTEGER}
   </update>
+  
+  <select id="getMdbByStudentId" resultType="cn.lynu.model.Mdb">
+  	 select 
+    <include refid="Base_Column_List" />
+    from mdb
+    where student_id = #{student_id}
+  </select>
+  
 </mapper>

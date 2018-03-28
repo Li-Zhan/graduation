@@ -19,6 +19,8 @@ public interface ProjectMapper {
     List<Project> selectByExample(ProjectExample example);
 
     Project selectByPrimaryKey(Integer projectId);
+    
+    Project selectProjectAndFromByPid(Integer projectId);
 
     int updateByExampleSelective(@Param("record") Project record, @Param("example") ProjectExample example);
 

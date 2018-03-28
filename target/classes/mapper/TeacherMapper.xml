@@ -8,6 +8,7 @@
     <result column="teacher_type_id" jdbcType="INTEGER" property="teacherTypeId" />
     <result column="user_id" jdbcType="CHAR" property="userId" />
     <result column="dept_id" jdbcType="INTEGER" property="deptId" />
+    <result column="zhicheng" jdbcType="CHAR" property="zhicheng" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -68,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    teacher_id, teacher_describe, teacher_project_num, teacher_type_id, user_id, dept_id
+    teacher_id, teacher_describe, teacher_project_num, teacher_type_id, user_id, dept_id, zhicheng
   </sql>
   <select id="selectByExample" parameterType="cn.lynu.model.TeacherExample" resultMap="BaseResultMap">
     select
@@ -102,11 +103,11 @@
   </delete>
   <insert id="insert" parameterType="cn.lynu.model.Teacher">
     insert into teacher (teacher_id, teacher_describe, teacher_project_num, 
-      teacher_type_id, user_id, dept_id
+      teacher_type_id, user_id, dept_id, zhicheng
       )
     values (#{teacherId,jdbcType=CHAR}, #{teacherDescribe,jdbcType=VARCHAR}, #{teacherProjectNum,jdbcType=CHAR}, 
       #{teacherTypeId,jdbcType=INTEGER}, #{userId,jdbcType=CHAR}, #{deptId,jdbcType=INTEGER}
-      )
+      , #{zhicheng,jdbcType=CHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.lynu.model.Teacher">
     insert into teacher
@@ -129,6 +130,9 @@
       <if test="deptId != null">
         dept_id,
       </if>
+      <if test="zhicheng != null">
+        zhicheng,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="teacherId != null">
@@ -148,6 +152,9 @@
       </if>
       <if test="deptId != null">
         #{deptId,jdbcType=INTEGER},
+      </if>
+      <if test="zhicheng != null">
+        #{zhicheng,jdbcType=CHAR},
       </if>
     </trim>
   </insert>
@@ -178,6 +185,9 @@
       <if test="record.deptId != null">
         dept_id = #{record.deptId,jdbcType=INTEGER},
       </if>
+      <if test="record.zhicheng != null">
+        zhicheng = #{record.zhicheng,jdbcType=CHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -190,7 +200,8 @@
       teacher_project_num = #{record.teacherProjectNum,jdbcType=CHAR},
       teacher_type_id = #{record.teacherTypeId,jdbcType=INTEGER},
       user_id = #{record.userId,jdbcType=CHAR},
-      dept_id = #{record.deptId,jdbcType=INTEGER}
+      dept_id = #{record.deptId,jdbcType=INTEGER},
+      zhicheng = #{record.zhicheng,jdbcType=CHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -213,6 +224,9 @@
       <if test="deptId != null">
         dept_id = #{deptId,jdbcType=INTEGER},
       </if>
+      <if test="zhicheng != null">
+        zhicheng = #{zhicheng,jdbcType=CHAR},
+      </if>
     </set>
     where teacher_id = #{teacherId,jdbcType=CHAR}
   </update>
@@ -222,7 +236,8 @@
       teacher_project_num = #{teacherProjectNum,jdbcType=CHAR},
       teacher_type_id = #{teacherTypeId,jdbcType=INTEGER},
       user_id = #{userId,jdbcType=CHAR},
-      dept_id = #{deptId,jdbcType=INTEGER}
+      dept_id = #{deptId,jdbcType=INTEGER},
+      zhicheng = #{zhicheng,jdbcType=CHAR}
     where teacher_id = #{teacherId,jdbcType=CHAR}
   </update>
   

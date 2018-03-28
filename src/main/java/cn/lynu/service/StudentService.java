@@ -39,5 +39,14 @@ public class StudentService {
 	public boolean updateNoProjectNum(String studentId) {
 		return studentMapper.updateNoProjectNum(studentId);
 	}
+	
+	@Transactional(propagation=Propagation.SUPPORTS)
+	public Student getStuAndProject(String studentId) {
+		return studentMapper.getStuAndProject(studentId);
+	}
 
+	@Transactional(propagation=Propagation.SUPPORTS)
+	public Student getStuAndProjectAndTeacher(String studentId) {
+		return studentMapper.getStuAndProjectAndTeacher(studentId);
+	}
 }

@@ -225,4 +225,12 @@
       student_id = #{studentId,jdbcType=CHAR}
     where zqjc_id = #{zqjcId,jdbcType=INTEGER}
   </update>
+  
+  <select id="getzqjcByStudentId" resultType="cn.lynu.model.Zqjc">
+  	select 
+    <include refid="Base_Column_List" />
+    from zqjc
+    where student_id = #{studentId}
+  </select>
+  
 </mapper>

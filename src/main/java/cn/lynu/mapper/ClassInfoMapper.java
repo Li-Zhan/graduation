@@ -20,6 +20,8 @@ public interface ClassInfoMapper {
 
     ClassInfo selectByPrimaryKey(Integer classId);
 
+    ClassInfo selectProjectAndGradeAndSubjectByCid(Integer classId);
+
     int updateByExampleSelective(@Param("record") ClassInfo record, @Param("example") ClassInfoExample example);
 
     int updateByExample(@Param("record") ClassInfo record, @Param("example") ClassInfoExample example);

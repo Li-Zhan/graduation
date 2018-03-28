@@ -15,6 +15,8 @@ public class Teacher {
 
     private Integer deptId;
     
+    private String zhicheng;
+    
     //级联属性
     private User user;
     
@@ -92,6 +94,14 @@ public class Teacher {
 
 	public void setProjectList(List<Project> projectList) {
 		this.projectList = projectList;
+	}
+
+	public String getZhicheng() {
+		return zhicheng;
+	}
+
+	public void setZhicheng(String zhicheng) {
+		this.zhicheng = zhicheng;
 	}
     
 }

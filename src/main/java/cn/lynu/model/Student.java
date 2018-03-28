@@ -21,8 +21,35 @@ public class Student {
     
     //级联属性
     private User user;
+    private Project project;
+    private ClassInfo classInfo;
+    private Teacher teacher;
+    
+    public Teacher getTeacher() {
+		return teacher;
+	}
 
-    public String getStudentId() {
+	public void setTeacher(Teacher teacher) {
+		this.teacher = teacher;
+	}
+
+	public ClassInfo getClassInfo() {
+		return classInfo;
+	}
+
+	public void setClassInfo(ClassInfo classInfo) {
+		this.classInfo = classInfo;
+	}
+
+	public Project getProject() {
+		return project;
+	}
+
+	public void setProject(Project project) {
+		this.project = project;
+	}
+
+	public String getStudentId() {
         return studentId;
     }
 

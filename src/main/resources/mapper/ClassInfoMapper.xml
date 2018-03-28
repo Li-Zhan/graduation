@@ -193,4 +193,16 @@
       subject_id = #{subjectId,jdbcType=INTEGER}
     where class_id = #{classId,jdbcType=INTEGER}
   </update>
+  
+  <resultMap type="cn.lynu.model.ClassInfo" id="classPlus" extends="BaseResultMap">
+  	<association property="grade" column="grade_id" select="cn.lynu.mapper.GradeMapper.selectByPrimaryKey"></association>
+  	<association property="subject" column="subject_id" select="cn.lynu.mapper.SubjectMapper.selectByPrimaryKey"></association>
+  </resultMap>
+  <select id="selectProjectAndGradeAndSubjectByCid" parameterType="java.lang.Integer" resultMap="classPlus">
+    select 
+    <include refid="Base_Column_List" />
+    from class_info
+    where class_id = #{classId,jdbcType=INTEGER}
+  </select>
+  
 </mapper>

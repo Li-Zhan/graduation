@@ -302,4 +302,25 @@
   	update student set project_num=0,teacher_id=NULL,project_id=NULL where student_id=#{studentId}
   </update>
   
+  <resultMap type="cn.lynu.model.Student" id="studentAndProjectAndClass" extends="studentPlus">
+  	<association property="project" column="project_id" select="cn.lynu.mapper.ProjectMapper.selectProjectAndFromByPid"></association>
+  	<association property="classInfo" column="class_id" select="cn.lynu.mapper.ClassInfoMapper.selectProjectAndGradeAndSubjectByCid"></association>
+  </resultMap>
+  <select id="getStuAndProject" resultMap="studentAndProjectAndClass">
+  	select 
+	  	<include refid="Base_Column_List" />
+	    from student
+	    where student_id = #{studentId}
+  </select>
+  
+  <resultMap type="cn.lynu.model.Student" id="studentAndProjectAndClassAndTeacher" extends="studentAndProjectAndClass">
+  	<association property="teacher" column="teacher_id" select="cn.lynu.mapper.TeacherMapper.findTeacherByTeacherId"></association>
+  </resultMap>
+  <select id="getStuAndProjectAndTeacher" resultMap="studentAndProjectAndClassAndTeacher">
+  	select 
+	  	<include refid="Base_Column_List" />
+	    from student
+	    where student_id = #{studentId}
+  </select>
+  
 </mapper>

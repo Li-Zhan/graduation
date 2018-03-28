@@ -266,4 +266,14 @@
   	update project set student_id=NULL where project_id=#{projectId}
   </update>
   
+  <resultMap type="cn.lynu.model.Project" id="projectComeFrom" extends="BaseResultMap">
+  	<association property="projectFrom" column="project_from_id" select="cn.lynu.mapper.ProjectFromMapper.selectByPrimaryKey"></association>
+  </resultMap>
+   <select id="selectProjectAndFromByPid" parameterType="java.lang.Integer" resultMap="projectComeFrom">
+    select 
+    <include refid="Base_Column_List" />
+    from project
+    where project_id = #{projectId,jdbcType=INTEGER}
+  </select>
+  
 </mapper>
