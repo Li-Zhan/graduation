@@ -29,37 +29,37 @@
                                 <table class="am-table am-table-centered am-table-striped am-table-hover table-main">
                                     <thead>
                                         <tr>
-                                            <th class="table-id">ID</th>
+                                            <th class="table-id">序号</th>
                                             <th class="table-title">课题名</th>
                                             <th class="table-type">课题描述</th>
                                             <th>课题来源</th>
                                             <th class="table-set">操作</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <tr>
+                                    <tbody id="tbody">
+                                      <tr>
                                             <td>1</td>
                                             <td><input type="text"/></td>
                                             <td><input type="text"/></td>
                                             <td>
 	                                        <label class="am-radio-inline">
-												    <input type="radio" name="radio1" value="male" data-am-ucheck>学生拟定
+												    <input type="radio" name="radio1" value="2" data-am-ucheck>学生拟定
 											</label>
 											<label class="am-radio-inline">
-												    <input type="radio" name="radio1" value="female" data-am-ucheck checked>教师建议
+												    <input type="radio" name="radio1" value="1" data-am-ucheck checked>教师建议
 											</label>
 											<label class="am-radio-inline">
-												    <input type="radio" name="radio1" value="pig" data-am-ucheck>企业和社会征集
+												    <input type="radio" name="radio1" value="3" data-am-ucheck>企业和社会征集
 											</label>
 											<label class="am-radio-inline">
-												    <input type="radio" name="radio1" value="pig" data-am-ucheck>科研单位提供
+												    <input type="radio" name="radio1" value="4" data-am-ucheck>科研单位提供
 											</label>
 											</td>
                                             <td>
                                                 <div class="am-btn-toolbar">
                                                     <div class="am-btn-group am-btn-group-xs">
-                                                        <button type="button" class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span> 编辑</button>
-                                                        <button type="button" class="am-btn am-btn-default am-btn-xs" ><span class="am-icon-check"></span>  提交</button>
+                                                        <button type="button" class="am-btn am-btn-default am-btn-xs am-text-secondary update"><span class="am-icon-pencil-square-o"></span> 编辑</button>
+                                                        <button type="button" class="am-btn am-btn-default am-btn-xs yes" ><span class="am-icon-check"></span>  提交</button>
                                                     </div>
                                                 </div>
                                             </td>
@@ -70,23 +70,23 @@
                                             <td><input type="text"/></td>
                                             <td>
 	                                        <label class="am-radio-inline">
-												    <input type="radio" name="radio2" value="male" data-am-ucheck>学生拟定
+												    <input type="radio" name="radio2" value="2" data-am-ucheck>学生拟定
 											</label>
 											<label class="am-radio-inline">
-												    <input type="radio" name="radio2" value="female" data-am-ucheck checked>教师建议
+												    <input type="radio" name="radio2" value="1" data-am-ucheck checked>教师建议
 											</label>
 											<label class="am-radio-inline">
-												    <input type="radio" name="radio2" value="pig" data-am-ucheck>企业和社会征集
+												    <input type="radio" name="radio2" value="3" data-am-ucheck>企业和社会征集
 											</label>
 											<label class="am-radio-inline">
-												    <input type="radio" name="radio2" value="pig" data-am-ucheck>科研单位提供
+												    <input type="radio" name="radio2" value="4" data-am-ucheck>科研单位提供
 											</label>
 											</td>
                                             <td>
                                                 <div class="am-btn-toolbar">
                                                     <div class="am-btn-group am-btn-group-xs">
-                                                        <button type="button" class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span> 编辑</button>
-                                                        <button type="button" class="am-btn am-btn-default am-btn-xs" ><span class="am-icon-check"></span> 提交</button>
+                                                        <button type="button" class="am-btn am-btn-default am-btn-xs am-text-secondary update"><span class="am-icon-pencil-square-o"></span> 编辑</button>
+                                                        <button type="button" class="am-btn am-btn-default am-btn-xs yes" ><span class="am-icon-check"></span> 提交</button>
                                                     </div>
                                                 </div>
                                             </td>
@@ -97,23 +97,23 @@
                                             <td><input type="text"/></td>
                                             <td>
 	                                        <label class="am-radio-inline">
-												    <input type="radio" name="radio3" value="male" data-am-ucheck>学生拟定
+												    <input type="radio" name="radio3" value="2" data-am-ucheck>学生拟定
 											</label>
 											<label class="am-radio-inline">
-												    <input type="radio" name="radio3" value="female" data-am-ucheck checked>教师建议
+												    <input type="radio" name="radio3" value="1" data-am-ucheck checked>教师建议
 											</label>
 											<label class="am-radio-inline">
-												    <input type="radio" name="radio3" value="pig" data-am-ucheck>企业和社会征集
+												    <input type="radio" name="radio3" value="3" data-am-ucheck>企业和社会征集
 											</label>
 											<label class="am-radio-inline">
-												    <input type="radio" name="radio3" value="pig" data-am-ucheck>科研单位提供
+												    <input type="radio" name="radio3" value="4" data-am-ucheck>科研单位提供
 											</label>
 											</td>
                                             <td>
                                                 <div class="am-btn-toolbar">
                                                     <div class="am-btn-group am-btn-group-xs">
-                                                        <button type="button" class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span> 编辑</button>
-                                                        <button type="button" class="am-btn am-btn-default am-btn-xs" ><span class="am-icon-check"></span> 提交</button>
+                                                        <button type="button" class="am-btn am-btn-default am-btn-xs am-text-secondary update"><span class="am-icon-pencil-square-o"></span> 编辑</button>
+                                                        <button type="button" class="am-btn am-btn-default am-btn-xs yes" ><span class="am-icon-check"></span> 提交</button>
                                                     </div>
                                                 </div>
                                             </td>
@@ -124,23 +124,23 @@
                                             <td><input type="text"/></td>
                                             <td>
 	                                        <label class="am-radio-inline">
-												    <input type="radio" name="radio4" value="male" data-am-ucheck>学生拟定
+												    <input type="radio" name="radio4" value="2" data-am-ucheck>学生拟定
 											</label>
 											<label class="am-radio-inline">
-												    <input type="radio" name="radio4" value="female" data-am-ucheck checked>教师建议
+												    <input type="radio" name="radio4" value="1" data-am-ucheck checked>教师建议
 											</label>
 											<label class="am-radio-inline">
-												    <input type="radio" name="radio40" value="pig" data-am-ucheck>企业和社会征集
+												    <input type="radio" name="radio40" value="3" data-am-ucheck>企业和社会征集
 											</label>
 											<label class="am-radio-inline">
-												    <input type="radio" name="radio4" value="pig" data-am-ucheck>科研单位提供
+												    <input type="radio" name="radio4" value="4" data-am-ucheck>科研单位提供
 											</label>
 											</td>
                                             <td>
                                                 <div class="am-btn-toolbar">
                                                     <div class="am-btn-group am-btn-group-xs">
-                                                        <button type="button" class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span> 编辑</button>
-                                                        <button type="button" class="am-btn am-btn-default am-btn-xs" ><span class="am-icon-check"></span> 提交</button>
+                                                        <button type="button" class="am-btn am-btn-default am-btn-xs am-text-secondary update"><span class="am-icon-pencil-square-o"></span> 编辑</button>
+                                                        <button type="button" class="am-btn am-btn-default am-btn-xs yes" ><span class="am-icon-check"></span> 提交</button>
                                                     </div>
                                                 </div>
                                             </td>
@@ -151,23 +151,23 @@
                                             <td><input type="text"/></td>
                                             <td>
 	                                        <label class="am-radio-inline">
-												    <input type="radio" name="radio5" value="male" data-am-ucheck>学生拟定
+												    <input type="radio" name="radio5" value="2" data-am-ucheck>学生拟定
 											</label>
 											<label class="am-radio-inline">
-												    <input type="radio" name="radio5" value="female" data-am-ucheck checked>教师建议
+												    <input type="radio" name="radio5" value="1" data-am-ucheck checked>教师建议
 											</label>
 											<label class="am-radio-inline">
-												    <input type="radio" name="radio5" value="pig" data-am-ucheck>企业和社会征集
+												    <input type="radio" name="radio5" value="3" data-am-ucheck>企业和社会征集
 											</label>
 											<label class="am-radio-inline">
-												    <input type="radio" name="radio5" value="pig" data-am-ucheck>科研单位提供
+												    <input type="radio" name="radio5" value="4" data-am-ucheck>科研单位提供
 											</label>
 											</td>
                                             <td>
                                                 <div class="am-btn-toolbar">
                                                     <div class="am-btn-group am-btn-group-xs">
-                                                        <button type="button" class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span> 编辑</button>
-                                                        <button type="button" class="am-btn am-btn-default am-btn-xs" ><span class="am-icon-check"></span> 提交</button>
+                                                        <button type="button" class="am-btn am-btn-default am-btn-xs am-text-secondary update"><span class="am-icon-pencil-square-o"></span> 编辑</button>
+                                                        <button type="button" class="am-btn am-btn-default am-btn-xs yes" ><span class="am-icon-check"></span> 提交</button>
                                                     </div>
                                                 </div>
                                             </td>
@@ -178,23 +178,23 @@
                                             <td><input type="text"/></td>
                                             <td>
 	                                        <label class="am-radio-inline">
-												    <input type="radio" name="radio6" value="male" data-am-ucheck>学生拟定
+												    <input type="radio" name="radio6" value="2" data-am-ucheck>学生拟定
 											</label>
 											<label class="am-radio-inline">
-												    <input type="radio" name="radio6" value="female" data-am-ucheck checked>教师建议
+												    <input type="radio" name="radio6" value="1" data-am-ucheck checked>教师建议
 											</label>
 											<label class="am-radio-inline">
-												    <input type="radio" name="radio6" value="pig" data-am-ucheck>企业和社会征集
+												    <input type="radio" name="radio6" value=3 data-am-ucheck>企业和社会征集
 											</label>
 											<label class="am-radio-inline">
-												    <input type="radio" name="radio6" value="pig" data-am-ucheck>科研单位提供
+												    <input type="radio" name="radio6" value="4" data-am-ucheck>科研单位提供
 											</label>
 											</td>
                                             <td>
                                                 <div class="am-btn-toolbar">
                                                     <div class="am-btn-group am-btn-group-xs">
-                                                        <button type="button" class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span> 编辑</button>
-                                                        <button type="button" class="am-btn am-btn-default am-btn-xs" ><span class="am-icon-check"></span> 提交</button>
+                                                        <button type="button" class="am-btn am-btn-default am-btn-xs am-text-secondary update"><span class="am-icon-pencil-square-o"></span> 编辑</button>
+                                                        <button type="button" class="am-btn am-btn-default am-btn-xs yes" ><span class="am-icon-check"></span> 提交</button>
                                                     </div>
                                                 </div>
                                             </td>
@@ -205,23 +205,23 @@
                                             <td><input type="text"/></td>
                                             <td>
 	                                        <label class="am-radio-inline">
-												    <input type="radio" name="radio7" value="male" data-am-ucheck>学生拟定
+												    <input type="radio" name="radio7" value="2" data-am-ucheck>学生拟定
 											</label>
 											<label class="am-radio-inline">
-												    <input type="radio" name="radio7" value="female" data-am-ucheck checked>教师建议
+												    <input type="radio" name="radio7" value="1" data-am-ucheck checked>教师建议
 											</label>
 											<label class="am-radio-inline">
-												    <input type="radio" name="radio70" value="pig" data-am-ucheck>企业和社会征集
+												    <input type="radio" name="radio70" value="3" data-am-ucheck>企业和社会征集
 											</label>
 											<label class="am-radio-inline">
-												    <input type="radio" name="radio7" value="pig" data-am-ucheck>科研单位提供
+												    <input type="radio" name="radio7" value="4" data-am-ucheck>科研单位提供
 											</label>
 											</td>
                                             <td>
                                                 <div class="am-btn-toolbar">
                                                     <div class="am-btn-group am-btn-group-xs">
-                                                        <button type="button" class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span> 编辑</button>
-                                                        <button type="button" class="am-btn am-btn-default am-btn-xs" ><span class="am-icon-check"></span> 提交</button>
+                                                        <button type="button" class="am-btn am-btn-default am-btn-xs am-text-secondary update"><span class="am-icon-pencil-square-o"></span> 编辑</button>
+                                                        <button type="button" class="am-btn am-btn-default am-btn-xs yes" ><span class="am-icon-check"></span> 提交</button>
                                                     </div>
                                                 </div>
                                             </td>
@@ -232,28 +232,27 @@
                                             <td><input type="text"/></td>
                                             <td>
 	                                        <label class="am-radio-inline">
-												    <input type="radio" name="radio8" value="male" data-am-ucheck>学生拟定
+												    <input type="radio" name="radio8" value="2" data-am-ucheck>学生拟定
 											</label>
 											<label class="am-radio-inline">
-												    <input type="radio" name="radio8" value="female" data-am-ucheck checked>教师建议
+												    <input type="radio" name="radio8" value="1" data-am-ucheck checked>教师建议
 											</label>
 											<label class="am-radio-inline">
-												    <input type="radio" name="radio8" value="pig" data-am-ucheck>企业和社会征集
+												    <input type="radio" name="radio8" value="3" data-am-ucheck>企业和社会征集
 											</label>
 											<label class="am-radio-inline">
-												    <input type="radio" name="radio8" value="pig" data-am-ucheck>科研单位提供
+												    <input type="radio" name="radio8" value="4" data-am-ucheck>科研单位提供
 											</label>
 											</td>
                                             <td>
                                                 <div class="am-btn-toolbar">
                                                     <div class="am-btn-group am-btn-group-xs">
-                                                        <button type="button" class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span> 编辑</button>
-                                                        <button type="button" class="am-btn am-btn-default am-btn-xs" ><span class="am-icon-check"></span> 提交</button>
+                                                        <button type="button" class="am-btn am-btn-default am-btn-xs am-text-secondary update"><span class="am-icon-pencil-square-o"></span> 编辑</button>
+                                                        <button type="button" class="am-btn am-btn-default am-btn-xs yes" ><span class="am-icon-check"></span> 提交</button>
                                                     </div>
                                                 </div>
                                             </td>
                                         </tr>
-                                      
                                     </tbody>
                                 </table>
                             </form>
@@ -268,7 +267,55 @@
 	<script src="../amazeui/js/amazeui.min.js"></script>
 	<script type="text/javascript">
 		$(function() {
-
+			
+			$.get('/graduation/projectController/getProjectByTeacherId',function(data){
+				for(var i=0;i<data.length;i++){
+					var tr=$('#tbody').find('tr').eq(i);
+					tr.find('td').eq(1).find('input').val(data[i].projectName).attr('disabled','disabled');
+					tr.find('td').eq(2).find('input').val(data[i].projectName).attr('disabled','disabled');
+					var radio=tr.find('td').eq(3).find('input[type=radio]').removeAttr('checked');
+					radio.each(function(index,value){
+						if($(this).val()==data[i].projectFromId){
+							$(this).attr('checked','checked');
+						}
+					});
+					tr.append($('<input>').attr('type','hidden').val(data[i].projectId));
+					tr.find('td').eq(4).find('.yes').attr('disabled','disabled');
+				}
+			});
+			
+			$('.yes').click(function(){
+				var btn=$(this);
+				var tr=btn.parent().parent().parent().parent();
+				var project_name=tr.find('td').eq(1).find('input').val();
+				var project_describe=tr.find('td').eq(2).find('input').val();
+				if(project_name==null){
+					return false;
+				}
+				var project_from_id=tr.find('td').eq(3).find('input:checked').val();
+				var projectId=tr.find('input[type=hidden]').val();
+				$.post('/graduation/projectController/insertSelective',{
+					projectName:project_name,
+					projectDescribe:project_describe,
+					projectFromId:project_from_id,
+					projectId:projectId
+				},function(data){
+					btn.attr('disabled','disabled');
+					btn.parent().find('.update').removeAttr('disabled');
+					tr.find('td').eq(1).find('input').attr('disabled','disabled');
+					tr.find('td').eq(2).find('input').attr('disabled','disabled');
+				})
+			});
+			
+			$('.update').click(function(){
+				var btn=$(this);
+				var tr=btn.parent().parent().parent().parent();
+				btn.attr('disabled','disabled');
+				btn.parent().find('.yes').removeAttr('disabled');
+				tr.find('td').eq(1).find('input').removeAttr('disabled');
+				tr.find('td').eq(2).find('input').removeAttr('disabled');
+			});
+			
 		});
 	</script>
 </body>

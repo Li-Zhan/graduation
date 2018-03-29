@@ -39,7 +39,7 @@
 							</div>
 							<div class="details">
 								<div class="number">当前阶段</div>
-								<div class="desc">选择课题</div>
+								<div class="desc" id="workTime"></div>
 							</div>
 
 						</div>
@@ -52,7 +52,7 @@
 							<i class="am-icon-bar-chart-o"></i>
 						</div>
 						<div class="details">
-							<div class="number">653</div>
+							<div class="number" id="number"></div>
 							<div class="desc">剩余课题数</div>
 						</div>
 					</div>
@@ -92,6 +92,20 @@
 	$(function() {
 		
 		console.log($(window.parent.document).find('#hiddenText').val());
+		var date=new Date();
+		var thisDate=date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate();
+		
+		$.get('/graduation/projectController/getCountProjectNum',function(data){
+			$('#number').text(data);
+		});
+		
+		$.get('/graduation/workTimeController/getWorkTime',{
+			date:thisDate
+		},function(data){
+			if(data.workTimeInfo!=null){
+				$('#workTime').text(data.workTimeInfo);
+			}
+		});
 		
 	});
 </script>

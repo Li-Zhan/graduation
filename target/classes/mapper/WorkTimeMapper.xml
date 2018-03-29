@@ -193,4 +193,9 @@
       work_time_end = #{workTimeEnd,jdbcType=TIMESTAMP}
     where work_time_id = #{workTimeId,jdbcType=INTEGER}
   </update>
+  
+  <select id="getWorkTime" resultType="cn.lynu.model.WorkTime">
+  	select work_time_info from work_time where #{thisDate} BETWEEN work_time_start AND work_time_end
+  </select>
+  
 </mapper>

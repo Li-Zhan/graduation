@@ -111,6 +111,19 @@
  			var a=$('<a>').attr('href','#').addClass('am-text-truncate');
  			a.append($('<span>').text(data.list[i].downTitle));
  			a.append($('<span>').text(getMyDate(data.list[i].createDate)));
+ 			a.append($('<span>').css('display','none').text(data.list[i].downPath));
+ 			var fileName=a.find('span:last').text();
+ 			if(fileName!=null){
+ 			  a.attr('href',encodeURI('downController/downloadResource?fileName='+fileName));
+ 			}
+/* 			a.on('click',function(){
+ 				if(fileName!=null){
+	 				$.post('downController/downloadResource',{
+	 					fileName:fileName
+	 				},function(data){});
+ 				}
+ 				return false;
+ 			});*/
  			var li=$("#down_ul").append($('<li>').append(a));
  		}
  	});

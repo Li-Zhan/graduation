@@ -54,7 +54,19 @@ public class StudentController {
 					return projectService.updateStudentIdByProjectId(student.getStudentId(), projectId);
 				}
 			}
-			return false;
+		}
+		return false;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/updateTeacherId")
+	public boolean updateTeacherId(HttpSession session,String teacherId) {
+		User user=(User) session.getAttribute("user");
+		if(user!=null) {
+			Student student = studentService.getStudentByUserId(user.getUserId());
+			if(student!=null) {
+				return studentService.updateTeacherId(teacherId,student.getStudentId());
+			}
 		}
 		return false;
 	}
@@ -106,9 +118,8 @@ public class StudentController {
 					return newStu;
 				}
 			}
-			return null;
 		}
-		return null;
+		return new Student();
 	}
 	
 	@ResponseBody
@@ -123,9 +134,8 @@ public class StudentController {
 					return newStu;
 				}
 			}
-			return null;
 		}
-		return null;
+		return new Student();
 	}
 	
 }

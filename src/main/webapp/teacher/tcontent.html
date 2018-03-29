@@ -39,7 +39,7 @@
 							</div>
 							<div class="details">
 								<div class="number">当前阶段</div>
-								<div class="desc">申报课题</div>
+								<div class="desc" id="workTime"></div>
 							</div>
 
 						</div>
@@ -52,7 +52,7 @@
 							<i class="am-icon-bar-chart-o"></i>
 						</div>
 						<div class="details">
-							<div class="number">6</div>
+							<div class="number" id="num1"></div>
 							<div class="desc">已选课题数</div>
 						</div>
 					</div>
@@ -63,7 +63,7 @@
 							<i class="am-icon-users"></i>
 						</div>
 						<div class="details">
-							<div class="number">2</div>
+							<div class="number" id="num2"></div>
 							<div class="desc">待确认人数</div>
 						</div>
 					</div>
@@ -99,6 +99,33 @@
 
 <script src="../js/jquery.min.js"></script>
 <script src="../amazeui/js/amazeui.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		
+		var date=new Date();
+		var thisDate=date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate();
+		$.get('/graduation/workTimeController/getWorkTime',{
+			date:thisDate
+		},function(data){
+			if(data.workTimeInfo!=null){
+				$('#workTime').text(data.workTimeInfo);
+			}
+		});
+		
+		$.get('/graduation/projectController/thisTeacherYesProjectNum',function(data){
+			if(data!=null){
+				$('#num1').text(data);
+			}
+		});
+		
+		$.get('/graduation/projectController/thisTeacherUndefinedStudentNum',function(data){
+			if(data!=null){
+				$('#num2').text(data);
+			}
+		});
+		
+	});
+</script>
 </body>
 
 </html>

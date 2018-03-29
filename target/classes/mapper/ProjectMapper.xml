@@ -108,7 +108,7 @@
       #{projectFromId,jdbcType=INTEGER}, #{teacherId,jdbcType=CHAR}, #{studentId,jdbcType=CHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="cn.lynu.model.Project">
+  <insert id="insertSelective" useGeneratedKeys="true" keyProperty="projectId" parameterType="cn.lynu.model.Project">
     insert into project
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="projectId != null">
@@ -274,6 +274,21 @@
     <include refid="Base_Column_List" />
     from project
     where project_id = #{projectId,jdbcType=INTEGER}
+  </select>
+  
+  <select id="getCountProjectNum" resultType="int">
+  	select count(*) from project where student_id is NULL
+  </select>
+  
+  <select id="thisTeacherYesProjectNum" resultType="int">
+  	select count(*) from project where teacher_id=#{teacherId} and student_id IS NOT NULL
+  </select>
+  
+  <select id="getProjectByTeacherId" resultType="cn.lynu.model.Project">
+  	select 
+    <include refid="Base_Column_List" />
+    from project
+    where teacher_id = #{teacherId}
   </select>
   
 </mapper>

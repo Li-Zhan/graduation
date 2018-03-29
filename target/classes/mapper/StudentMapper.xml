@@ -323,4 +323,12 @@
 	    where student_id = #{studentId}
   </select>
   
+  <update id="updateTeacherId">
+  		update student set teacher_id=#{teacherId} where student_id=#{studentId}
+  </update>
+  
+  <select id="thisTeacherUndefinedStudentNum" resultType="int">
+  	select count(*) from student where teacher_id = #{teacherId} and project_id is NULL
+  </select>
+  
 </mapper>

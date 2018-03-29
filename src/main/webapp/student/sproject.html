@@ -89,7 +89,13 @@
 						if(projectId!=undefined){
 							$.post('/graduation/studentController/updateProjectByStudentId/'+projectId,{
 								'_method':'put'
-							},function(data){});
+							},function(data){
+								if(data){
+									$.post('/graduation/studentController/updateTeacherId',{
+										teacherId:teacherId
+									},function(data){});
+								}
+							});
 						}
 						
 						//不允许再点击其他课题

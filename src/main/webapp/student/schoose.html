@@ -90,11 +90,18 @@
 					pageNum:pageNum,
 					pageSize:pageSize
 				},function(data){
+					//清除之前的数据
+ 					$('#chooseBody').empty();
+					if(data.list.length!=0){
 						chooseBody(data);
-					if(j==1){
-						//第一次调用
-						j++;
-						showPage1(data.total,pageSize);
+						$('#news-Pagination-1').css('display','');
+						if(j==1){
+							//第一次调用
+							j++;
+							showPage1(data.total,pageSize);
+						}
+					}else{
+						$('#news-Pagination-1').css('display','none');
 					}
 				}); 
 			}
@@ -141,14 +148,22 @@
  				$('#searchTeacher').click(function() {
  					var teacherName=$('#searchInput').val().trim();
  					if(teacherName==null||teacherName==''){
+ 						j=1;
+ 						showTeacher(pageNum,pageSize);
  						return false;
  					}
  					searchBody(teacherName,pageNum,pageSize);
 				});
  				$(document).keyup(function(event){
  					if(event.keyCode ==13){
+ 						var teacherName=$('#searchInput').val().trim();
+ 	 					if(teacherName==null||teacherName==''){
+ 	 						j=1;
+ 	 						showTeacher(pageNum,pageSize);
+ 	 						return false;
+ 	 					}
  						searchBody($('#searchInput').val().trim(),pageNum,pageSize);
- 						 }
+ 					}
  				});
  				function searchBody(teacherName,pageNum,pageSize){
  					$.get('/graduation/teacherController/findTeacherByTeacherName',{
@@ -158,16 +173,21 @@
  					},function(data){
 						//清除之前的数据
 	 					$('#chooseBody').empty();
-	 						chooseBody(data);
-	 						$('.choose_btn').on('click',function() {
-	 							var url='sproject.html?teacherId='+$(this).parent().find('input:hidden').val();
-	 							window.location.href=url;
-	 						});
-	 					 if(a==1){
-							//第一次调用
-							a++;
-							showPage2(data.total,pageSize);
-						} 
+ 						if(data.list.length!=0){
+		 						chooseBody(data);
+		 						$('#news-Pagination-1').css('display','');
+		 						$('.choose_btn').on('click',function() {
+		 							var url='sproject.html?teacherId='+$(this).parent().find('input:hidden').val();
+		 							window.location.href=url;
+		 						});
+		 					 if(a==1){
+								//第一次调用
+								a++;
+								showPage2(data.total,pageSize);
+							} 
+ 						}else{
+ 							$('#news-Pagination-1').css('display','none');
+ 						}
 					});
  				}
 

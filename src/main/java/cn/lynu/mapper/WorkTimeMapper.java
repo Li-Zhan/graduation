@@ -27,4 +27,6 @@ public interface WorkTimeMapper {
     int updateByPrimaryKeySelective(WorkTime record);
 
     int updateByPrimaryKey(WorkTime record);
+
+    WorkTime getWorkTime(String thisDate);
 }

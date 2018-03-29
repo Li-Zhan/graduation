@@ -44,4 +44,8 @@ public interface StudentMapper {
 	Student getStuAndProject(String studentId);
 	
 	Student getStuAndProjectAndTeacher(String studentId);
+
+	boolean updateTeacherId(@Param("teacherId")String teacherId,@Param("studentId") String studentId);
+
+	int thisTeacherUndefinedStudentNum(String teacherId);
 }

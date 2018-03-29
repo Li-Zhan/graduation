@@ -243,7 +243,7 @@
 				window.location.href='tindex.jsp';
 			});
 			
-			$('#iframepage').on('load',function(){
+/* 			$('#iframepage').on('load',function(){
 				  //"ref_page"为引用页面DIV的ID，获取DIV的外部宽度、外部高度。
 				  var height = $(this).contents().find('#ref_page').outerHeight();
 				  // 设置iframe的宽度、高度。
@@ -251,7 +251,7 @@
 					  height=850;
 				  }
 				  $(this).height(height);
-			});
+			}); */
 			
 			//知道点击的是那个选项
 			$('.link_a').click(function() {

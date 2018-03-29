@@ -261,7 +261,10 @@
   </select>
   
   <select id="findTeacherByTeacherName" resultMap="teacherPlus2">
-  	select teacher.* from user,teacher where user.user_id=teacher.user_id and user.user_name LIKE concat('%',#{teacherName},'%')
+  	select teacher.* from user,teacher where user.user_id=teacher.user_id 
+  	<if test="teacherName!=null">
+	  	and user.user_name LIKE concat('%',#{teacherName},'%')
+  	</if>
   </select>
   
   <resultMap type="cn.lynu.model.Teacher" id="TAP" extends="teacherPlus">

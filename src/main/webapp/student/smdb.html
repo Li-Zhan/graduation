@@ -114,22 +114,27 @@
 			   dataType:'json',
 			   async:false,
 			   success: function(data){
-				   $('#tr1').find('td').eq(1).text(data.user.userAccount);
-				   $('#tr1').find('td').eq(3).text(data.user.userName);
-				   var gender;
-				   if(data.user.userGender==1){
-					   gender='男';
+				   if(!isNull(data.studentId)){
+					   $('#tr1').find('td').eq(1).text(data.user.userAccount);
+					   $('#tr1').find('td').eq(3).text(data.user.userName);
+					   var gender;
+					   if(data.user.userGender==1){
+						   gender='男';
+					   }else{
+						   gender='女';
+					   }
+					   $('#tr1').find('td').eq(5).text(gender);
+					   $('#tr2').find('td').eq(1).text(data.classInfo.subject.subjectName);
+					   $('#tr2').find('td').eq(3).text(data.classInfo.grade.gradeName);
+					   $('#tr2').find('td').eq(5).text(data.classInfo.className);
+					   $('#tr3').find('td').eq(3).text(data.user.userTel);
+					   $('#tr4').find('td').eq(1).text(data.project.projectName);
+					   $('#tr4').find('td').eq(3).text(data.teacher.user.userName);
+					   $('#mdb_btn').append($('<input>').attr('type','hidden').val(data.studentId));
 				   }else{
-					   gender='女';
+					   	$('#mdb_btn').addClass('am-disabled').text('请先选择课题');
+						$('#column1').attr('disabled','disabled'); 
 				   }
-				   $('#tr1').find('td').eq(5).text(gender);
-				   $('#tr2').find('td').eq(1).text(data.classInfo.subject.subjectName);
-				   $('#tr2').find('td').eq(3).text(data.classInfo.grade.gradeName);
-				   $('#tr2').find('td').eq(5).text(data.classInfo.className);
-				   $('#tr3').find('td').eq(3).text(data.user.userTel);
-				   $('#tr4').find('td').eq(1).text(data.project.projectName);
-				   $('#tr4').find('td').eq(3).text(data.teacher.user.userName);
-				   $('#mdb_btn').append($('<input>').attr('type','hidden').val(data.studentId));
 			   }
 			 });
 		

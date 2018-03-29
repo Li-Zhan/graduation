@@ -41,4 +41,10 @@ public interface ProjectMapper {
     List<Project> getProjectAndStudent(String teacher_id);
 
 	boolean updateNoStudent(String projectId);
+
+	int getCountProjectNum();
+
+	int thisTeacherYesProjectNum(String teacherId);
+
+	List<Project> getProjectByTeacherId(String teacherId);
 }

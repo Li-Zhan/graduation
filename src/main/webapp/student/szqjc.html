@@ -89,6 +89,7 @@
 			   dataType:'json',
 			   async:false,
 			   success: function(data){
+				   if(!isNull(data.studentId)){
 					$('#tr1').find('td').eq(3).text(data.classInfo.subject.subjectName);
 					$('#tr1').find('td').eq(5).text(data.classInfo.grade.gradeName);
 					$('#tr2').find('td').eq(1).text(data.project.projectName);
@@ -97,6 +98,11 @@
 					$('#tr4').find('td').eq(1).text(data.teacher.user.userName);
 					$('#tr4').find('td').eq(3).text(data.teacher.zhicheng);
 					$('#zqjc_btn').append($('<input>').attr('type','hidden').val(data.studentId));
+				   }else{
+					   	$('#zqjc_btn').addClass('am-disabled').text('请先选择课题');
+						$('#column1').attr('disabled','disabled');
+						$('#column2').attr('disabled','disabled');
+				   }
 			   }
 			 });
 		

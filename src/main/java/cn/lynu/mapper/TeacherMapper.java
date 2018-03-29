@@ -1,5 +1,6 @@
 package cn.lynu.mapper;
 
+import cn.lynu.model.Project;
 import cn.lynu.model.Teacher;
 import cn.lynu.model.TeacherExample;
 import java.util.List;
@@ -32,7 +33,7 @@ public interface TeacherMapper {
     
     Teacher findTeacherByTeacherId(String teacherId);
     
-    List<Teacher> findTeacherByTeacherName(String teacherName);
+    List<Teacher> findTeacherByTeacherName(@Param("teacherName")String teacherName);
     
     Teacher findTeacherAndProject(String teacherId);
     

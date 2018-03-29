@@ -164,9 +164,9 @@
 									class="am-icon-angle-right"></i> <span>开题报告</span>
 							</a> <a href="szqjc.html" class="link_a" target="iframe_a"> <i
 									class="am-icon-angle-right"></i> <span>中期检查</span>
-							</a><a href="syansou.html" class="link_a" target="iframe_a"> <i
+							</a><!-- <a href="syansou.html" class="link_a" target="iframe_a"> <i
 									class="am-icon-angle-right"></i> <span>系统验收</span>
-							</a><!--  <a href="form-news.html"> <i class="am-icon-angle-right"></i>
+							</a> --><!--  <a href="form-news.html"> <i class="am-icon-angle-right"></i>
 									<span>上传论文</span>
 							</a>  --><a href="smdb.html" class="link_a" target="iframe_a"> <i
 									class="am-icon-angle-right"></i> <span>免答辩申请</span>
@@ -281,7 +281,7 @@
 				window.location.href='sindex.jsp';
 			});
 			
-			$('#iframepage').on('load',function(){
+/* 			$('#iframepage').on('load',function(){
 				  //"ref_page"为引用页面DIV的ID，获取DIV的外部宽度、外部高度。
 				  var height = $(this).contents().find('#ref_page').outerHeight();
 				  // 设置iframe的宽度、高度。
@@ -289,7 +289,7 @@
 					  height=850;
 				  }
 				  $(this).height(height);
-			});
+			}); */
 			
 			//知道点击的是那个选项
 			$('.link_a').click(function() {

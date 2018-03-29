@@ -36,4 +36,37 @@ public class ProjectService {
 		return projectMapper.updateNoStudent(projectId);
 	}
 
+	@Transactional(propagation=Propagation.SUPPORTS)
+	public int getCountProjectNum() {
+		return projectMapper.getCountProjectNum();
+	}
+
+	@Transactional(propagation=Propagation.SUPPORTS)
+	public int thisTeacherYesProjectNum(String teacherId) {
+		return projectMapper.thisTeacherYesProjectNum(teacherId);
+	}
+	
+	@Transactional(propagation=Propagation.REQUIRED)
+	public boolean insertSelective(Project project) {
+		int num = projectMapper.insertSelective(project);
+		if(num>0) {
+			return true;
+		}
+		return false;
+	}
+
+	@Transactional(propagation=Propagation.SUPPORTS)
+	public List<Project> getProjectByTeacherId(String teacherId) {
+		return projectMapper.getProjectByTeacherId(teacherId);
+	}
+	
+	@Transactional(propagation=Propagation.REQUIRED)
+	public boolean updateByPrimaryKeySelective(Project project) {
+		int num = projectMapper.updateByPrimaryKeySelective(project);
+		if(num>0) {
+			return true;
+		}
+		return false;
+	}
+
 }

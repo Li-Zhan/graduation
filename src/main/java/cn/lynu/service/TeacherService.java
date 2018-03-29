@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import cn.lynu.mapper.TeacherMapper;
+import cn.lynu.model.Project;
 import cn.lynu.model.Teacher;
 
 @Service
