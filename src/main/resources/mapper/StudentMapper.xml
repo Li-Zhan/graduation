@@ -331,4 +331,29 @@
   	select count(*) from student where teacher_id = #{teacherId} and project_id is NULL
   </select>
   
+  <select id="getStudentByTeacherId" resultMap="studentPlus">
+  	select 
+  		<include refid="Base_Column_List" />
+  		from student
+  		where teacher_id=#{teacherId} and project_num=1 and project_id is not NULL
+  </select>
+  
+  <resultMap type="cn.lynu.model.Student" id="sapack" extends="studentAndProjectAndClass">
+  	<association property="ktbg" column="student_id" select="cn.lynu.mapper.KtbgMapper.getKtbgByStudentId"></association>
+  </resultMap>
+  <select id="getStudentAndKtbgBySid" resultMap="sapack">
+  	select 
+  		<include refid="Base_Column_List" />
+  		from student where student_id=#{studentId}
+  </select>
+  
+  <resultMap type="cn.lynu.model.Student" id="sapacz" extends="studentAndProjectAndClassAndTeacher">
+  	<association property="zqjc" column="student_id" select="cn.lynu.mapper.ZqjcMapper.getzqjcByStudentId"></association>
+  </resultMap>
+  <select id="getStudentAndZqjcBySid" resultMap="sapacz">
+  	select 
+  		<include refid="Base_Column_List" />
+  		from student where student_id=#{studentId}
+  </select>
+  
 </mapper>

@@ -112,8 +112,8 @@
  			a.append($('<span>').text(data.list[i].downTitle));
  			a.append($('<span>').text(getMyDate(data.list[i].createDate)));
  			a.append($('<span>').css('display','none').text(data.list[i].downPath));
- 			var fileName=a.find('span:last').text();
- 			if(fileName!=null){
+ 			var fileName=data.list[i].downPath;
+ 			if(fileName!=null&&fileName!=''){
  			  a.attr('href',encodeURI('downController/downloadResource?fileName='+fileName));
  			}
 /* 			a.on('click',function(){

@@ -24,8 +24,27 @@ public class Student {
     private Project project;
     private ClassInfo classInfo;
     private Teacher teacher;
+    private Ktbg ktbg;
+    private Zqjc zqjc;
     
-    public Teacher getTeacher() {
+    
+    public Zqjc getZqjc() {
+		return zqjc;
+	}
+
+	public void setZqjc(Zqjc zqjc) {
+		this.zqjc = zqjc;
+	}
+
+	public Ktbg getKtbg() {
+		return ktbg;
+	}
+
+	public void setKtbg(Ktbg ktbg) {
+		this.ktbg = ktbg;
+	}
+
+	public Teacher getTeacher() {
 		return teacher;
 	}
 

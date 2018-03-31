@@ -17,7 +17,6 @@
 <link rel="stylesheet" href="../amazeui/css/amazeui.min.css" />
 <link rel="stylesheet" href="css/admin.css">
 <link rel="stylesheet" href="css/app.css">
-<link rel="stylesheet" href="css/sindex.css">
 </head>
 
 <body data-type="index">
@@ -129,13 +128,13 @@
 						</c:choose>
 				</a>
 					<ul class="am-dropdown-content">
-						<li><a href="#"><span class="am-icon-user"></span> 资料</a></li>
-						<li><a href="#"><span class="am-icon-cog"></span> 设置</a></li>
-						<li><a href="#"><span class="am-icon-power-off"></span>
+						<li><a href="#" id="userInfo_a" style="outline: none;"><span class="am-icon-user"></span> 信息</a></li>
+						<!-- <li><a href="#"><span class="am-icon-cog"></span> 设置</a></li> -->
+						<li><a href="/graduation/userController/logout" style="outline: none;"><span class="am-icon-power-off"></span>
 								退出</a></li>
 					</ul>
 				</li>
-				<li><a href="###" class="tpl-header-list-link"><span
+				<li><a href="/graduation/userController/logout" class="tpl-header-list-link"><span
 						class="am-icon-sign-out tpl-header-list-ico-out-size"></span></a></li>
 			</ul>
 		</div>
@@ -269,6 +268,65 @@
 			</div>
 		</div>
 	</div>
+	<div class="am-modal am-modal-alert" tabindex="-1" id="userInfo-modal">
+	  <div class="am-modal-dialog">
+	    <div class="am-modal-hd">个人基本信息
+	      <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+	    </div>
+	    <div class="am-modal-bd" id="userInfo-bd" style="margin-top: 10px;">
+	    	  <form class="am-form am-form-horizontal">
+				  <div class="am-form-group">
+				    <label for="doc-ipt-3" class="am-u-sm-2 am-form-label">姓名</label>
+				    <div class="am-u-sm-10">
+				      <input type="text" id="userName">
+				    </div>
+				  </div>
+				  <div class="am-form-group">
+				    <label for="doc-ipt-3" class="am-u-sm-2 am-form-label">账号</label>
+				    <div class="am-u-sm-10">
+				      <input type="text" id="account" disabled>
+				    </div>
+				  </div>
+				  <div class="am-form-group">
+				    <label for="doc-ipt-pwd-2" class="am-u-sm-2 am-form-label">密码</label>
+				    <div class="am-u-sm-10">
+				      <input type="text" id="password">
+				    </div>
+				  </div>
+				  <div class="am-form-group">
+				    <label for="doc-ipt-pwd-2" class="am-u-sm-2 am-form-label">电话</label>
+				    <div class="am-u-sm-10">
+				      <input type="text" id="tel">
+				    </div>
+				  </div>
+			      <div class="am-form-group">
+				      <label for="doc-ipt-pwd-2" class="am-u-sm-2 am-form-label">性别</label>
+					    <div class="am-u-sm-10">
+					      <label class="am-radio-inline am-fl">
+					    	<input type="radio" name="radio11" value="1" data-am-ucheck> 男
+						  </label>
+						  <label class="am-radio-inline am-fl">
+						    <input type="radio" name="radio11" value="0" data-am-ucheck> 女
+						  </label>
+					    </div>
+				 </div>
+				 <div class="am-form-group">
+				      <label for="doc-ipt-pwd-2" class="am-u-sm-2 am-form-label">头像</label>
+					    <div class="am-u-sm-10">
+					      <div class="am-form-group am-form-file am-fl">
+							  <button type="button" class="am-btn am-btn-default am-btn-sm">
+							    <i class="am-icon-cloud-upload"></i> 选择要上传的头像</button>
+							  <input type="file" multiple>
+						  </div>
+					    </div>
+				 </div>
+				</form>
+	    </div>
+		<div class="am-modal-footer">
+	      <span class="am-modal-btn" id="updateInfo_btn">修改</span>
+	    </div>
+	  </div>
+	</div>
 
 	<script src="../js/jquery.min.js"></script>
 	<script src="../amazeui/js/amazeui.min.js"></script>
@@ -276,12 +334,44 @@
 	<script type="text/javascript">
 		$(function() {
 			
+			$('#userInfo_a').click(function(){
+				$.get('/graduation/studentController/findStudent',function(data){
+					$('#userName').val(data.user.userName);
+					$('#account').val(data.user.userAccount);
+					$('#password').val(data.user.userPassword);
+					$('#tel').val(data.user.userTel);
+					$('input[name=radio11]').each(function(index,value){
+						if($(value).val()==data.user.userGender){
+							$(this).attr('checked','checked');
+						}
+					});
+					$('#updateInfo_btn').append($('<input>').attr({'type':'hidden','name':'userId'}).val(data.userId));
+					$('#userInfo-modal').modal('open');
+				});
+			});
+			
+			$('#updateInfo_btn').click(function(){
+				$.post('/graduation/studentController/updateStudentInfo',{
+					'_method':'put',
+					'user.userId':$('input[name=userId]').val(),
+					'user.userName':$('#userName').val(),
+					'user.userPassword':$('#password').val(),
+					'user.userTel':$('#tel').val(),
+					'user.userGender':$('input[name=radio11]:checked').val()
+				},function(data){
+					if(data){
+						$('#userInfo-modal').modal('close');
+					}
+				});
+				return false;
+			});
+			
 			//网页刷新回到首页
 			$(window).on('unload',function(){
 				window.location.href='sindex.jsp';
 			});
 			
-/* 			$('#iframepage').on('load',function(){
+/*  			$('#iframepage').on('load',function(){
 				  //"ref_page"为引用页面DIV的ID，获取DIV的外部宽度、外部高度。
 				  var height = $(this).contents().find('#ref_page').outerHeight();
 				  // 设置iframe的宽度、高度。
@@ -289,7 +379,7 @@
 					  height=850;
 				  }
 				  $(this).height(height);
-			}); */
+			});  */
 			
 			//知道点击的是那个选项
 			$('.link_a').click(function() {

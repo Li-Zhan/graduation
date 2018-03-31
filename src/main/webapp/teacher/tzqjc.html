@@ -10,20 +10,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="renderer" content="webkit">
 <meta http-equiv="Cache-Control" content="no-siteapp" />
-<link rel="icon" type="image/png" href="../img/lysf.ico">
-<link rel="stylesheet" href="../amazeui/css/amazeui.min.css" />
-<link rel="stylesheet" href="css/admin.css">
-<link rel="stylesheet" href="css/app.css">
+<link rel="icon" type="image/png" href="/graduation/img/lysf.ico">
+<link rel="stylesheet" href="/graduation/amazeui/css/amazeui.min.css" />
+<link rel="stylesheet" href="/graduation/teacher/css/admin.css">
+<link rel="stylesheet" href="/graduation/teacher/css/app.css">
 </head>
 
-<body style="margin-left: 10px;overflow:hidden;" >
+<body style="margin-left: 10px;overflow-x:hidden;" >
 
 	<div id="ref_page" class="am-g">
 	
 		<div class="tpl-content-page-title" style="margin-bottom: 10px;">审阅中期检查</div>
 			
 		<ol class="am-breadcrumb">
-			<li><a href="tstudentlist.html" class="am-icon-users">学生列表</a></li>
+			<li><a href="/graduation/teacher/tstudentlist.html" class="am-icon-users">学生列表</a></li>
 			<li class="am-active">中期检查</li>
 		</ol>
 		<div class="am-panel am-panel-default">
@@ -34,50 +34,50 @@
 								<tr>
 									<th colspan="6" class="am-text-middle">洛阳师范学院本科毕业论文（设计）中期检查</th>
 								</tr>
-								<tr>
+								<tr id="tr1">
 										<td>院(系)：</td>
-										<td>信息技术学院</td>
+										<td></td>
 										<td>专业：</td>
-										<td class="am-text-left">软件工程（移动终端应用软件开发）</td>
+										<td class="am-text-left"></td>
 										<td>年级:</td>
-										<td>2014级</td>
+										<td></td>
 								</tr>
 							</thead>
 						 	<tbody>
-								<tr>
+								<tr id="tr2">
 									<td class="am-text-middle" colspan="2">题目</td>
-									<td colspan="4">毕设管理系统</td>
+									<td colspan="4"></td>
 								</tr>
-								<tr>
+								<tr id="tr3">
 									<td>学号</td>
-									<td colspan="2">141164514</td>
+									<td colspan="2"></td>
 									<td>姓名</td>
-									<td colspan="2">李展</td>
+									<td colspan="2"></td>
 								</tr>
-								<tr>
+								<tr id="tr4">
 									<td>指导老师</td>
-									<td colspan="2">xxx</td>
+									<td colspan="2"></td>
 									<td>职称</td>
-									<td colspan="2">副教授</td>
+									<td colspan="2"></td>
 								</tr>
 								<tr>
 									<td colspan="6" class="am-text-left">
-										<textarea style="width: 100%; height: 200px;" placeholder="已经完成的内容：" disabled="disabled">不知道不知道不知道不知道不知道不知道不知道不知道不知道不知道不知道</textarea>
+										<textarea id="column1" style="width: 100%; height: 200px;" placeholder="已经完成的内容：" disabled="disabled"></textarea>
 									</td>
 								</tr>
 								<tr>
 									<td colspan="6" class="am-text-left">
-										<textarea style="width: 100%; height: 200px;" placeholder="未完成内容及原因：" disabled="disabled">不知道不知道不知道不知道不知道不知道不知道不知道不知道不知道不知道</textarea>
+										<textarea id="column2" style="width: 100%; height: 200px;" placeholder="未完成内容及原因：" disabled="disabled"></textarea>
 									</td>
 								</tr>
 								<tr>
 									<td colspan="6">
-										<textarea style="width: 100%; height: 200px;" placeholder="指导教师意见："></textarea>
+										<textarea id="column3" style="width: 100%; height: 200px;" placeholder="指导教师意见："></textarea>
 									</td>
 								</tr>
 								<tr>
 									<td colspan="6">
-										<textarea style="width: 100%; height: 200px;" placeholder="备注："></textarea>
+										<textarea id="column4" style="width: 100%; height: 200px;" placeholder="备注："></textarea>
 									</td>
 								</tr>
 							</tbody> 
@@ -91,20 +91,79 @@
 				  
 	</div>
 
-<script src="../js/jquery.min.js"></script>
-<script src="../amazeui/js/amazeui.min.js"></script>
-<script src="js/app.js"></script>
+<script src="/graduation/js/jquery.min.js"></script>
+<script src="/graduation/amazeui/js/amazeui.min.js"></script>
+<script src="/graduation/teacher/js/app.js"></script>
 <script type="text/javascript">
 	$(function() {
 		
-		//查询数据库是否应该禁用提交按钮disableBtn(id)
+		var studentId=getQueryString("studentId");
+		
+		$.ajax({
+			   url: "/graduation/studentController/getStudentAndZqjcBySid",
+			   type: 'get',
+			   dataType:'json',
+			   async:false,
+			   data:{
+				   studentId:studentId
+			   },
+			   success: function(data){
+				   if(!isNull(data.studentId)){
+					$('#tr1').find('td').eq(3).text(data.classInfo.subject.subjectName);
+					$('#tr1').find('td').eq(5).text(data.classInfo.grade.gradeName);
+					$('#tr2').find('td').eq(1).text(data.project.projectName);
+					$('#tr3').find('td').eq(1).text(data.user.userAccount);
+					$('#tr3').find('td').eq(3).text(data.user.userName);
+					$('#tr4').find('td').eq(1).text(data.teacher.user.userName);
+					$('#tr4').find('td').eq(3).text(data.teacher.zhicheng);
+					$('#column1').text(data.zqjc.column1);
+					$('#column2').text(data.zqjc.column2);
+					$('#zqjc_btn').append($('<input>').attr('type','hidden').val(data.zqjc.zqjcId));
+					 if(!isNull(data.zqjc.column3)&&!isNull(data.zqjc.column4)){
+						 $('#column3').attr('disabled','disabled').text(data.zqjc.column3);
+						 $('#column4').attr('disabled','disabled').text(data.zqjc.column4);
+						 $('#zqjc_btn').attr('disabled','disabled').text('已审核');
+					   }
+				   }
+			   }
+			 });
+		
+		//查询数据库是否应该禁用提交按钮
+	/* 		$.ajax({
+			   url: "/graduation/studentController/getStudentAndZqjcBySid",
+			   type: 'get',
+			   dataType:'json',
+			   async:false,
+			   data:{
+				   studentId:studentId
+			   },
+			   success: function(data){
+				   if(isNull(data.zqjc.column3)){
+					   
+				   }
+			   }
+			 }); */
+		
 		//提交中期检查
 		$('#zqjc_btn').click(function () {
 			  var $btn = $(this);
-			  $btn.button('loading');
-			    setTimeout(function(){
-			    	disableBtn('zqjc_btn','完成');
-			  }, 3000);
+			  var zqjcId=$btn.find('input:hidden').val();
+			  if(isNull(zqjcId)){
+				  return;
+			  }
+			  $.post('/graduation/zqjcController/updateByPrimaryKeySelective',{
+				  '_method':'put',
+				  zqjcId:zqjcId,
+				  column3:$('#column3').val(),
+				  column4:$('#column4').val(),
+			  },function(data){
+				  if(data){
+					  $btn.button('loading');
+					    setTimeout(function(){
+					    	disableBtn('zqjc_btn','完成');
+					  }, 3000);
+				  }
+			  });
 			    
 		});
 		

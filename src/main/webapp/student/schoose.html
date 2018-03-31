@@ -70,7 +70,7 @@
 					var p3=$('<p>').append($('<button>').addClass('am-btn am-btn-primary am-btn-block choose_btn').text('选择该老师的课题'));
 					p3.append($('<input>').addClass('teacherId').attr('type','hidden').val(data.list[num].teacherId));
 					//点击按钮后选择课题
-					$('.choose_btn').on('click',function() {
+					p3.find('button').on('click',function() {
 						var url='sproject.html?teacherId='+$(this).parent().find('input:hidden').val();
 						window.location.href=url;
 					});

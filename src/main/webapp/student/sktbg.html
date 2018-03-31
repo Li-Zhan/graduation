@@ -117,40 +117,13 @@
 			   async:false,
 			   success: function(data){
 				   if(!isNull(data.studentId)){
-						$('#ktbg_btn').addClass('am-disabled');
+						$('#ktbg_btn').addClass('am-disabled').text('已提交');
 						$('#column1').attr('disabled','disabled').text(data.column1);
 						$('#column2').attr('disabled','disabled').text(data.column2);
 					}
 			   }
 			 });
 		
-		/* $.get('/graduation/studentController/getStuAndProject',function(data){
-			$('#stuInfo1').find('td').eq(0).text(data.user.userName);
-			var gender;
-			if(data.user.userGender==1){
-				gender='男';
-			}else{
-				gender='女';
-			}
-			$('#stuInfo1').find('td').eq(1).text(gender);
-			$('#stuInfo1').find('td').eq(2).text(data.user.userAccount);
-			$('#stuInfo1').find('td').eq(3).text(data.classInfo.subject.subjectName);
-			$('#stuInfo1').find('td').eq(4).text(data.classInfo.grade.gradeName);
-			$('#projectName').text(data.project.projectName);
-			$('#projectFrom').text(data.project.projectFrom.projectFromName);
-			$('#ktbg_btn').append($('<input>').attr('type','hidden').val(data.studentId));
-		}); */
-		
-		//查询数据库是否应该禁用提交按钮
-/* 		$.get('/graduation/ktbgController/getKtbgByStudentId',{
-			studentId:$('#ktbg_btn').find('input:hidden').val()
-		},function(data){
-			if(!isNull(data)){
-				$('#ktbg_btn').addClass('am-disabled');
-				$('#column1').attr('disabled','disabled').text(data.column1);
-				$('#column2').attr('disabled','disabled').text(data.column2);
-			}
-		}); */
 		
 		//点击提交开题报告按钮ktbg_btn
 		$('#ktbg_btn').click(function () {

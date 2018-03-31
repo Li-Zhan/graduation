@@ -27,4 +27,7 @@ public interface LunwenMapper {
     int updateByPrimaryKeySelective(Lunwen record);
 
     int updateByPrimaryKey(Lunwen record);
+
+	Lunwen getLunwenBySid(String studentId);
+
 }

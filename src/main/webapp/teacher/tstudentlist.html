@@ -22,7 +22,7 @@
 	
 				<div class="tpl-content-page-title" style="margin:0 0 10px 16px;">教师评审</div>
 		
-				<div class="am-u-lg-3 am-u-md-3 am-u-sm-6">
+<!-- 				<div class="am-u-lg-3 am-u-md-3 am-u-sm-6">
 					<div class="am-thumbnail chooseStyle">
 						<p>
 							<img class="am-circle am-center am-img-thumbnail"
@@ -173,7 +173,7 @@
 							</p>
 						</div>
 					</div>
-				</div>
+				</div> -->
 				
 				  
 	</div>
@@ -182,7 +182,52 @@
 <script src="../amazeui/js/amazeui.min.js"></script>
 <script type="text/javascript">
 		$(function() {
-			
+			/* <div class="am-u-lg-3 am-u-md-3 am-u-sm-6">
+			<div class="am-thumbnail chooseStyle">
+				<p>
+					<img class="am-circle am-center am-img-thumbnail"
+						src="../img/user01.png"
+						width="140" height="140" style="margin-top: 1.6rem;"/>
+				</p>
+				<div class="am-thumbnail-caption">
+					<p class="am-text-center">李展08</p>
+					<p>
+						<div class="am-btn-group am-btn-group-justify">
+						  <a class="am-btn am-btn-default am-btn-primary" role="button">开题报告</a>
+						  <a class="am-btn am-btn-default am-btn-primary" role="button">中期检查</a>
+						  <a class="am-btn am-btn-default am-btn-primary" role="button">论文</a>
+						</div>
+					</p>
+				</div>
+			</div>
+		</div> */
+		
+		$.get('/graduation/teacherController/getStudentByTeacherId',function(data){
+			$(data).each(function(index,value){
+				var div=$('<div>').addClass('am-u-lg-3 am-u-md-3 am-u-sm-6');
+				var div1=$('<div>').addClass('am-thumbnail chooseStyle');
+				var imgSrc=value.user.userPortrait;
+				if(imgSrc==null){
+					imgSrc='../img/user01.png';
+				}
+				var p=$('<p>').append($('<img>').addClass('am-circle am-center am-img-thumbnail')
+						.attr({'src':imgSrc,'height':'140px','width':'140px'}).css('margin-top','1.6rem'));
+				var div2=$('<div>').addClass('am-thumbnail-caption');
+				var div2_p=$('<p>').addClass('am-text-center').text(value.user.userName);
+				var a1=$('<a>').addClass('am-btn am-btn-default am-btn-primary a1').attr('role','button').text('开题报告');
+				var a2=$('<a>').addClass('am-btn am-btn-default am-btn-primary a2').attr('role','button').text('中期检查');
+				var a3=$('<a>').addClass('am-btn am-btn-default am-btn-primary a3').attr('role','button').text('论文');
+				var div2_div=$('<div>').addClass('am-btn-group am-btn-group-justify').append(a1).append(a2).append(a3);
+				div2.append(div2_p).append(div2_div);
+				div1.append(p).append(div2);
+				div.append(div1);
+				$('#ref_page').append(div);
+				$('.a1').attr('href','/graduation/ktbgController/gotoTktbg?studentId='+value.studentId);
+				$('.a2').attr('href','/graduation/zqjcController/gotoTzqjc?studentId='+value.studentId);
+				$('.a3').attr('href','/graduation/lunwenController/gotoTstudentlunwen?studentId='+value.studentId);
+			});
+		});
+		
 
 		});
 </script>

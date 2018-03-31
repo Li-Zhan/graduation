@@ -29,4 +29,6 @@ public interface MdbMapper {
     int updateByPrimaryKey(Mdb record);
 
 	Mdb getMdbByStudentId(String studentId);
+	
+	int updateColumn(Mdb mdb);
 }

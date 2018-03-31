@@ -27,4 +27,12 @@ public class ZqjcService {
 		return zqjcMapper.getzqjcByStudentId(studentId);
 	}
 
+	@Transactional(propagation=Propagation.REQUIRED)
+	public boolean updateByPrimaryKeySelective(Zqjc zqjc) {
+		if(zqjcMapper.updateByPrimaryKeySelective(zqjc)>0) {
+			return true;
+		}
+		return false;
+	}
+
 }

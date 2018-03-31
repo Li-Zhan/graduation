@@ -138,4 +138,35 @@ public class StudentController {
 		return new Student();
 	}
 	
+	@ResponseBody
+	@RequestMapping("/getStudentAndKtbgBySid")
+	public Student getStudentAndKtbgBySid(String studentId) {
+		return studentService.getStudentAndKtbgBySid(studentId);
+	}
+	
+	@ResponseBody
+	@RequestMapping("/getStudentAndZqjcBySid")
+	public Student getStudentAndZqjcBySid(String studentId) {
+		return studentService.getStudentAndZqjcBySid(studentId);
+	}
+	
+	@ResponseBody
+	@RequestMapping("/findStudent")
+	public Student findStudent(HttpSession session) {
+		User user=(User) session.getAttribute("user");
+		if(user!=null) {
+			Student student = studentService.getStudentByUserId(user.getUserId());
+			if(student!=null) {
+				return student;
+			}
+		}
+		return null;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/updateStudentInfo",method=RequestMethod.PUT)
+	public boolean updateStudentInfo(Student student) {
+		return studentService.updateStudentInfo(student);
+	}
+	
 }

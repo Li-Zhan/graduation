@@ -48,4 +48,10 @@ public interface StudentMapper {
 	boolean updateTeacherId(@Param("teacherId")String teacherId,@Param("studentId") String studentId);
 
 	int thisTeacherUndefinedStudentNum(String teacherId);
+
+	List<Student> getStudentByTeacherId(String teacherId);
+
+	Student getStudentAndKtbgBySid(String studentId);
+
+	Student getStudentAndZqjcBySid(String studentId);
 }

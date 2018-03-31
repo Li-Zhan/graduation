@@ -10,10 +10,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="renderer" content="webkit">
 <meta http-equiv="Cache-Control" content="no-siteapp" />
-<link rel="icon" type="image/png" href="../img/lysf.ico">
-<link rel="stylesheet" href="../amazeui/css/amazeui.min.css" />
-<link rel="stylesheet" href="css/admin.css">
-<link rel="stylesheet" href="css/app.css">
+<link rel="icon" type="image/png" href="/graduation/img/lysf.ico">
+<link rel="stylesheet" href="/graduation/amazeui/css/amazeui.min.css" />
+<link rel="stylesheet" href="/graduation/teacher/css/admin.css">
+<link rel="stylesheet" href="/graduation/teacher/css/app.css">
 </head>
 
 <body style="margin-left: 10px;overflow:hidden;" >
@@ -23,17 +23,17 @@
 		<div class="tpl-content-page-title" style="margin-bottom: 10px;">审核论文</div>
 			
 		<ol class="am-breadcrumb">
-			<li><a href="tstudentlist.html" class="am-icon-users">学生列表</a></li>
+			<li><a href="/graduation/teacher/tstudentlist.html" class="am-icon-users">学生列表</a></li>
 			<li class="am-active">论文</li>
 		</ol>
 		<div class="am-panel am-panel-default">
 			<div class="am-form-group" style="margin: 20px;">
 			  <h3>审核意见</h3>
 			  <label class="am-radio-inline">
-			    <input type="radio" name="radio10" value="male" data-am-ucheck>退回修改
+			    <input type="radio" name="radio10" value="0" data-am-ucheck>退回修改
 			  </label>
 			  <label class="am-radio-inline">
-			    <input type="radio" name="radio10" value="female" data-am-ucheck>审核评分
+			    <input type="radio" name="radio10" value="1" data-am-ucheck>审核评分
 			  </label>
 			  <button id="lunwen_btn" type="button" class="am-btn am-btn-primary am-radius" style="margin-left: 5px;"
 			  data-am-loading="{spinner: 'circle-o-notch', loadingText: '提交中...', resetText: '提交完成'}">提交</button>
@@ -42,20 +42,44 @@
 				  
 	</div>
 
-<script src="../js/jquery.min.js"></script>
-<script src="../amazeui/js/amazeui.min.js"></script>
-<script src="js/app.js"></script>
+<script src="/graduation/js/jquery.min.js"></script>
+<script src="/graduation/amazeui/js/amazeui.min.js"></script>
+<script src="/graduation/teacher/js/app.js"></script>
 <script type="text/javascript">
 	$(function() {
 		
-		//查询数据库是否应该禁用提交按钮disableBtn(id)
+		var studentId=getQueryString("studentId");
+		
+		//查询数据库是否应该禁用提交按钮
+		$.get('/graduation/lunwenController/getLunwenBySid',{
+			studentId:studentId
+		},function(data){
+			if(!isNull(data.lunwenStatus)){
+				$('#lunwen_btn').attr('disabled','disabled').text('已审核');
+			}else{
+				$('#lunwen_btn').append($('<input>').attr('type','hidden').val(data.lunwenId));
+			}
+		});
+		
 		//点击提交评审论文按钮lunwen_btn
-		$('#lunwen_btn').click(function () {
+	 	$('#lunwen_btn').click(function () {
 			  var $btn = $(this);
-			  $btn.button('loading');
-			    setTimeout(function(){
-			    	disableBtn('lunwen_btn','提交完成');
-			  }, 3000);
+			  var status=$('input[name=radio10]:checked').val();
+			  if(isNull(status)){
+				  return;
+			  }
+			 $.post('/graduation/lunwenController/upLunwenBySid',{
+				  '_method':'put',
+				  lunwenId:$('#lunwen_btn').find('input:hidden').val(),
+				  lunwenStatus:status
+			  },function(data){
+				  if(data){
+					  $btn.button('loading');
+					    setTimeout(function(){
+					    	disableBtn('lunwen_btn','提交完成');
+					  }, 3000);
+				  }
+			  });
 			    
 			});
 		

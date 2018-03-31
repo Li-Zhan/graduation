@@ -117,7 +117,7 @@
 			   async:false,
 			   success: function(data){
 				   if(!isNull(data.studentId)){
-						$('#zqjc_btn').addClass('am-disabled');
+						$('#zqjc_btn').addClass('am-disabled').text('已提交');
 						$('#column1').attr('disabled','disabled').text(data.column1);
 						$('#column2').attr('disabled','disabled').text(data.column2);
 					}

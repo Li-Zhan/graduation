@@ -1994,3 +1994,8 @@ ul.tpl-dropdown-content li>a.tpl-dropdown-content-message:last-child {
 	border-radius: 8px;
 	border-color: #0E90D2;
 }
+.am-form-horizontal .am-checkbox, .am-form-horizontal .am-checkbox-inline, .am-form-horizontal .am-form-label, .am-form-horizontal .am-radio, .am-form-horizontal .am-radio-inline {
+	margin-top: 0;
+	margin-bottom: 0;
+	padding-top: 0; 
+}

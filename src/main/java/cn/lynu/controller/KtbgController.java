@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import cn.lynu.model.Ktbg;
 import cn.lynu.service.KtbgService;
@@ -34,5 +36,30 @@ public class KtbgController {
 		}
 		return new Ktbg();
 	}
-
+	
+	@ResponseBody
+	@RequestMapping(value="/updateColumn",method=RequestMethod.PUT)
+	public boolean updateColumn(Ktbg ktbg) {
+		return ktbgService.updateColumn(ktbg);
+	}
+	
+	@RequestMapping("/gotoTktbg")
+	public ModelAndView gotoTktbg(@RequestParam(required=true)String studentId) {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("/teacher/tktbg.html?studentId="+studentId);
+		return modelAndView;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/getKtbgStatus")
+	public Ktbg getKtbgStatus(String ktbgId) {
+		return ktbgService.getKtbgStatus(ktbgId);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/updateByPrimaryKeySelective",method=RequestMethod.POST)
+	public boolean updateByPrimaryKeySelective(Ktbg ktbg) {
+		return ktbgService.updateByPrimaryKeySelective(ktbg);
+	}
+	
 }

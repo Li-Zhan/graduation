@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import cn.lynu.mapper.StudentMapper;
+import cn.lynu.mapper.UserMapper;
 import cn.lynu.model.Student;
 import cn.lynu.model.User;
 
@@ -14,6 +15,8 @@ public class StudentService {
 	
 	@Autowired
 	private StudentMapper studentMapper;
+	@Autowired
+	private UserMapper userMapper;
 	
 	@Transactional(propagation=Propagation.SUPPORTS)
 	public Student getStudentByUserId(String userId) {
@@ -58,5 +61,24 @@ public class StudentService {
 	@Transactional(propagation=Propagation.SUPPORTS)
 	public int thisTeacherUndefinedStudentNum(String teacherId) {
 		return studentMapper.thisTeacherUndefinedStudentNum(teacherId);
+	}
+
+	@Transactional(propagation=Propagation.SUPPORTS)
+	public Student getStudentAndKtbgBySid(String studentId) {
+		return studentMapper.getStudentAndKtbgBySid(studentId);
+	}
+
+	@Transactional(propagation=Propagation.SUPPORTS)
+	public Student getStudentAndZqjcBySid(String studentId) {
+		return studentMapper.getStudentAndZqjcBySid(studentId);
+	}
+
+	@Transactional(propagation=Propagation.REQUIRED)
+	public boolean updateStudentInfo(Student student) {
+		int bool = userMapper.updateByPrimaryKeySelective(student.getUser());
+		if(bool>0) {
+			return true;
+		}
+		return false;
 	}
 }

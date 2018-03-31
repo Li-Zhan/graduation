@@ -146,7 +146,7 @@
 			   async:false,
 			   success: function(data){
 				   if(!isNull(data.studentId)){
-						$('#mdb_btn').addClass('am-disabled');
+						$('#mdb_btn').addClass('am-disabled').text('已提交');
 						$('#column1').attr('disabled','disabled').text(data.column1);
 					}
 			   }

@@ -32,37 +32,37 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
+									<tr id="tr1">
 										<td colspan="2">学 号</td>
-										<td colspan="2">110</td>
+										<td colspan="2"></td>
 										<td>姓 名</td>
-										<td colspan="2">李展</td>
+										<td colspan="2"></td>
 										<td>性 别</td>
-										<td>男</td>
+										<td></td>
 									</tr>
-									<tr>
+									<tr id="tr2">
 										<td colspan="2">专 业</td>
-										<td colspan="3">软件工程</td>
+										<td colspan="3"></td>
 										<td>年 级</td>
-										<td>14级</td>
+										<td></td>
 										<td>班 级</td>
-										<td>移动终端应用软件开发</td>
+										<td></td>
 									</tr>
-									<tr>
+									<tr id="tr3">
 										<td colspan="2">申请人签名</td>
 										<td colspan="3"></td>
 										<td colspan="2">联系电话</td>
-										<td colspan="2">111223345566</td>
+										<td colspan="2"></td>
 									</tr>
-									<tr>
+									<tr id="tr4">
 										<td colspan="2">论文题目</td>
-										<td colspan="3">毕设管理系统</td>
+										<td colspan="3"></td>
 										<td colspan="2">导师姓名</td>
-										<td colspan="2">xxx老师</td>
+										<td colspan="2"></td>
 									</tr>
 									<tr style="height: 260px;">
 										<td colspan="2" class="am-text-middle">申请理由</td>
-										<td colspan="7"><textarea
+										<td colspan="7"><textarea id="column1"
 												style="width: 100%; height: 260px;"></textarea></td>
 									</tr>
 								</tbody>
@@ -107,14 +107,69 @@
 		});
 		$('#my-alert').modal('open');
 		
-		//查询数据库是否应该禁用提交按钮disableBtn(id)
+		$.ajax({
+			   url: "/graduation/studentController/getStuAndProjectAndTeacher",
+			   type: 'get',
+			   dataType:'json',
+			   async:false,
+			   success: function(data){
+				   if(!isNull(data.studentId)){
+					   $('#tr1').find('td').eq(1).text(data.user.userAccount);
+					   $('#tr1').find('td').eq(3).text(data.user.userName);
+					   var gender;
+					   if(data.user.userGender==1){
+						   gender='男';
+					   }else{
+						   gender='女';
+					   }
+					   $('#tr1').find('td').eq(5).text(gender);
+					   $('#tr2').find('td').eq(1).text(data.classInfo.subject.subjectName);
+					   $('#tr2').find('td').eq(3).text(data.classInfo.grade.gradeName);
+					   $('#tr2').find('td').eq(5).text(data.classInfo.className);
+					   $('#tr3').find('td').eq(3).text(data.user.userTel);
+					   $('#tr4').find('td').eq(1).text(data.project.projectName);
+					   $('#tr4').find('td').eq(3).text(data.teacher.user.userName);
+					   $('#mdb_btn').append($('<input>').attr('type','hidden').val(data.studentId));
+				   }else{
+					   $('#mdb_btn').addClass('am-disabled').text('请先选择课题');
+					   $('#column1').attr('disabled','disabled'); 
+				   }
+			   }
+			 });
+		
+		//查询数据库是否应该禁用提交按钮
+		$.ajax({
+			   url: "/graduation/mdbController/getMdbByStudentId?studentId="+$('#mdb_btn').find('input:hidden').val(),
+			   type: 'get',
+			   dataType:'json',
+			   async:false,
+			   success: function(data){
+				   if(!isNull(data.studentId)){
+						$('#column1').attr('disabled','disabled').text(data.column1);
+					}
+			   }
+			 });
+		
 		//提交免答辩
 		$('#mdb_btn').click(function () {
 			  var $btn = $(this);
-			  $btn.button('loading');
-			    setTimeout(function(){
-			    	disableBtn('mdb_btn','完成');
-			  }, 3000);
+			  var column1=$('#column1').val();
+			  var studentId=$btn.find('input:hidden').val();
+			  if(isNull(column1)||isNull(studentId)){
+				  return;
+			  }
+			  $.post('/graduation/mdbController/updateColumn',{
+				  _method:'put',
+				  studentId:studentId,
+				  column1:column1
+			  },function(data){
+				  if(data){
+					  $btn.button('loading');
+					    setTimeout(function(){
+					    	disableBtn('mdb_btn','完成');
+					  }, 3000);
+				  }
+			  });
 			    
 		});
 

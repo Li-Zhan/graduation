@@ -216,4 +216,10 @@
     where student_id = #{student_id}
   </select>
   
+  <update id="updateColumn" parameterType="cn.lynu.model.Mdb">
+  	update mdb
+    	set column1 = #{column1,jdbcType=VARCHAR}
+    where student_id = #{studentId,jdbcType=CHAR}
+  </update>
+  
 </mapper>

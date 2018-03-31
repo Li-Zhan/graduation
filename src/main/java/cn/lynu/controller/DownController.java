@@ -40,7 +40,10 @@ public class DownController {
 	 @RequestMapping("/downloadResource")
 	 public @ResponseBody String downloadResource(HttpSession session,HttpServletResponse response,
 	            HttpServletRequest request,@RequestParam(required=true)String fileName) throws Exception {
-	        String dataDir=request.getServletContext().getRealPath("/WEB-INF/file");
+	     if(fileName==null||fileName=="") {
+	    	 return null;
+	     }   
+		 String dataDir=request.getServletContext().getRealPath("/WEB-INF/file");
 	        try {
 	        	fileName=URLDecoder.decode(fileName,"utf-8");
 			} catch (Exception e1) {

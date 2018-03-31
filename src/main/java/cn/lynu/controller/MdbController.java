@@ -31,5 +31,11 @@ public class MdbController {
 		}
 		return new Mdb();
 	}
+	
+	@ResponseBody
+	@RequestMapping(value="/updateColumn",method=RequestMethod.PUT)
+	public boolean updateColumn(Mdb mdb) {
+		return mdbService.updateColumn(mdb);
+	}
 
 }

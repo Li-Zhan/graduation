@@ -26,5 +26,26 @@ public class KtbgService {
 	public Ktbg getKtbgByStudentId(String studentId) {
 		return ktbgMapper.getKtbgByStudentId(studentId);
 	}
+	
+	@Transactional(propagation=Propagation.REQUIRED)
+	public boolean updateColumn(Ktbg ktbg) {
+		if(ktbgMapper.updateColumn(ktbg)>0) {
+			return true;
+		}
+		return false;
+	}
+
+	@Transactional(propagation=Propagation.SUPPORTS)
+	public Ktbg getKtbgStatus(String ktbgId) {
+		return ktbgMapper.selectByPrimaryKey(Integer.valueOf(ktbgId));
+	}
+
+	@Transactional(propagation=Propagation.REQUIRED)
+	public boolean updateByPrimaryKeySelective(Ktbg ktbg) {
+		if(ktbgMapper.updateByPrimaryKeySelective(ktbg)>0) {
+			return true;
+		}
+		return false;
+	}
 
 }

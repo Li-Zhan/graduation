@@ -29,4 +29,6 @@ public interface KtbgMapper {
     int updateByPrimaryKey(Ktbg record);
     
     Ktbg getKtbgByStudentId(String studentId);
+    
+    int updateColumn(Ktbg ktbg);
 }

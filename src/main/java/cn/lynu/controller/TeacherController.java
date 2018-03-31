@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+
+import cn.lynu.model.Student;
 import cn.lynu.model.Teacher;
 import cn.lynu.model.User;
 import cn.lynu.service.TeacherService;
@@ -57,6 +59,41 @@ public class TeacherController {
 			}
 		}
 		return null;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/findTeacher")
+	public Teacher findTeacher(HttpSession session) {
+		User user = (User) session.getAttribute("user");
+		if(user!=null) {
+			Teacher teacher = teacherService.findTeacherByUserId(user.getUserId());
+			if(teacher!=null) {
+				Teacher teacherPlus = teacherService.findTeacherByTeacherId(teacher.getTeacherId());
+				if(teacherPlus!=null) {
+					return teacherPlus;
+				}
+			}
+		}
+		return null;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/getStudentByTeacherId")
+	public List<Student> getStudentByTeacherId(HttpSession session){
+		User user = (User) session.getAttribute("user");
+		if(user!=null) {
+			Teacher teacher = teacherService.findTeacherByUserId(user.getUserId());
+			if(teacher!=null) {
+				return teacherService.getStudentByTeacherId(teacher.getTeacherId());
+			}
+		}
+		return null;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/updateTeacherInfo",method=RequestMethod.PUT)
+	public boolean updateTeacherInfo(Teacher teacher) {
+		return teacherService.updateTeacherInfo(teacher);
 	}
 
 }

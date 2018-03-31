@@ -225,4 +225,12 @@
       lunwen_status = #{lunwenStatus,jdbcType=INTEGER}
     where lunwen_id = #{lunwenId,jdbcType=INTEGER}
   </update>
+  
+  <select id="getLunwenBySid" resultType="cn.lynu.model.Lunwen">
+  	select 
+    <include refid="Base_Column_List" />
+    from lunwen
+    where student_id = #{studentId}
+  </select>
+  
 </mapper>

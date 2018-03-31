@@ -26,5 +26,13 @@ public class MdbService {
 	public Mdb getMdbByStudentId(String studentId) {
 		return mdbMapper.getMdbByStudentId(studentId);
 	}
+	
+	@Transactional(propagation=Propagation.REQUIRED)
+	public boolean updateColumn(Mdb mdb) {
+		if(mdbMapper.updateColumn(mdb)>0) {
+			return true;
+		}
+		return false;
+	}
 
 }

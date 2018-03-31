@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import cn.lynu.model.Zqjc;
 import cn.lynu.service.ZqjcService;
@@ -33,6 +35,17 @@ public class ZqjcController {
 			return zqjc;
 		}
 		return new Zqjc();
+	}
+	
+	@RequestMapping("/gotoTzqjc")
+	public ModelAndView gotoTzqjc(@RequestParam(required=true)String studentId) {
+		return new ModelAndView("/teacher/tzqjc.html?studentId="+studentId);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/updateByPrimaryKeySelective",method=RequestMethod.PUT)
+	public boolean updateByPrimaryKeySelective(Zqjc zqjc) {
+		return zqjcService.updateByPrimaryKeySelective(zqjc);
 	}
 
 }
