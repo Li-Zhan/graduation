@@ -8,6 +8,8 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import cn.lynu.mapper.ProjectMapper;
+import cn.lynu.mapper.StudentMapper;
+import cn.lynu.mapper.TeacherMapper;
 import cn.lynu.model.Project;
 
 @Service
@@ -15,6 +17,8 @@ public class ProjectService {
 	
 	@Autowired
 	private ProjectMapper projectMapper;
+	@Autowired
+	private TeacherMapper teacherMapper;
 	
 	@Transactional(propagation=Propagation.SUPPORTS)
 	public List<Project> getProjectListByTeacherId(String teacherId){
@@ -47,10 +51,12 @@ public class ProjectService {
 	}
 	
 	@Transactional(propagation=Propagation.REQUIRED)
-	public boolean insertSelective(Project project) {
-		int num = projectMapper.insertSelective(project);
-		if(num>0) {
-			return true;
+	public boolean insertSelective(Project project,String teacherId) {
+		if(teacherMapper.addProjectAfter(teacherId)) {
+			int num = projectMapper.insertSelective(project);
+			if(num>0) {
+				return true;
+			}
 		}
 		return false;
 	}

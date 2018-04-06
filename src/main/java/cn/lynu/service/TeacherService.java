@@ -10,9 +10,12 @@ import org.springframework.transaction.annotation.Transactional;
 import cn.lynu.mapper.StudentMapper;
 import cn.lynu.mapper.TeacherMapper;
 import cn.lynu.mapper.UserMapper;
+import cn.lynu.mapper.YansouTeacherMapper;
+import cn.lynu.mapper.YansouTeamMapper;
 import cn.lynu.model.Project;
 import cn.lynu.model.Student;
 import cn.lynu.model.Teacher;
+import cn.lynu.model.YansouTeam;
 
 @Service
 public class TeacherService {
@@ -23,6 +26,10 @@ public class TeacherService {
 	private StudentMapper studentMapper;
 	@Autowired
 	private UserMapper userMapper;
+	@Autowired
+	private YansouTeamMapper yansouTeamMapper;
+	@Autowired
+	private YansouTeacherMapper yansouTeacherMapper;
 	
 	@Transactional(propagation=Propagation.SUPPORTS)
 	public List<Teacher> getSubTeacher(){
@@ -62,6 +69,17 @@ public class TeacherService {
 			return true;
 		}
 		return false;
+	}
+	
+	@Transactional(propagation=Propagation.SUPPORTS)
+	public YansouTeam getTeacherYansouInfo(String teacherId) {
+		Integer yansouTeamId = yansouTeacherMapper.selectYansouTeamIdByTeacherId(teacherId);
+		return yansouTeamMapper.selectYanSouInfoByid(yansouTeamId);
+	}
+
+	@Transactional(propagation=Propagation.SUPPORTS)
+	public List<Student> getStudentByTeacherId2(String teacherId) {
+		return studentMapper.getStudentByTeacherId2(teacherId);
 	}
 
 }

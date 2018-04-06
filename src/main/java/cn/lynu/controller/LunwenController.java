@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -25,7 +26,11 @@ public class LunwenController {
 	@ResponseBody
 	@RequestMapping("/getLunwenBySid")
 	public Lunwen getLunwenBySid(String studentId) {
-		return lunwenService.getLunwenBySid(studentId);
+		Lunwen lunwen = lunwenService.getLunwenBySid(studentId);
+		if(lunwen!=null) {
+			return lunwen;
+		}
+		return new Lunwen();
 	}
 	
 	@ResponseBody

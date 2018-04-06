@@ -18,6 +18,7 @@ import com.github.pagehelper.PageInfo;
 import cn.lynu.model.Student;
 import cn.lynu.model.Teacher;
 import cn.lynu.model.User;
+import cn.lynu.model.YansouTeam;
 import cn.lynu.service.TeacherService;
 
 @Controller
@@ -91,9 +92,35 @@ public class TeacherController {
 	}
 	
 	@ResponseBody
+	@RequestMapping("/getStudentByTeacherId2")
+	public List<Student> getStudentByTeacherId2(HttpSession session){
+		User user = (User) session.getAttribute("user");
+		if(user!=null) {
+			Teacher teacher = teacherService.findTeacherByUserId(user.getUserId());
+			if(teacher!=null) {
+				return teacherService.getStudentByTeacherId2(teacher.getTeacherId());
+			}
+		}
+		return null;
+	}
+	
+	@ResponseBody
 	@RequestMapping(value="/updateTeacherInfo",method=RequestMethod.PUT)
 	public boolean updateTeacherInfo(Teacher teacher) {
 		return teacherService.updateTeacherInfo(teacher);
+	}
+	
+	@ResponseBody
+	@RequestMapping("/getTeacherYansouInfo")
+	public YansouTeam getTeacherYansouInfo(HttpSession session){
+		User user = (User) session.getAttribute("user");
+		if(user!=null) {
+			Teacher teacher = teacherService.findTeacherByUserId(user.getUserId());
+			if(teacher!=null) {
+				return teacherService.getTeacherYansouInfo(teacher.getTeacherId());
+			}
+		}
+		return null;
 	}
 
 }

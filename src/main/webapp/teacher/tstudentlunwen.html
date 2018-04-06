@@ -54,6 +54,10 @@
 		$.get('/graduation/lunwenController/getLunwenBySid',{
 			studentId:studentId
 		},function(data){
+			if(isNull(data.lunwen_id)){
+				$('#lunwen_btn').attr('disabled','disabled').text('该学生没有提交论文');
+				return;
+			}
 			if(!isNull(data.lunwenStatus)){
 				$('#lunwen_btn').attr('disabled','disabled').text('已审核');
 			}else{

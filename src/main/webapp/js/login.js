@@ -53,6 +53,11 @@
 			     if(data=="randStrError"){
 			    	 $('#randStr').css('border-color','#dd514c');
 			     }else if(data=='passwordError'){
+			     	 $('#user-password').popover({
+						theme: 'danger sm',
+					    content: '密码错误'
+					 });
+					 $('#user-password').popover('open');
 			    	 $('#user-password').parent().addClass('am-form-error');
 			    	 $('#user-password').css('border-color','#dd514c');
 			     }else{
@@ -116,14 +121,6 @@
  			if(fileName!=null&&fileName!=''){
  			  a.attr('href',encodeURI('downController/downloadResource?fileName='+fileName));
  			}
-/* 			a.on('click',function(){
- 				if(fileName!=null){
-	 				$.post('downController/downloadResource',{
-	 					fileName:fileName
-	 				},function(data){});
- 				}
- 				return false;
- 			});*/
  			var li=$("#down_ul").append($('<li>').append(a));
  		}
  	});

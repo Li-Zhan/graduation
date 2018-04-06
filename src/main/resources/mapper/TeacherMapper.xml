@@ -5,7 +5,6 @@
     <id column="teacher_id" jdbcType="CHAR" property="teacherId" />
     <result column="teacher_describe" jdbcType="VARCHAR" property="teacherDescribe" />
     <result column="teacher_project_num" jdbcType="CHAR" property="teacherProjectNum" />
-    <result column="teacher_type_id" jdbcType="INTEGER" property="teacherTypeId" />
     <result column="user_id" jdbcType="CHAR" property="userId" />
     <result column="dept_id" jdbcType="INTEGER" property="deptId" />
     <result column="zhicheng" jdbcType="CHAR" property="zhicheng" />
@@ -69,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    teacher_id, teacher_describe, teacher_project_num, teacher_type_id, user_id, dept_id, zhicheng
+    teacher_id, teacher_describe, teacher_project_num, user_id, dept_id, zhicheng
   </sql>
   <select id="selectByExample" parameterType="cn.lynu.model.TeacherExample" resultMap="BaseResultMap">
     select
@@ -103,10 +102,10 @@
   </delete>
   <insert id="insert" parameterType="cn.lynu.model.Teacher">
     insert into teacher (teacher_id, teacher_describe, teacher_project_num, 
-      teacher_type_id, user_id, dept_id, zhicheng
+      user_id, dept_id, zhicheng
       )
     values (#{teacherId,jdbcType=CHAR}, #{teacherDescribe,jdbcType=VARCHAR}, #{teacherProjectNum,jdbcType=CHAR}, 
-      #{teacherTypeId,jdbcType=INTEGER}, #{userId,jdbcType=CHAR}, #{deptId,jdbcType=INTEGER}
+      #{userId,jdbcType=CHAR}, #{deptId,jdbcType=INTEGER}
       , #{zhicheng,jdbcType=CHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.lynu.model.Teacher">
@@ -120,9 +119,6 @@
       </if>
       <if test="teacherProjectNum != null">
         teacher_project_num,
-      </if>
-      <if test="teacherTypeId != null">
-        teacher_type_id,
       </if>
       <if test="userId != null">
         user_id,
@@ -143,9 +139,6 @@
       </if>
       <if test="teacherProjectNum != null">
         #{teacherProjectNum,jdbcType=CHAR},
-      </if>
-      <if test="teacherTypeId != null">
-        #{teacherTypeId,jdbcType=INTEGER},
       </if>
       <if test="userId != null">
         #{userId,jdbcType=CHAR},
@@ -176,9 +169,6 @@
       <if test="record.teacherProjectNum != null">
         teacher_project_num = #{record.teacherProjectNum,jdbcType=CHAR},
       </if>
-      <if test="record.teacherTypeId != null">
-        teacher_type_id = #{record.teacherTypeId,jdbcType=INTEGER},
-      </if>
       <if test="record.userId != null">
         user_id = #{record.userId,jdbcType=CHAR},
       </if>
@@ -198,7 +188,6 @@
     set teacher_id = #{record.teacherId,jdbcType=CHAR},
       teacher_describe = #{record.teacherDescribe,jdbcType=VARCHAR},
       teacher_project_num = #{record.teacherProjectNum,jdbcType=CHAR},
-      teacher_type_id = #{record.teacherTypeId,jdbcType=INTEGER},
       user_id = #{record.userId,jdbcType=CHAR},
       dept_id = #{record.deptId,jdbcType=INTEGER},
       zhicheng = #{record.zhicheng,jdbcType=CHAR}
@@ -214,9 +203,6 @@
       </if>
       <if test="teacherProjectNum != null">
         teacher_project_num = #{teacherProjectNum,jdbcType=CHAR},
-      </if>
-      <if test="teacherTypeId != null">
-        teacher_type_id = #{teacherTypeId,jdbcType=INTEGER},
       </if>
       <if test="userId != null">
         user_id = #{userId,jdbcType=CHAR},
@@ -234,7 +220,6 @@
     update teacher
     set teacher_describe = #{teacherDescribe,jdbcType=VARCHAR},
       teacher_project_num = #{teacherProjectNum,jdbcType=CHAR},
-      teacher_type_id = #{teacherTypeId,jdbcType=INTEGER},
       user_id = #{userId,jdbcType=CHAR},
       dept_id = #{deptId,jdbcType=INTEGER},
       zhicheng = #{zhicheng,jdbcType=CHAR}
@@ -281,5 +266,9 @@
   	 <include refid="Base_Column_List" />
     from teacher where user_id=#{userId}
   </select>
+  
+  <update id="addProjectAfter">
+  	update teacher set teacher_project_num=teacher_project_num+1 where teacher_id=#{teacherId}
+  </update>
   
 </mapper>

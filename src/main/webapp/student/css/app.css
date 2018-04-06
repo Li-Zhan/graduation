@@ -165,6 +165,7 @@ ul.am-dropdown-content>li>a {
     margin-left: 5px;
     margin-top: -4px;
     height: 39px;
+    width: 39px;
     display: inline-block;
     border-radius: 50%;
 }
@@ -1998,4 +1999,7 @@ ul.tpl-dropdown-content li>a.tpl-dropdown-content-message:last-child {
 	margin-top: 0;
 	margin-bottom: 0;
 	padding-top: 0; 
+}
+[class*="am-u-"] + [class*="am-u-"]:last-child {
+	 float: left; 
 }

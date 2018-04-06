@@ -32,7 +32,7 @@
 	            <table class="am-table am-table-striped am-table-hover table-main am-text-nowrap am-table-centered">
 	              <thead>
 	              <tr>
-	                <th>课题名</th><th>课题描述</th><th>课题来源</th><th>教师姓名</th><th>操作</th>
+	                <th>课题名</th><th>课题描述</th><th>课题来源</th><th>教师姓名</th><th>电话</th><th>操作</th>
 	              </tr>
 	              </thead>
 	              <tbody>
@@ -67,6 +67,7 @@
 					tr.append($('<td>').addClass('am-text-middle').append(textarea));
 	              	tr.append($('<td>').addClass('am-text-middle').text(data.list[i].projectFrom.projectFromName));
 	              	tr.append($('<td>').addClass('am-text-middle').text(data.list[i].teacher.user.userName));
+	              	tr.append($('<td>').addClass('am-text-middle').text(data.list[i].teacher.user.userTel));
 	              	tr.append($('<input>').addClass('studentId').attr('type','hidden').val(data.list[i].studentId));
 	              	var button=$('<button>').attr('type','button')
 	              				.addClass('am-btn am-btn-primary am-btn-sm project_button')

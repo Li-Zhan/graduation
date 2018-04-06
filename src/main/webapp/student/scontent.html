@@ -17,9 +17,6 @@
 </head>
 
 <body style="margin-left: 10px;overflow:hidden;" >
-
-<!--begin  -->
-	<!-- 	<div class="tpl-content-wrapper"> -->
 	<div id="ref_page">
 	
 			<div class="tpl-content-page-title" style="margin-bottom: 10px;">
@@ -30,8 +27,7 @@
 			</ol>
 
 			<div class="row">
-
-				<div class="am-u-lg-6 am-u-md-12 am-u-sm-12">
+				<div class="am-u-lg-4 am-u-md-12 am-u-sm-12">
 					<div class="dashboard-stat blue">
 						<div class="am-g" style="height: 95px;">
 							<div class="visual">
@@ -41,12 +37,10 @@
 								<div class="number">当前阶段</div>
 								<div class="desc" id="workTime"></div>
 							</div>
-
 						</div>
-
 					</div>
 				</div>
-				<div class="am-u-lg-6 am-u-md-12 am-u-sm-12" style="float: left;">
+				<div class="am-u-lg-4 am-u-md-12 am-u-sm-12" style="float: left;">
 					<div class="dashboard-stat green">
 						<div class="visual">
 							<i class="am-icon-bar-chart-o"></i>
@@ -57,10 +51,18 @@
 						</div>
 					</div>
 				</div>
-
+				<div class="am-u-lg-4 am-u-md-12 am-u-sm-12" style="float: left;">
+					<div class="dashboard-stat red">
+						<div class="visual">
+							<i class="am-icon-check"></i>
+						</div>
+						<div class="details">
+							<div class="number" id="num2" style="font-size: 25px;">未选题</div>
+							<div class="desc">选题状态</div>
+						</div>
+					</div>
+				</div>
 			</div>
-
-
 			<div class="am-panel am-panel-default"
 				style="margin: -5px 0 0 -4px;">
 				<div class="am-panel-bd">
@@ -83,15 +85,13 @@
 			</div>
 	</div>
 
-	<!-- 	</div> -->
-		<!--end  -->
-
 <script src="../js/jquery.min.js"></script>
 <script src="../amazeui/js/amazeui.min.js"></script>
 <script type="text/javascript">
 	$(function() {
 		
-		console.log($(window.parent.document).find('#hiddenText').val());
+		//获取iframe中的元素
+		//console.log($(window.parent.document).find('#hiddenText').val());
 		var date=new Date();
 		var thisDate=date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate();
 		
@@ -104,6 +104,16 @@
 		},function(data){
 			if(data.workTimeInfo!=null){
 				$('#workTime').text(data.workTimeInfo);
+			}
+		});
+		
+		$.get('/graduation/studentController/findStudent',function(data){
+			//num2
+			if(data.teacherId!=null){
+				$('#num2').text('等待老师确认');
+			}
+			if(data.projectId!=null){
+				$('#num2').text('选题成功');
 			}
 		});
 		

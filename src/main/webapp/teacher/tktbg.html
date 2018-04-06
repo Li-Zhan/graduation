@@ -84,7 +84,7 @@
 			</div>
 	</div>
 	
-<div class="am-modal am-modal-no-btn" tabindex="-1" id="noktbg-modal">
+<!-- <div class="am-modal am-modal-no-btn" tabindex="-1" id="noktbg-modal">
   <div class="am-modal-dialog">
     <div class="am-modal-hd">
       <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
@@ -93,7 +93,7 @@
       该学生没有填写开题报告
     </div>
   </div>
-</div>
+</div> -->
 
 <script src="/graduation/js/jquery.min.js"></script>
 <script src="/graduation/amazeui/js/amazeui.min.js"></script>
@@ -102,7 +102,6 @@
 	$(function() {
 		
 		var studentId=getQueryString("studentId");
-		
 		$.ajax({
 			   url: "/graduation/studentController/getStudentAndKtbgBySid",
 			   type: 'get',
@@ -112,7 +111,7 @@
 				   studentId:studentId
 			   },
 			   success: function(data){
-				   if(!isNull(data.studentId)){
+				   if(!isNull(data.ktbg)){
 						$('#stuInfo1').find('td').eq(0).text(data.user.userName);
 						var gender;
 						if(data.user.userGender==1){
@@ -130,26 +129,30 @@
 						$('#column2').text(data.ktbg.column2);
 						$('#ktbg_btn').append($('<input>').attr('type','hidden').val(data.ktbg.ktbgId));
 				   }else{
-					   $('#noktbg-modal').modal('open');
+					   $('#ktbg_btn').attr('disabled','disabled').text('该学生没有填写开题报告');
+					 //  $('#noktbg-modal').modal('open');
 				   }
 			   }
 			 });
 		
 		//查询数据库是否应该禁用提交按钮
-		$.ajax({
-		   url: "/graduation/ktbgController/getKtbgStatus",
-		   type: 'get',
-		   dataType:'json',
-		   async:false,
-		   data:{
-			   ktbgId:$('#ktbg_btn').find('input:hidden').val()
-		   },
-		   success: function(data){
-			  if(!isNull(data.ktbgStatus)){
-				  $('#ktbg_btn').attr('disabled','disabled').text('已审核');
-			  }
-		   }
-	 });
+		var ktbg_btn=$('#ktbg_btn').find('input:hidden').val();
+		if(!isNull(ktbg_btn)){
+			$.ajax({
+			   url: "/graduation/ktbgController/getKtbgStatus",
+			   type: 'get',
+			   dataType:'json',
+			   async:false,
+			   data:{
+				   ktbgId:$('#ktbg_btn').find('input:hidden').val()
+			   },
+			   success: function(data){
+				  if(!isNull(data.ktbgStatus)){
+					  $('#ktbg_btn').attr('disabled','disabled').text('已审核');
+				  }
+			   }
+		 });
+		}
 		
 		//点击提交开题报告按钮ktbg_btn
 		$('#ktbg_btn').click(function () {

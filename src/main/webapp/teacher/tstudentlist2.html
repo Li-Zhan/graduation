@@ -19,131 +19,7 @@
 <body style="overflow:hidden;" >
 
 	<div id="ref_page" class="am-g">
-	
-				<div class="tpl-content-page-title" style="margin:0 0 10px 16px;">成绩评分</div>
-		
-				<div class="am-u-lg-3 am-u-md-3 am-u-sm-6">
-					<div class="am-thumbnail chooseStyle">
-						<p>
-							<img class="am-circle am-center am-img-thumbnail"
-								src="../img/user01.png"
-								width="140" height="140" style="margin-top: 1.6rem;"/>
-						</p>
-						<div class="am-thumbnail-caption">
-							<p class="am-text-center">李展01</p>
-							<p>
-								<button type="button" class="am-btn am-btn-primary am-btn-block pinfen_btn">进入评分</button>
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="am-u-lg-3 am-u-md-3 am-u-sm-6">
-					<div class="am-thumbnail chooseStyle">
-						<p>
-							<img class="am-circle am-center am-img-thumbnail"
-								src="../img/user01.png"
-								width="140" height="140" style="margin-top: 1.6rem;"/>
-						</p>
-						<div class="am-thumbnail-caption">
-							<p class="am-text-center">李展02</p>
-							<p>
-								<button type="button" class="am-btn am-btn-primary am-btn-block pinfen_btn">进入评分</button>
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="am-u-lg-3 am-u-md-3 am-u-sm-6">
-					<div class="am-thumbnail chooseStyle">
-						<p>
-							<img class="am-circle am-center am-img-thumbnail"
-								src="../img/user01.png"
-								width="140" height="140" style="margin-top: 1.6rem;"/>
-						</p>
-						<div class="am-thumbnail-caption">
-							<p class="am-text-center">李展03</p>
-							<p>
-								<button type="button" class="am-btn am-btn-primary am-btn-block pinfen_btn">进入评分</button>
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="am-u-lg-3 am-u-md-3 am-u-sm-6">
-					<div class="am-thumbnail chooseStyle">
-						<p>
-							<img class="am-circle am-center am-img-thumbnail"
-								src="../img/user01.png"
-								width="140" height="140" style="margin-top: 1.6rem;"/>
-						</p>
-						<div class="am-thumbnail-caption">
-							<p class="am-text-center">李展04</p>
-							<p>
-								<button type="button" class="am-btn am-btn-primary am-btn-block pinfen_btn">进入评分</button>
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="am-u-lg-3 am-u-md-3 am-u-sm-6">
-					<div class="am-thumbnail chooseStyle">
-						<p>
-							<img class="am-circle am-center am-img-thumbnail"
-								src="../img/user01.png"
-								width="140" height="140" style="margin-top: 1.6rem;"/>
-						</p>
-						<div class="am-thumbnail-caption">
-							<p class="am-text-center">李展05</p>
-							<p>
-								<button type="button" class="am-btn am-btn-primary am-btn-block pinfen_btn">进入评分</button>
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="am-u-lg-3 am-u-md-3 am-u-sm-6">
-					<div class="am-thumbnail chooseStyle">
-						<p>
-							<img class="am-circle am-center am-img-thumbnail"
-								src="../img/user01.png"
-								width="140" height="140" style="margin-top: 1.6rem;"/>
-						</p>
-						<div class="am-thumbnail-caption">
-							<p class="am-text-center">李展06</p>
-							<p>
-								<button type="button" class="am-btn am-btn-primary am-btn-block pinfen_btn">进入评分</button>
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="am-u-lg-3 am-u-md-3 am-u-sm-6">
-					<div class="am-thumbnail chooseStyle">
-						<p>
-							<img class="am-circle am-center am-img-thumbnail"
-								src="../img/user01.png"
-								width="140" height="140" style="margin-top: 1.6rem;"/>
-						</p>
-						<div class="am-thumbnail-caption">
-							<p class="am-text-center">李展07</p>
-							<p>
-								<button type="button" class="am-btn am-btn-primary am-btn-block pinfen_btn">进入评分</button>
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="am-u-lg-3 am-u-md-3 am-u-sm-6">
-					<div class="am-thumbnail chooseStyle">
-						<p>
-							<img class="am-circle am-center am-img-thumbnail"
-								src="../img/user01.png"
-								width="140" height="140" style="margin-top: 1.6rem;"/>
-						</p>
-						<div class="am-thumbnail-caption">
-							<p class="am-text-center">李展08</p>
-							<p>
-								<button type="button" class="am-btn am-btn-primary am-btn-block pinfen_btn">进入评分</button>
-							</p>
-						</div>
-					</div>
-				</div>
-			
-				
+		<div class="tpl-content-page-title" style="margin:0 0 10px 16px;">学生列表</div>
 	</div>
 
 <script src="../js/jquery.min.js"></script>
@@ -151,10 +27,40 @@
 <script type="text/javascript">
 		$(function() {
 			
-			$('.pinfen_btn').click(function() {
-				//修改：去拿id拼url
-				window.location.href='tstudentscore.html';
+			$.get('/graduation/teacherController/getStudentByTeacherId',function(data){
+				$(data).each(function(index,value){
+					var div=$('<div>').addClass('am-u-lg-3 am-u-md-3 am-u-sm-6');
+					var div1=$('<div>').addClass('am-thumbnail chooseStyle');
+					var imgSrc=value.user.userPortrait;
+					if(imgSrc==null){
+						imgSrc='../img/user01.png';
+					}
+					var p=$('<p>').append($('<img>').addClass('am-circle am-center am-img-thumbnail')
+							.attr({'src':imgSrc,'height':'140px','width':'140px'}).css('margin-top','1.6rem'));
+					var div2=$('<div>').addClass('am-thumbnail-caption');
+					var div2_p1=$('<p>').addClass('am-text-center').text(value.user.userName);
+					var pinfen_btn;
+					var studentScore = value.studentScore;
+					if(studentScore!=null&&studentScore!=''){
+						pinfen_btn=$('<button>').attr('type','button').addClass('am-btn am-btn-primary am-btn-block am-disabled').text('已为学生评分：'+studentScore+'分');
+					}else{
+						pinfen_btn=$('<button>').attr('type','button').addClass('am-btn am-btn-primary am-btn-block').text('进入评分');
+					}
+					var div2_p2=$('<p>').append(pinfen_btn);
+					div2_p2.find('button').click(function() {
+						var url='/graduation/studentController/gotoTstudentscore?studentId='+value.studentId;
+						var form=$('<form>').attr({'action':url,'method':'post'});
+						$('body').append(form);
+						form.submit();
+					});
+					div2.append(div2_p1).append(div2_p2);
+					div1.append(p).append(div2);
+					div.append(div1);
+					$('#ref_page').append(div);
+				});
 			});
+			
+			
 
 		});
 </script>

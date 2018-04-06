@@ -108,7 +108,7 @@
 				   studentId:studentId
 			   },
 			   success: function(data){
-				   if(!isNull(data.studentId)){
+				   if(!isNull(data.zqjc)){
 					$('#tr1').find('td').eq(3).text(data.classInfo.subject.subjectName);
 					$('#tr1').find('td').eq(5).text(data.classInfo.grade.gradeName);
 					$('#tr2').find('td').eq(1).text(data.project.projectName);
@@ -119,11 +119,15 @@
 					$('#column1').text(data.zqjc.column1);
 					$('#column2').text(data.zqjc.column2);
 					$('#zqjc_btn').append($('<input>').attr('type','hidden').val(data.zqjc.zqjcId));
-					 if(!isNull(data.zqjc.column3)&&!isNull(data.zqjc.column4)){
+					if(!isNull(data.zqjc.column3)&&!isNull(data.zqjc.column4)){
 						 $('#column3').attr('disabled','disabled').text(data.zqjc.column3);
 						 $('#column4').attr('disabled','disabled').text(data.zqjc.column4);
 						 $('#zqjc_btn').attr('disabled','disabled').text('已审核');
 					   }
+				   }else{
+					   $('#column3').attr('disabled','disabled');
+					   $('#column4').attr('disabled','disabled');
+					   $('#zqjc_btn').attr('disabled','disabled').text('该学生没有填写中期检查');
 				   }
 			   }
 			 });

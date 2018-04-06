@@ -29,10 +29,10 @@
 				     	<th>答辩组打分</th>
 				     	<th>总分</th>
 				     </tr>
-				     <tr>
-				     	<td>30</td>
-				     	<td>70</td>
-				     	<td>100</td>
+				     <tr id="score">
+				     	<td></td>
+				     	<td></td>
+				     	<td></td>
 				     </tr>
 				  </table>
 			  </div>
@@ -45,7 +45,37 @@
 	<script src="js/app.js"></script>
 	<script type="text/javascript">
 		$(function() {
-
+			$.ajax({
+				url:'/graduation/studentController/getThisStudentScore',
+				type:'get',
+				async:false,
+				success:function(data){
+					if(data!=-1){
+						$('#score').find('td').eq(0).text(data);
+					}else{
+						$('#score').find('td').eq(0).text('还未评分');
+					}
+				}
+			});
+			$.ajax({
+				url:'/graduation/dabianController/getThisStudentScore',
+				type:'get',
+				async:false,
+				success:function(data){
+					if(data!=-1){
+						$('#score').find('td').eq(1).text(data);
+					}else{
+						$('#score').find('td').eq(1).text('还未评分');
+					}
+				}
+			});
+			
+			var score1=$('#score').find('td').eq(0).text();
+			var score2=$('#score').find('td').eq(1).text();
+			if(!isNaN(score1)&&!isNaN(score2)){
+				$('#score').find('td').eq(2).text((parseInt(score1)+parseInt(score2)));
+			}
+			
 		});
 	</script>
 </body>

@@ -8,7 +8,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import cn.lynu.model.Project;
 import cn.lynu.model.Student;
@@ -108,7 +110,10 @@ public class StudentController {
 	
 	@ResponseBody
 	@RequestMapping("/getStuAndProject")
-	public Student getStuAndProject(HttpSession session,HttpServletResponse response) {
+	public Student getStuAndProject(HttpSession session,HttpServletResponse response,String studentId) {
+		if(studentId!=null&&studentId!="") {
+			return studentService.getStuAndProject(studentId);
+		}
 		User user=(User) session.getAttribute("user");
 		if(user!=null) {
 			Student student = studentService.getStudentByUserId(user.getUserId());
@@ -167,6 +172,30 @@ public class StudentController {
 	@RequestMapping(value="/updateStudentInfo",method=RequestMethod.PUT)
 	public boolean updateStudentInfo(Student student) {
 		return studentService.updateStudentInfo(student);
+	}
+	
+	@RequestMapping("/gotoTstudentscore")
+	public ModelAndView gotoTstudentscore(@RequestParam(required=true)String studentId) {
+		return new ModelAndView("/teacher/tstudentscore.html?studentId="+studentId);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/updateScore",method=RequestMethod.PUT)
+	public boolean updateScore(Student student) {
+		return studentService.updateStudent(student);
+	}
+	
+	@ResponseBody
+	@RequestMapping("/getThisStudentScore")
+	public Integer getThisStudentScore(HttpSession session) {
+		User user=(User) session.getAttribute("user");
+		if(user!=null) {
+			Student student = studentService.getStudentByUserId(user.getUserId());
+			if(student!=null) {
+				return studentService.getThisStudentScore(student.getStudentId());
+			}
+		}
+		return -1;
 	}
 	
 }

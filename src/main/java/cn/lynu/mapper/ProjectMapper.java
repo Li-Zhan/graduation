@@ -47,4 +47,5 @@ public interface ProjectMapper {
 	int thisTeacherYesProjectNum(String teacherId);
 
 	List<Project> getProjectByTeacherId(String teacherId);
+
 }

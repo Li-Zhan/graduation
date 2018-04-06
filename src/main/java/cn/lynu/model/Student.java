@@ -15,9 +15,11 @@ public class Student {
 
     private Integer classId;
 
-    private Integer studentSource;
+    private Integer studentScore;
 
     private String teacherEvaluate;
+    
+    private String yansouTeamId;
     
     //级联属性
     private User user;
@@ -27,8 +29,16 @@ public class Student {
     private Ktbg ktbg;
     private Zqjc zqjc;
     
-    
-    public Zqjc getZqjc() {
+
+	public String getYansouTeamId() {
+		return yansouTeamId;
+	}
+
+	public void setYansouTeamId(String yansouTeamId) {
+		this.yansouTeamId = yansouTeamId;
+	}
+
+	public Zqjc getZqjc() {
 		return zqjc;
 	}
 
@@ -124,12 +134,13 @@ public class Student {
         this.classId = classId;
     }
 
-    public Integer getStudentSource() {
-        return studentSource;
+    
+    public Integer getStudentScore() {
+        return studentScore;
     }
 
-    public void setStudentSource(Integer studentSource) {
-        this.studentSource = studentSource;
+    public void setStudentScore(Integer studentScore) {
+        this.studentScore = studentScore;
     }
 
     public String getTeacherEvaluate() {

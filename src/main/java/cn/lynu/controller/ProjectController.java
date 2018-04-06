@@ -88,7 +88,7 @@ public class ProjectController {
 				if(project.getProjectId()!=null) {
 					return projectService.updateByPrimaryKeySelective(project);
 				}else {
-					return projectService.insertSelective(project);
+					return projectService.insertSelective(project,teacher.getTeacherId());
 				}
 			}
 		}

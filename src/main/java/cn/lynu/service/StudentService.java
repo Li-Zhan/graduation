@@ -81,4 +81,21 @@ public class StudentService {
 		}
 		return false;
 	}
+
+	@Transactional(propagation=Propagation.REQUIRED)
+	public boolean updateStudent(Student student) {
+		if(studentMapper.updateByPrimaryKeySelective(student)>0) {
+			return true;
+		}
+		return false;
+	}
+
+	@Transactional(propagation=Propagation.SUPPORTS)
+	public Integer getThisStudentScore(String studentId) {
+		Integer score=studentMapper.getThisStudentScore(studentId);
+		if(score!=null) {
+			return score;
+		}
+		return -1;
+	}
 }

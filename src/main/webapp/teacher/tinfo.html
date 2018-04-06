@@ -25,50 +25,45 @@
 			<div class="am-panel-bd am-scrollable-horizontal">
 				
 				<div class="am-u-sm-12">
-                                <table class="am-table am-table-centered table-main">
-                                    <thead>
-                                        <tr>
-                                            <th class="table-title">姓名</th>
-                                            <th>是否为验收组成员</th>
-                                            <th>是否为验收组组长</th>
-                                            <th>是否为盲审组成员</th>
-                                            <th>所在答辩组</th>
-                                            <th>是否为答辩组组长</th>
-                                            <th>答辩地点</th>
-                                            <th>答辩组时间</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td class="am-text-middle"><span>XXX</span></td>
-                                            <td class="am-text-middle"><span>是</span></td>
-                                            <td class="am-text-middle"><span>是</span></td>
-                                            <td class="am-text-middle"><span>是</span></td>
-                                            <td class="am-text-middle"><span>答辩一组</span></td>
-                                            <td class="am-text-middle"><span>是</span></td>
-                                            <td class="am-text-middle"><span>G5-101</span></td>
-                                            <td class="am-text-middle"><span>20118-01-01</span></td>
-                                        </tr>
-                                                                         
-                                    </tbody>
-                                </table>
-                        </div>
-				
-				
-				
-				
-				
+                      <table class="am-table am-table-centered table-main">
+                          <thead>
+                              <tr>
+                                  <th class="table-title">姓名</th>
+                                  <th>所在验收/答辩组</th>
+                                  <th>是否为验收/答辩组组长</th>
+                              </tr>
+                          </thead>
+                          <tbody id="tinfo">
+                             <!--  <tr id="tinfo">
+                                  <td class="am-text-middle"><span>XXX</span></td>
+                                  <td class="am-text-middle"><span>答辩一组</span></td>
+                                  <td class="am-text-middle"><span>是</span></td>
+                              </tr> -->
+                          </tbody>
+                      </table>
+                  </div>
 			</div>
 		</div>
-
-
 	</div>
 
 	<script src="../js/jquery.min.js"></script>
 	<script src="../amazeui/js/amazeui.min.js"></script>
 	<script type="text/javascript">
 		$(function() {
-
+			$.get('/graduation/teacherController/getTeacherYansouInfo',function(data){
+				$(data.yansouTeachers).each(function(index,value){
+					var td1=$('<td>').addClass('am-text-middle').append($('<span>').text(value.teacher.user.userName));
+					var td2=$('<td>').addClass('am-text-middle').append($('<span>').text(data.yansouTeamName));
+					var is_leader;
+					if(value.isLeader==1){
+						is_leader='是';
+					}else{
+						is_leader='否';
+					}
+					var td3=$('<td>').addClass('am-text-middle').append($('<span>').text(is_leader));
+					$('#tinfo').append($('<tr>').append(td1).append(td2).append(td3));
+				});
+			}); 
 		});
 	</script>
 </body>

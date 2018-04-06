@@ -39,4 +39,6 @@ public interface TeacherMapper {
     
     Teacher findTeacherByUserId(String userId);
 
+	boolean addProjectAfter(String teacherId);
+
 }

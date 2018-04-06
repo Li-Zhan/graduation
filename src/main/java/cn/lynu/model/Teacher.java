@@ -9,8 +9,6 @@ public class Teacher {
 
     private String teacherProjectNum;
 
-    private Integer teacherTypeId;
-
     private String userId;
 
     private Integer deptId;
@@ -46,14 +44,6 @@ public class Teacher {
 
     public void setTeacherProjectNum(String teacherProjectNum) {
         this.teacherProjectNum = teacherProjectNum == null ? null : teacherProjectNum.trim();
-    }
-
-    public Integer getTeacherTypeId() {
-        return teacherTypeId;
-    }
-
-    public void setTeacherTypeId(Integer teacherTypeId) {
-        this.teacherTypeId = teacherTypeId;
     }
 
     public String getUserId() {

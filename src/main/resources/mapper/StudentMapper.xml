@@ -9,8 +9,9 @@
     <result column="teacher_id" jdbcType="CHAR" property="teacherId" />
     <result column="user_id" jdbcType="CHAR" property="userId" />
     <result column="class_id" jdbcType="INTEGER" property="classId" />
-    <result column="student_source" jdbcType="INTEGER" property="studentSource" />
+    <result column="student_score" jdbcType="INTEGER" property="studentScore" />
     <result column="teacher_evaluate" jdbcType="VARCHAR" property="teacherEvaluate" />
+    <result column="yansou_team_id" jdbcType="VARCHAR" property="yansouTeamId" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -71,8 +72,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    student_id, project_num, good_boy, project_id, teacher_id, user_id, class_id, student_source, 
-    teacher_evaluate
+    student_id, project_num, good_boy, project_id, teacher_id, user_id, class_id, student_score, 
+    teacher_evaluate,yansou_team_id
   </sql>
   <select id="selectByExample" parameterType="cn.lynu.model.StudentExample" resultMap="BaseResultMap">
     select
@@ -107,12 +108,12 @@
   <insert id="insert" parameterType="cn.lynu.model.Student">
     insert into student (student_id, project_num, good_boy, 
       project_id, teacher_id, user_id, 
-      class_id, student_source, teacher_evaluate
+      class_id, student_score, teacher_evaluate,yansou_team_id
       )
     values (#{studentId,jdbcType=CHAR}, #{projectNum,jdbcType=INTEGER}, #{goodBoy,jdbcType=INTEGER}, 
       #{projectId,jdbcType=INTEGER}, #{teacherId,jdbcType=CHAR}, #{userId,jdbcType=CHAR}, 
-      #{classId,jdbcType=INTEGER}, #{studentSource,jdbcType=INTEGER}, #{teacherEvaluate,jdbcType=VARCHAR}
-      )
+      #{classId,jdbcType=INTEGER}, #{studentScore,jdbcType=INTEGER}, #{teacherEvaluate,jdbcType=VARCHAR},
+      #{yansouTeamId,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.lynu.model.Student">
     insert into student
@@ -138,11 +139,14 @@
       <if test="classId != null">
         class_id,
       </if>
-      <if test="studentSource != null">
-        student_source,
+      <if test="studentScore != null">
+        student_score,
       </if>
       <if test="teacherEvaluate != null">
         teacher_evaluate,
+      </if>
+      <if test="yansouTeamId != null">
+        yansou_team_id,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -167,11 +171,14 @@
       <if test="classId != null">
         #{classId,jdbcType=INTEGER},
       </if>
-      <if test="studentSource != null">
-        #{studentSource,jdbcType=INTEGER},
+      <if test="studentScore != null">
+        #{studentScore,jdbcType=INTEGER},
       </if>
       <if test="teacherEvaluate != null">
         #{teacherEvaluate,jdbcType=VARCHAR},
+      </if>
+      <if test="yansouTeamId != null">
+        #{yansouTeamId,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -205,11 +212,14 @@
       <if test="record.classId != null">
         class_id = #{record.classId,jdbcType=INTEGER},
       </if>
-      <if test="record.studentSource != null">
-        student_source = #{record.studentSource,jdbcType=INTEGER},
+      <if test="record.studentScore != null">
+        student_score = #{record.studentScore,jdbcType=INTEGER},
       </if>
       <if test="record.teacherEvaluate != null">
         teacher_evaluate = #{record.teacherEvaluate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.yansouTeamId != null">
+        yansou_team_id = #{record.yansouTeamId,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -225,8 +235,9 @@
       teacher_id = #{record.teacherId,jdbcType=CHAR},
       user_id = #{record.userId,jdbcType=CHAR},
       class_id = #{record.classId,jdbcType=INTEGER},
-      student_source = #{record.studentSource,jdbcType=INTEGER},
-      teacher_evaluate = #{record.teacherEvaluate,jdbcType=VARCHAR}
+      student_score = #{record.studentScore,jdbcType=INTEGER},
+      teacher_evaluate = #{record.teacherEvaluate,jdbcType=VARCHAR},
+      yansou_team_id = #{record.yansouTeamId,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -252,11 +263,14 @@
       <if test="classId != null">
         class_id = #{classId,jdbcType=INTEGER},
       </if>
-      <if test="studentSource != null">
-        student_source = #{studentSource,jdbcType=INTEGER},
+      <if test="studentScore != null">
+        student_score = #{studentScore,jdbcType=INTEGER},
       </if>
       <if test="teacherEvaluate != null">
         teacher_evaluate = #{teacherEvaluate,jdbcType=VARCHAR},
+      </if>
+      <if test="yansouTeamId != null">
+        yansou_team_id = #{yansouTeamId,jdbcType=VARCHAR},
       </if>
     </set>
     where student_id = #{studentId,jdbcType=CHAR}
@@ -269,9 +283,10 @@
       teacher_id = #{teacherId,jdbcType=CHAR},
       user_id = #{userId,jdbcType=CHAR},
       class_id = #{classId,jdbcType=INTEGER},
-      student_source = #{studentSource,jdbcType=INTEGER},
-      teacher_evaluate = #{teacherEvaluate,jdbcType=VARCHAR}
-    where student_id = #{studentId,jdbcType=CHAR}
+      student_score = #{studentScore,jdbcType=INTEGER},
+      teacher_evaluate = #{teacherEvaluate,jdbcType=VARCHAR},
+      yansou_team_id = #{teacherEvaluate,jdbcType=VARCHAR}
+    where student_id = #{yansouTeamId,jdbcType=CHAR}
   </update>
   
   <resultMap type="cn.lynu.model.Student" id="studentPlus" extends="BaseResultMap">
@@ -337,6 +352,12 @@
   		from student
   		where teacher_id=#{teacherId} and project_num=1 and project_id is not NULL
   </select>
+  <select id="getStudentByTeacherId2" resultMap="studentAndProjectAndClass">
+   	select 
+ 		<include refid="Base_Column_List" />
+ 		from student
+ 		where teacher_id=#{teacherId} and project_num=1 and project_id is not NULL
+  </select>
   
   <resultMap type="cn.lynu.model.Student" id="sapack" extends="studentAndProjectAndClass">
   	<association property="ktbg" column="student_id" select="cn.lynu.mapper.KtbgMapper.getKtbgByStudentId"></association>
@@ -354,6 +375,10 @@
   	select 
   		<include refid="Base_Column_List" />
   		from student where student_id=#{studentId}
+  </select>
+  
+  <select id="getThisStudentScore" resultType="integer">
+  	select student_score from student where student_id=#{studentId}
   </select>
   
 </mapper>

@@ -54,4 +54,10 @@ public interface StudentMapper {
 	Student getStudentAndKtbgBySid(String studentId);
 
 	Student getStudentAndZqjcBySid(String studentId);
+
+	boolean addProjectAfter(String teacherId);
+
+	Integer getThisStudentScore(String studentId);
+
+	List<Student> getStudentByTeacherId2(String teacherId);
 }

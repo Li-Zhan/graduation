@@ -31,11 +31,11 @@ public class UserController {
 				if(user!=null) {
 					if(2==user.getUserRoles()) {
 						session.setAttribute("user", user);
-						return "student/sindex.jsp";
+						return "student/sindex.html";
 					}
 					if(1==user.getUserRoles()) {
 						session.setAttribute("user", user);
-						return "teacher/tindex.jsp";
+						return "teacher/tindex.html";
 					}
 				}
 			}else {
