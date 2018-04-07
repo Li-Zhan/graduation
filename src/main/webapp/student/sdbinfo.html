@@ -25,7 +25,7 @@
 		  <div class="am-panel-bd">
 			  <ul class="am-list am-list-static am-list-border">
 			    <li>所在答辩/验收组：<span id="team_name"></span></li>
-			    <li>答辩/验收组组长：<span id="team_leader"></span>  (联系电话：<span id="team_leader_tel"></span>)</li>
+			    <li>答辩/验收组组长：<span id="team_leader"></span></li>
 			    <li id="teacher_li">
 			    	答辩/验收组其他成员：
 			    </li>
@@ -46,7 +46,7 @@
 				$(data.yansouTeachers).each(function(index,value){
 					if(value.isLeader==1){
 						$('#team_leader').text(value.teacher.user.userName);
-						$('#team_leader_tel').text(value.teacher.user.userTel);
+						$('#team_leader').parent().append($('<span>').text('  (联系电话：'+value.teacher.user.userTel+' )'));
 					}else{
 						var span=$('<span>').text(value.teacher.user.userName+
 								'(联系电话：'+value.teacher.user.userTel+')	');

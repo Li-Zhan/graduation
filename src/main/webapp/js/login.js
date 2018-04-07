@@ -52,6 +52,7 @@
 			   function(data){
 			     if(data=="randStrError"){
 			    	 $('#randStr').css('border-color','#dd514c');
+			    	 refresh();
 			     }else if(data=='passwordError'){
 			     	 $('#user-password').popover({
 						theme: 'danger sm',

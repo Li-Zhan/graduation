@@ -25,73 +25,54 @@
 			<div class="am-panel-bd am-scrollable-horizontal">
 				
 				<div class="am-u-sm-12">
-                                <table class="am-table am-table-centered am-table-striped am-table-hover table-main">
-                                    <thead>
-                                        <tr>
-                                            <th class="table-id">编号</th>
-                                            <th class="table-title">姓名</th>
-                                            <th class="table-type">性别</th>
-                                            <th>专业</th>
-                                            <th>年级</th>
-                                            <th>班级</th>
-                                            <th>电话号码</th>
-                                            <th>选题</th>
-                                            <th>审核免答辩申请</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="mdbStuList">
-                                         <tr>
-                                            <td class="am-text-middle">1</td>
-                                            <td class="am-text-middle"><span>李展01</span></td>
-                                            <td class="am-text-middle"><span>男</span></td>
-                                            <td class="am-text-middle"><span>软件工程</span></td>
-                                            <td class="am-text-middle"><span>2014级</span></td>
-                                            <td class="am-text-middle"><span>移动终端班</span></td>
-                                            <td class="am-text-middle"><span>112233445566</span></td>
-                                            <td class="am-text-middle"><span>毕设管理系统</span></td>
-                                            <td class="am-text-middle"><a class="mdb_a" href="#">进入审核</a></td>
-                                        </tr>
-                                         <tr>
-                                            <td class="am-text-middle">2</td>
-                                            <td class="am-text-middle"><span>李展02</span></td>
-                                            <td class="am-text-middle"><span>男</span></td>
-                                            <td class="am-text-middle"><span>软件工程</span></td>
-                                            <td class="am-text-middle"><span>2014级</span></td>
-                                            <td class="am-text-middle"><span>移动终端班</span></td>
-                                            <td class="am-text-middle"><span>112233445566</span></td>
-                                            <td class="am-text-middle"><span>毕设管理系统</span></td>
-                                            <td class="am-text-middle"><a class="mdb_a" href="#">进入审核</a></td>
-                                        </tr>
-                                         <tr>
-                                            <td class="am-text-middle">3</td>
-                                            <td class="am-text-middle"><span>李展03</span></td>
-                                            <td class="am-text-middle"><span>男</span></td>
-                                            <td class="am-text-middle"><span>软件工程</span></td>
-                                            <td class="am-text-middle"><span>2014级</span></td>
-                                            <td class="am-text-middle"><span>移动终端班</span></td>
-                                            <td class="am-text-middle"><span>112233445566</span></td>
-                                            <td class="am-text-middle"><span>毕设管理系统</span></td>
-                                            <td class="am-text-middle"><a class="mdb_a" href="#">进入审核</a></td>
-                                        </tr> 
-                                    </tbody>
-                                </table>
-                        </div>
+                      <table class="am-table am-table-centered am-table-striped am-table-hover table-main">
+                          <thead>
+                              <tr>
+                                  <th class="table-id">编号</th>
+                                  <th class="table-title">姓名</th>
+                                  <th class="table-type">性别</th>
+                                  <th>专业</th>
+                                  <th>年级</th>
+                                  <th>班级</th>
+                                  <th>电话号码</th>
+                                  <th>选题</th>
+                                  <th>审核免答辩申请</th>
+                              </tr>
+                          </thead>
+                          <tbody id="mdbStuList"></tbody>
+                      </table>
+                 </div>
 			</div>
 		</div>
-
-
 	</div>
 
 	<script src="../js/jquery.min.js"></script>
 	<script src="../amazeui/js/amazeui.min.js"></script>
 	<script type="text/javascript">
 		$(function() {
-			
-			$('.mdb_a').click(function() {
-				//得到学生id拼url
-				window.location.href='tsuremdb.html';
-				return false;
+			$.get('/graduation/teacherController/getStudentByTeacherId2',function(data){
+				$(data).each(function(index,value){
+					if(value.mdb!=null&&value.mdb!=''){
+						var td1=$('<td>').addClass('am-text-middle').text((index+1));
+						var td2=$('<td>').addClass('am-text-middle').append($('<span>').text(value.user.userName));
+						var userGender;
+						if(value.user.userGender==1){
+							userGender='男';
+						}else{
+							userGender='女';
+						}
+						var td3=$('<td>').addClass('am-text-middle').append($('<span>').text(userGender));
+						var td4=$('<td>').addClass('am-text-middle').append($('<span>').text(value.classInfo.subject.subjectName));
+						var td5=$('<td>').addClass('am-text-middle').append($('<span>').text(value.classInfo.grade.gradeName));
+						var td6=$('<td>').addClass('am-text-middle').append($('<span>').text(value.classInfo.className));
+						var td7=$('<td>').addClass('am-text-middle').append($('<span>').text(value.user.userTel));
+						var td8=$('<td>').addClass('am-text-middle').append($('<span>').text(value.project.projectName));
+						var td9=$('<td>').addClass('am-text-middle').append($('<a>').addClass('mdb_a').attr('href','/graduation/mdbController/gotoTsureMdb?studentId='+value.studentId).text('进入审核'));
+						$('#mdbStuList').append($('<tr>').append(td1).append(td2).append(td3).append(td4).append(td5).append(td6).append(td7).append(td8).append(td9));
+					}
+				});
 			});
+			
 			
 		});
 	</script>

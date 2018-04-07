@@ -320,6 +320,7 @@
   <resultMap type="cn.lynu.model.Student" id="studentAndProjectAndClass" extends="studentPlus">
   	<association property="project" column="project_id" select="cn.lynu.mapper.ProjectMapper.selectProjectAndFromByPid"></association>
   	<association property="classInfo" column="class_id" select="cn.lynu.mapper.ClassInfoMapper.selectProjectAndGradeAndSubjectByCid"></association>
+  	<association property="mdb" column="student_id" select="cn.lynu.mapper.MdbMapper.getMdbByStudentId"></association>
   </resultMap>
   <select id="getStuAndProject" resultMap="studentAndProjectAndClass">
   	select 
@@ -379,6 +380,15 @@
   
   <select id="getThisStudentScore" resultType="integer">
   	select student_score from student where student_id=#{studentId}
+  </select>
+  
+  <resultMap type="cn.lynu.model.Student" id="studentAndMdb" extends="studentAndProjectAndClassAndTeacher">
+  	<association property="mdb" column="student_id" select="cn.lynu.mapper.MdbMapper.getMdbByStudentId"></association>
+  </resultMap>
+  <select id="getStudentAndMdbBySid" resultMap="studentAndMdb">
+  	select 
+  		<include refid="Base_Column_List" />
+  		from student where student_id=#{studentId}
   </select>
   
 </mapper>

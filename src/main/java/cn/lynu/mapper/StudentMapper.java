@@ -60,4 +60,6 @@ public interface StudentMapper {
 	Integer getThisStudentScore(String studentId);
 
 	List<Student> getStudentByTeacherId2(String teacherId);
+
+	Student getStudentAndMdbBySid(String studentId);
 }

@@ -82,7 +82,7 @@
 <script src="js/app.js"></script>
 <script type="text/javascript">
 	$(function() {
-		
+		 
 		$.ajax({
 			   url: "/graduation/studentController/getStuAndProjectAndTeacher",
 			   type: 'get',
@@ -103,6 +103,23 @@
 						$('#column1').attr('disabled','disabled');
 						$('#column2').attr('disabled','disabled');
 				   }
+			   }
+			 });
+		
+		 $.ajax({
+			   url: "/graduation/ktbgController/getKtbgByStudentId",
+			   type: 'get',
+			   dataType:'json',
+			   data:{
+				   studentId:$('#ktbg_btn').find('input:hidden').val()
+			   },
+			   async:false,
+			   success: function(data){
+				   if(isNull(data.studentId)){
+					   	$('#column1').attr('disabled','disabled');
+						$('#column2').attr('disabled','disabled');
+						$('#zqjc_btn').addClass('am-disabled').text('请先完成开题报告');
+					}
 			   }
 			 });
 		

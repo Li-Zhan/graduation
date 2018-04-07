@@ -98,4 +98,13 @@ public class StudentService {
 		}
 		return -1;
 	}
+
+	@Transactional(propagation=Propagation.SUPPORTS)
+	public Student getStudentAndMdbBySid(String studentId) {
+		Student student=studentMapper.getStudentAndMdbBySid(studentId);
+		if(student!=null) {
+			return student;
+		}
+		return null;
+	}
 }

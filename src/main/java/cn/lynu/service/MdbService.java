@@ -35,4 +35,12 @@ public class MdbService {
 		return false;
 	}
 
+	@Transactional(propagation=Propagation.REQUIRED)
+	public boolean updateColumnById(Mdb mdb) {
+		if(mdbMapper.updateByPrimaryKeySelective(mdb)>0) {
+			return true;
+		}
+		return false;
+	}
+
 }

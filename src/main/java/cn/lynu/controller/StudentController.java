@@ -198,4 +198,10 @@ public class StudentController {
 		return -1;
 	}
 	
+	@ResponseBody
+	@RequestMapping("/getStudentAndMdbBySid")
+	public Student getStudentAndMdbBySid(String studentId) {
+		return studentService.getStudentAndMdbBySid(studentId);
+	}
+	
 }

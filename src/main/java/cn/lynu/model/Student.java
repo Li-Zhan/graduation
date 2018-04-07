@@ -28,7 +28,16 @@ public class Student {
     private Teacher teacher;
     private Ktbg ktbg;
     private Zqjc zqjc;
+    private Mdb mdb;
     
+
+	public Mdb getMdb() {
+		return mdb;
+	}
+
+	public void setMdb(Mdb mdb) {
+		this.mdb = mdb;
+	}
 
 	public String getYansouTeamId() {
 		return yansouTeamId;
