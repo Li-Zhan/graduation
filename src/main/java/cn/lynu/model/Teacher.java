@@ -2,8 +2,8 @@ package cn.lynu.model;
 
 import java.util.List;
 
-public class Teacher {
-    private String teacherId;
+public class Teacher{
+	private String teacherId;
 
     private String teacherDescribe;
 
@@ -21,6 +21,17 @@ public class Teacher {
     private Integer noChooseProject;
     
     private List<Project> projectList;
+    
+    private Dept dept;
+    
+
+	public Dept getDept() {
+		return dept;
+	}
+
+	public void setDept(Dept dept) {
+		this.dept = dept;
+	}
 
 	public String getTeacherId() {
         return teacherId;

@@ -1,7 +1,9 @@
 package cn.lynu.controller;
 
+import java.io.File;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -12,12 +14,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
 import cn.lynu.model.Student;
 import cn.lynu.model.Teacher;
 import cn.lynu.model.User;
+import cn.lynu.model.YansouTeacher;
 import cn.lynu.model.YansouTeam;
 import cn.lynu.service.TeacherService;
 
@@ -105,8 +110,27 @@ public class TeacherController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="/updateTeacherInfo",method=RequestMethod.PUT)
-	public boolean updateTeacherInfo(Teacher teacher) {
+	@RequestMapping(value="/updateTeacherInfo",method=RequestMethod.POST)
+	public boolean updateTeacherInfo(Teacher teacher,
+			@RequestParam(value="portrait",required=false)MultipartFile portrait,HttpServletRequest request) {
+		if(portrait!=null&&portrait.getSize()>0) {
+			if(portrait.getSize()>(10*1024*1024)) {
+				return false;
+			}
+			String filename=portrait.getOriginalFilename();
+			String dbPath=request.getServletContext().getContextPath()+"/portrait/"+teacher.getUser().getUserId();
+			String basePath=request.getServletContext().getRealPath("/portrait/"+teacher.getUser().getUserId());
+			new File(basePath).mkdir();
+        	File portraitFile=new File(basePath,filename);
+        	try {
+				portrait.transferTo(portraitFile);
+				teacher.getUser().setUserPortrait(dbPath+"/"+filename);
+				return teacherService.updateTeacherInfo(teacher);
+			} catch (Exception e) {
+				e.printStackTrace();
+			} 
+        	
+		}
 		return teacherService.updateTeacherInfo(teacher);
 	}
 	
@@ -118,6 +142,32 @@ public class TeacherController {
 			Teacher teacher = teacherService.findTeacherByUserId(user.getUserId());
 			if(teacher!=null) {
 				return teacherService.getTeacherYansouInfo(teacher.getTeacherId());
+			}
+		}
+		return null;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/thisTeacherisLeader")
+	public YansouTeacher thisTeacherisLeader(HttpSession session){
+		User user = (User) session.getAttribute("user");
+		if(user!=null) {
+			return teacherService.thisTeacherisLeader(user);
+		}
+		return null;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/getYansouTeamStu")
+	public PageInfo<Student> getYansouTeamStu(HttpSession session,
+			@RequestParam(defaultValue="1")int pageNum,	@RequestParam(defaultValue="8")int pageSize){
+		User user = (User) session.getAttribute("user");
+		if(user!=null) {
+			Teacher teacher = teacherService.findTeacherByUserId(user.getUserId());
+			if(teacher!=null) {
+				PageHelper.startPage(pageNum, pageSize);
+				List<Student> list = teacherService.getYansouTeamStu(teacher.getTeacherId());
+				return new PageInfo<Student>(list);
 			}
 		}
 		return null;

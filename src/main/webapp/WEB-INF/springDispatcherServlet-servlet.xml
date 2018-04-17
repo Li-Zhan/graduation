@@ -13,6 +13,11 @@
    	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 	<!--	<property name="prefix" value="/WEB-INF/views/"></property>
 		<property name="suffix" value=".jsp"></property>--> 
+	</bean>
+	
+	<!-- 配置使用commons-fileupload进行文件上传 -->
+	 <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	   <property name="maxUploadSize" value="10000000"/>
 	</bean>  
 
 	<mvc:annotation-driven/>

@@ -69,7 +69,7 @@
 							</table>
 							<button id="mdb_btn" type="button" class="am-btn am-btn-primary am-radius am-fr"
 								data-am-loading="{spinner: 'circle-o-notch', loadingText: '提交中...', resetText: '提交完成'}">
-								提交免答辩申请</button>
+								提交</button>
 					</div>
 				</div>
 			</div>
@@ -130,7 +130,8 @@
 					   $('#tr3').find('td').eq(3).text(data.user.userTel);
 					   $('#tr4').find('td').eq(1).text(data.project.projectName);
 					   $('#tr4').find('td').eq(3).text(data.teacher.user.userName);
-					   $('#mdb_btn').append($('<input>').attr('type','hidden').val(data.studentId));
+					   $('#mdb_btn').append($('<input>').attr({'type':'hidden','name':'studentId'}).val(data.studentId));
+					   disBtn(data.studentId);
 				   }else{
 					   	$('#mdb_btn').addClass('am-disabled').text('请先选择课题');
 						$('#column1').attr('disabled','disabled'); 
@@ -139,34 +140,46 @@
 			 });
 		
 		//查询数据库是否应该禁用提交按钮
-		$.ajax({
-			   url: "/graduation/mdbController/getMdbByStudentId?studentId="+$('#mdb_btn').find('input:hidden').val(),
-			   type: 'get',
-			   dataType:'json',
-			   async:false,
-			   success: function(data){
-				   if(!isNull(data.studentId)){
-						$('#mdb_btn').addClass('am-disabled').text('已提交');
-						$('#column1').attr('disabled','disabled').text(data.column1);
-					}
-			   }
-			 });
+		function disBtn(studentId) {
+			if(!isNull(studentId)&&studentId!='undefined'){
+				$.ajax({
+					   url: "/graduation/mdbController/getMdbByStudentId?studentId="+studentId,
+					   type: 'get',
+					   dataType:'json',
+					   async:false,
+					   success: function(data){
+						   if(!isNull(data.mdbStatus)){
+								$('#mdb_btn').addClass('am-disabled').text('已审核');
+								$('#column1').attr('disabled','disabled').text(data.column1);
+							}else if(!isNull(data.mdbId)){
+								$('#mdb_btn').text('更新');
+								$('#column1').text(data.column1);
+								$('#mdb_btn').append($('<input>').attr({'type':'hidden','name':'studentId'}).val(data.studentId));
+								$('#mdb_btn').append($('<input>').attr({'type':'hidden','name':'mdbId'}).val(data.mdbId));
+							}
+					   }
+					 });
+			}
+		}
 		
 		//提交免答辩
 		$('#mdb_btn').click(function () {
 			  var $btn = $(this);
+			  var studentId=$btn.find('input:hidden[name=studentId]').val();
+			  var mdbId=$btn.find('input:hidden[name=mdbId]').val();
 			  var column1=$('#column1').val();
-			  if(isNull(column1)){
+			  if(isNull(column1)||isNull(studentId)){
 				  return;
 			  }
 			  $.post('/graduation/mdbController/insertSelective',{
-				  studentId:$btn.find('input:hidden').val(),
+				  mdbId:mdbId,
+				  studentId:studentId,
 				  column1:column1
 			  },function(data){
 				  if(data){
 					  $btn.button('loading');
 					    setTimeout(function(){
-					    	disableBtn('mdb_btn','提交完成');
+					    	disableBtn('mdb_btn','完成');
 					  }, 3000);
 				  }
 			  });

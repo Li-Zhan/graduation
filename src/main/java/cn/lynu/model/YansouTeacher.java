@@ -1,7 +1,11 @@
 package cn.lynu.model;
 
-public class YansouTeacher {
-    private Integer id;
+import java.io.Serializable;
+
+public class YansouTeacher implements Serializable{
+	private static final long serialVersionUID = 3228891451232583789L;
+
+	private Integer id;
 
     private Integer yansouTeamId;
 

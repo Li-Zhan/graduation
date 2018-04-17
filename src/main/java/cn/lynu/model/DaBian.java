@@ -1,7 +1,7 @@
 package cn.lynu.model;
 
-public class DaBian {
-    private Integer id;
+public class DaBian{
+	private Integer id;
 
     private String studentId;
 

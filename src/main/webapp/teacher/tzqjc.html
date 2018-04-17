@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="/graduation/teacher/css/app.css">
 </head>
 
-<body style="margin-left: 10px;overflow-x:hidden;" >
+<body style="margin-left: 10px;overflow:hidden;" >
 
 	<div id="ref_page" class="am-g">
 	
@@ -36,7 +36,7 @@
 								</tr>
 								<tr id="tr1">
 										<td>院(系)：</td>
-										<td></td>
+										<td>信息技术学院</td>
 										<td>专业：</td>
 										<td class="am-text-left"></td>
 										<td>年级:</td>
@@ -84,7 +84,7 @@
 						</table>
 						<button id="zqjc_btn" type="button" class="am-btn am-btn-primary am-radius am-fr"
 							data-am-loading="{spinner: 'circle-o-notch', loadingText: '提交中...', resetText: '完成'}">
-							提交审核意见</button>
+							提交</button>
 				</div>
 			</div>
 		</div>
@@ -118,12 +118,12 @@
 					$('#tr4').find('td').eq(3).text(data.teacher.zhicheng);
 					$('#column1').text(data.zqjc.column1);
 					$('#column2').text(data.zqjc.column2);
-					$('#zqjc_btn').append($('<input>').attr('type','hidden').val(data.zqjc.zqjcId));
 					if(!isNull(data.zqjc.column3)&&!isNull(data.zqjc.column4)){
-						 $('#column3').attr('disabled','disabled').text(data.zqjc.column3);
-						 $('#column4').attr('disabled','disabled').text(data.zqjc.column4);
-						 $('#zqjc_btn').attr('disabled','disabled').text('已审核');
+						 $('#column3').text(data.zqjc.column3);
+						 $('#column4').text(data.zqjc.column4);
+						 $('#zqjc_btn').text('更新');
 					   }
+					$('#zqjc_btn').append($('<input>').attr('type','hidden').val(data.zqjc.zqjcId));
 				   }else{
 					   $('#column3').attr('disabled','disabled');
 					   $('#column4').attr('disabled','disabled');
@@ -131,22 +131,6 @@
 				   }
 			   }
 			 });
-		
-		//查询数据库是否应该禁用提交按钮
-	/* 		$.ajax({
-			   url: "/graduation/studentController/getStudentAndZqjcBySid",
-			   type: 'get',
-			   dataType:'json',
-			   async:false,
-			   data:{
-				   studentId:studentId
-			   },
-			   success: function(data){
-				   if(isNull(data.zqjc.column3)){
-					   
-				   }
-			   }
-			 }); */
 		
 		//提交中期检查
 		$('#zqjc_btn').click(function () {
@@ -168,7 +152,6 @@
 					  }, 3000);
 				  }
 			  });
-			    
 		});
 		
 	});

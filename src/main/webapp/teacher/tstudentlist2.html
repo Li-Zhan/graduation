@@ -36,16 +36,12 @@
 						imgSrc='../img/user01.png';
 					}
 					var p=$('<p>').append($('<img>').addClass('am-circle am-center am-img-thumbnail')
-							.attr({'src':imgSrc,'height':'140px','width':'140px'}).css('margin-top','1.6rem'));
+							.attr('src',imgSrc).css({'margin-top':'1.6rem','width':'140px','height':'140px'}));
 					var div2=$('<div>').addClass('am-thumbnail-caption');
 					var div2_p1=$('<p>').addClass('am-text-center').text(value.user.userName);
 					var pinfen_btn;
 					var studentScore = value.studentScore;
-					if(studentScore!=null&&studentScore!=''){
-						pinfen_btn=$('<button>').attr('type','button').addClass('am-btn am-btn-primary am-btn-block am-disabled').text('已为学生评分：'+studentScore+'分');
-					}else{
-						pinfen_btn=$('<button>').attr('type','button').addClass('am-btn am-btn-primary am-btn-block').text('进入评分');
-					}
+					pinfen_btn=$('<button>').attr('type','button').addClass('am-btn am-btn-primary am-btn-block').text('进入评分');
 					var div2_p2=$('<p>').append(pinfen_btn);
 					div2_p2.find('button').click(function() {
 						var url='/graduation/studentController/gotoTstudentscore?studentId='+value.studentId;
@@ -59,8 +55,6 @@
 					$('#ref_page').append(div);
 				});
 			});
-			
-			
 
 		});
 </script>

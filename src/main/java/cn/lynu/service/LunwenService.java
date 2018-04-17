@@ -26,5 +26,21 @@ public class LunwenService {
 		}
 		return false;
 	}
+	
+	@Transactional(propagation=Propagation.REQUIRED)
+	public boolean insertOrUpdate(String studentId,Lunwen lw) {
+		Lunwen lunwen=lunwenMapper.getLunwenBySid(studentId);
+		if(lunwen!=null) {
+			lunwen.setLunwenDate(lw.getLunwenDate());
+			lunwen.setLunwenName(lw.getLunwenName());
+			lunwen.setLunwenPath(lw.getLunwenPath());
+			lunwenMapper.updateByPrimaryKeySelective(lunwen);
+			return true;
+		}else {
+			lw.setStudentId(studentId);
+			lunwenMapper.insertSelective(lw);
+			return true;
+		}
+	}
 
 }

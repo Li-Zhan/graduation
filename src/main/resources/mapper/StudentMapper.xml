@@ -321,6 +321,9 @@
   	<association property="project" column="project_id" select="cn.lynu.mapper.ProjectMapper.selectProjectAndFromByPid"></association>
   	<association property="classInfo" column="class_id" select="cn.lynu.mapper.ClassInfoMapper.selectProjectAndGradeAndSubjectByCid"></association>
   	<association property="mdb" column="student_id" select="cn.lynu.mapper.MdbMapper.getMdbByStudentId"></association>
+  	<association property="ktbg" column="student_id" select="cn.lynu.mapper.KtbgMapper.getKtbgByStudentId"></association>
+  	<association property="zqjc" column="student_id" select="cn.lynu.mapper.ZqjcMapper.getzqjcByStudentId"></association>
+  	<association property="lunwen" column="student_id" select="cn.lynu.mapper.LunwenMapper.getLunwenBySid"></association>
   </resultMap>
   <select id="getStuAndProject" resultMap="studentAndProjectAndClass">
   	select 
@@ -360,19 +363,19 @@
  		where teacher_id=#{teacherId} and project_num=1 and project_id is not NULL
   </select>
   
-  <resultMap type="cn.lynu.model.Student" id="sapack" extends="studentAndProjectAndClass">
+<!--   <resultMap type="cn.lynu.model.Student" id="sapack" extends="studentAndProjectAndClass">
   	<association property="ktbg" column="student_id" select="cn.lynu.mapper.KtbgMapper.getKtbgByStudentId"></association>
-  </resultMap>
-  <select id="getStudentAndKtbgBySid" resultMap="sapack">
+  </resultMap> -->
+  <select id="getStudentAndKtbgBySid" resultMap="studentAndProjectAndClassAndTeacher">
   	select 
   		<include refid="Base_Column_List" />
   		from student where student_id=#{studentId}
   </select>
   
-  <resultMap type="cn.lynu.model.Student" id="sapacz" extends="studentAndProjectAndClassAndTeacher">
+<!--   <resultMap type="cn.lynu.model.Student" id="sapacz" extends="studentAndProjectAndClassAndTeacher">
   	<association property="zqjc" column="student_id" select="cn.lynu.mapper.ZqjcMapper.getzqjcByStudentId"></association>
-  </resultMap>
-  <select id="getStudentAndZqjcBySid" resultMap="sapacz">
+  </resultMap> -->
+  <select id="getStudentAndZqjcBySid" resultMap="studentAndProjectAndClassAndTeacher">
   	select 
   		<include refid="Base_Column_List" />
   		from student where student_id=#{studentId}
@@ -382,13 +385,26 @@
   	select student_score from student where student_id=#{studentId}
   </select>
   
-  <resultMap type="cn.lynu.model.Student" id="studentAndMdb" extends="studentAndProjectAndClassAndTeacher">
+<!--   <resultMap type="cn.lynu.model.Student" id="studentAndMdb" extends="studentAndProjectAndClassAndTeacher">
   	<association property="mdb" column="student_id" select="cn.lynu.mapper.MdbMapper.getMdbByStudentId"></association>
-  </resultMap>
-  <select id="getStudentAndMdbBySid" resultMap="studentAndMdb">
+  </resultMap> -->
+  <select id="getStudentAndMdbBySid" resultMap="studentAndProjectAndClassAndTeacher">
   	select 
   		<include refid="Base_Column_List" />
   		from student where student_id=#{studentId}
+  </select>
+  
+  
+  <resultMap type="cn.lynu.model.Student" id="sAndPAndCAndTAndDabian" extends="studentPlus">
+  	<association property="project" column="project_id" select="cn.lynu.mapper.ProjectMapper.selectProjectAndFromByPid"></association>
+  	<association property="classInfo" column="class_id" select="cn.lynu.mapper.ClassInfoMapper.selectProjectAndGradeAndSubjectByCid"></association>
+  	<association property="teacher" column="teacher_id" select="cn.lynu.mapper.TeacherMapper.findTeacherByTeacherId"></association>
+  	<association property="daBian" column="student_id"  select="cn.lynu.mapper.DaBianMapper.getThisStudentScore"></association>
+  </resultMap>
+  <select id="findStudentsByYansouId" resultMap="sAndPAndCAndTAndDabian">
+  	select
+  	<include refid="Base_Column_List" />
+  		from student where yansou_team_id=#{yansouTeamId}
   </select>
   
 </mapper>

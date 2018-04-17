@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.lynu.mapper.YansouTeacherMapper">
+<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
   <resultMap id="BaseResultMap" type="cn.lynu.model.YansouTeacher">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="yansou_team_id" jdbcType="INTEGER" property="yansouTeamId" />
@@ -204,8 +205,10 @@
     where yansou_team_id = #{yansouTeamId}
   </select>
   
-   <select id="selectYansouTeamIdByTeacherId" resultType="integer">
-  	select yansou_team_id from yansou_teacher where teacher_id = #{teacherId}
+   <select id="selectYansouTeacherByTeacherId" resultType="cn.lynu.model.YansouTeacher">
+  	select 
+  	<include refid="Base_Column_List" />
+  	from yansou_teacher where teacher_id = #{teacherId}
   </select>
   
 </mapper>

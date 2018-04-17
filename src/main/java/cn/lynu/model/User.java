@@ -1,7 +1,11 @@
 package cn.lynu.model;
 
-public class User {
-    private String userId;
+import java.io.Serializable;
+
+public class User implements Serializable{
+	private static final long serialVersionUID = -5212799195008015123L;
+
+	private String userId;
 
     private String userName;
 

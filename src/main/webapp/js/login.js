@@ -1,6 +1,6 @@
 //刷新验证码
   function refresh(){
-	    document.getElementById("imgValidate").src="code.jsp?"+new Date();
+	    document.getElementById("imgValidate").src="/graduation/code.jsp?"+new Date();
   }
 
   $(function() {
@@ -12,12 +12,16 @@
 	
 	//失去焦点进行查询账户
 	$('#user-account').blur(function() {
+		var account=$('#user-account').val().trim();
+		if(account==null||account==''){
+			return;
+		}
 		$.ajax({
-			url:'userController/isuser',
+			url:'/graduation/userController/isuser',
 			dataType:'json',
 			type:'post',
 			data:{
-				account:$('#user-account').val().trim()
+				account:account
 			},
 			success:function(result){
 				var accountParent=$('#user-account').parent();
@@ -44,7 +48,7 @@
  		login();
 	}); 
  	function login() {
- 		$.post("userController/login", { 
+ 		$.post("/graduation/userController/login", { 
 			account: $('#user-account').val().trim(),
 			password: $('#user-password').val().trim(),
 			randStr: $('#randStr').val().trim()
@@ -87,7 +91,7 @@
  	}
  	
  	//得到通知
-  	$.get('informController/getSubInform',{
+  	$.get('/graduation/informController/getSubInform',{
   		pageNum:'1',
   		pageSize:'6',
   		navigatePages:'1'
@@ -108,7 +112,7 @@
  	});
  	
  	//得到下载列表
-  	$.get('downController/getSubDown',{
+  	$.get('/graduation/downController/getSubDown',{
   		pageNum:'1',
   		pageSize:'6',
   		navigatePages:'1'
@@ -120,7 +124,7 @@
  			a.append($('<span>').css('display','none').text(data.list[i].downPath));
  			var fileName=data.list[i].downPath;
  			if(fileName!=null&&fileName!=''){
- 			  a.attr('href',encodeURI('downController/downloadResource?fileName='+fileName));
+ 			  a.attr('href',encodeURI('/graduation/downController/downloadResource?fileName='+fileName));
  			}
  			var li=$("#down_ul").append($('<li>').append(a));
  		}

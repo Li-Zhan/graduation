@@ -1,7 +1,6 @@
 package cn.lynu.controller;
 
-import javax.servlet.http.HttpServletResponse;
-
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,7 +9,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import cn.lynu.model.Student;
+import cn.lynu.model.User;
 import cn.lynu.model.Zqjc;
+import cn.lynu.service.StudentService;
 import cn.lynu.service.ZqjcService;
 
 @Controller
@@ -19,20 +21,39 @@ public class ZqjcController {
 	
 	@Autowired
 	private ZqjcService zqjcService;
+	@Autowired
+	private StudentService studentService;
 	
 	@ResponseBody
 	@RequestMapping(value="/insertSelective",method=RequestMethod.POST)
 	public boolean insertSelective(Zqjc zqjc) {
-		return zqjcService.insertSelective(zqjc);
+		if(zqjc.getZqjcId()==null) {
+			return zqjcService.insertSelective(zqjc);
+		}else {
+			return zqjcService.updateByPrimaryKeySelective(zqjc);
+		}
 	}
 	
 	@ResponseBody
 	@RequestMapping("/getzqjcByStudentId")
-	public Zqjc getzqjcByStudentId(String studentId,HttpServletResponse response) {
-		response.setContentType("application/json;charset=utf-8");
-		Zqjc zqjc = zqjcService.getzqjcByStudentId(studentId);
-		if(zqjc!=null) {
-			return zqjc;
+	public Zqjc getzqjcByStudentId(@RequestParam(value="studentId",required=false)String studentId,
+			HttpSession session) {
+		if(studentId!=null&&!studentId.isEmpty()) {
+			Zqjc zqjc = zqjcService.getzqjcByStudentId(studentId);
+			if(zqjc!=null) {
+				return zqjc;
+			}
+		}else {
+			User user = (User) session.getAttribute("user");
+			if(user!=null) {
+				Student student = studentService.getStudentByUserId(user.getUserId());
+				if(student!=null) {
+					Zqjc zqjc = zqjcService.getzqjcByStudentId(student.getStudentId());
+					if(zqjc!=null) {
+						return zqjc;
+					}
+				}
+			}
 		}
 		return new Zqjc();
 	}

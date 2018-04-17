@@ -24,7 +24,7 @@
 		<div class="am-panel am-panel-default">
 			  <div class="am-panel-bd">
 				  <blockquote>
-				  	<p id="mdb_result" class="am-text-xl">允许免答辩</p>
+				  	<p id="mdb_result" class="am-text-xl"></p>
 				  </blockquote>
 			  </div>
 		</div>
@@ -36,17 +36,17 @@
 	<script src="js/app.js"></script>
 	<script type="text/javascript">
 		$(function() {
-			//查数据库得出免答辩结果
-			var result='aaa';
-			//允许绿色,不允许红色
-			if(result==true){
-				$('#mdb_result').css('color','green').text('允许免答辩');
-			}if(result==false){
-				$('#mdb_result').css('color','red').text('不允许免答辩');
-			}else{
-				//还没有结果
-				$('#mdb_result').css('color','#697882').text('没有结果');
-			}
+		 	$.get('/graduation/mdbController/getMdbByStudentId',function(data){
+				if(data.mdbId==null){
+					$('#mdb_result').css('color','#697882').text('未填写免答辩申请');
+				}else{
+					if(data.mdbStatus==1){
+						$('#mdb_result').css('color','green').text('允许免答辩');
+					}else{
+						$('#mdb_result').css('color','red').text('不允许免答辩');
+					}
+				}
+			});
 		});
 	</script>
 </body>

@@ -30,9 +30,8 @@
                               <tr>
                                   <th class="table-id">编号</th>
                                   <th class="table-title">课题名</th>
-                                  <th class="table-type">课题描述</th>
                                   <th>选题学生</th>
-                                  <th class="table-set">操作</th>
+                                  <th class="table-set"><span class="am-fr">操作</span></th>
                               </tr>
                           </thead>
                           <tbody id="tsureBody"></tbody>
@@ -58,26 +57,22 @@
 						   if(student!=null){
 							   var td1=$('<td>').addClass('am-text-middle').text((i+1));
 							   var td2=$('<td>').addClass('am-text-middle').append($('<span>').text(data.projectList[i].projectName));
-							   var td3=$('<td>').addClass('am-text-middle').append($('<textarea>').attr('disabled','disabled').css({'height':'40px','overflow-x':'hidden'}).val(data.projectList[i].projectDescribe));
+							  // var td3=$('<td>').addClass('am-text-middle').append($('<textarea>').attr('disabled','disabled').css({'height':'40px','overflow-x':'hidden'}).val(data.projectList[i].projectDescribe));
 							   var td4=$('<td>').addClass('am-text-middle').text(student.user.userName);
 							   student_id=student.studentId;
 							   var btn1=$('<button>').attr('type','button').addClass('am-btn am-btn-default am-btn-xs am-text-secondary yes_btn').append($('<span>').addClass('am-icon-check')).append($('<span>').text(' 确定'));
 							   var btn2=$('<button>').attr('type','button').addClass('am-btn am-btn-default am-btn-xs am-text-danger no_btn').append($('<span>').addClass('am-icon-times')).append($('<span>').text(' 取消'));
 							   var td5=$('<td>').addClass('am-text-middle').append($('<div>').addClass('am-btn-toolbar')
-									   			.append($('<div>').addClass('am-btn-group am-btn-group-xs').css('left','70px').append(btn1).append(btn2)));
+									   			.append($('<div>').addClass('am-btn-group am-btn-group-xs').css('float','right').append(btn1).append(btn2)));
 							   if(student_id!=null&&student_id!=''){
 								   td5.append($('<input>').addClass('studentId').attr('type','hidden').val(student_id));
 								   student_id='';
 							   }
 							   td5.append($('<input>').addClass('teacherId').attr('type','hidden').val(data.teacherId));
 							   td5.append($('<input>').addClass('projectId').attr('type','hidden').val(data.projectList[i].projectId));
-							   var tr=$('<tr>').append(td1).append(td2).append(td3).append(td4).append(td5);
+							   var tr=$('<tr>').append(td1).append(td2).append(td4).append(td5);
 							   $('#tsureBody').append(tr);
 						   }
-						/*    else{
-							   var td4=$('<td>').addClass('am-text-middle');
-							   var td5=$('<td>').addClass('am-text-middle');
-						   } */
 					   }
 				   }
 				 });
@@ -100,6 +95,7 @@
 					  }
 				  });
 			   });
+			 
 			 //取消按钮
 			   $('.no_btn').click(function(){
 				   var btn=$(this);
@@ -113,10 +109,9 @@
 					  studentId:sId
 				  },function(data){
 					  if(data){
-						  btn.parent().parent().parent().prev().text('');
-						  btn.parent().empty();
+						btn.parent().parent().parent().parent().empty();
 					  }
-				  });
+				  }); 
 			   }); 
 			 
 				//查询已确认学生

@@ -28,5 +28,5 @@ public interface DaBianMapper {
 
     int updateByPrimaryKey(DaBian record);
 
-	Integer getThisStudentScore(String studentId);
+	DaBian getThisStudentScore(String studentId);
 }

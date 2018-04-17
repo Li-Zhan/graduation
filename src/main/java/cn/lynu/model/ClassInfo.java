@@ -1,7 +1,11 @@
 package cn.lynu.model;
 
-public class ClassInfo {
-    private Integer classId;
+import java.io.Serializable;
+
+public class ClassInfo implements Serializable{
+	private static final long serialVersionUID = -5068568524778234955L;
+
+	private Integer classId;
 
     private String className;
 

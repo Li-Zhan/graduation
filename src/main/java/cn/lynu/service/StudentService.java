@@ -4,9 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-
 import cn.lynu.mapper.StudentMapper;
-import cn.lynu.mapper.UserMapper;
 import cn.lynu.model.Student;
 import cn.lynu.model.User;
 
@@ -15,8 +13,6 @@ public class StudentService {
 	
 	@Autowired
 	private StudentMapper studentMapper;
-	@Autowired
-	private UserMapper userMapper;
 	
 	@Transactional(propagation=Propagation.SUPPORTS)
 	public Student getStudentByUserId(String userId) {
@@ -73,14 +69,14 @@ public class StudentService {
 		return studentMapper.getStudentAndZqjcBySid(studentId);
 	}
 
-	@Transactional(propagation=Propagation.REQUIRED)
+/*	@Transactional(propagation=Propagation.REQUIRED)
 	public boolean updateStudentInfo(Student student) {
 		int bool = userMapper.updateByPrimaryKeySelective(student.getUser());
 		if(bool>0) {
 			return true;
 		}
 		return false;
-	}
+	}*/
 
 	@Transactional(propagation=Propagation.REQUIRED)
 	public boolean updateStudent(Student student) {
@@ -107,4 +103,5 @@ public class StudentService {
 		}
 		return null;
 	}
+
 }

@@ -15,6 +15,8 @@ import cn.lynu.mapper.YansouTeamMapper;
 import cn.lynu.model.Project;
 import cn.lynu.model.Student;
 import cn.lynu.model.Teacher;
+import cn.lynu.model.User;
+import cn.lynu.model.YansouTeacher;
 import cn.lynu.model.YansouTeam;
 
 @Service
@@ -73,13 +75,28 @@ public class TeacherService {
 	
 	@Transactional(propagation=Propagation.SUPPORTS)
 	public YansouTeam getTeacherYansouInfo(String teacherId) {
-		Integer yansouTeamId = yansouTeacherMapper.selectYansouTeamIdByTeacherId(teacherId);
-		return yansouTeamMapper.selectYanSouInfoByid(yansouTeamId);
+		YansouTeacher yansouTeacher = yansouTeacherMapper.selectYansouTeacherByTeacherId(teacherId);
+		return yansouTeamMapper.selectYanSouInfoByid(yansouTeacher.getYansouTeamId());
 	}
 
 	@Transactional(propagation=Propagation.SUPPORTS)
 	public List<Student> getStudentByTeacherId2(String teacherId) {
 		return studentMapper.getStudentByTeacherId2(teacherId);
+	}
+
+	@Transactional(propagation=Propagation.SUPPORTS)
+	public List<Student> getYansouTeamStu(String teacherId) {
+		YansouTeacher yansouTeacher = yansouTeacherMapper.selectYansouTeacherByTeacherId(teacherId);
+		return studentMapper.findStudentsByYansouId(yansouTeacher.getYansouTeamId());
+	}
+
+	@Transactional(propagation=Propagation.SUPPORTS)
+	public YansouTeacher thisTeacherisLeader(User user) {
+		Teacher teacher = teacherMapper.findTeacherByUserId(user.getUserId());
+		if(teacher!=null) {
+			return yansouTeacherMapper.selectYansouTeacherByTeacherId(teacher.getTeacherId());
+		}
+		return null;
 	}
 
 }

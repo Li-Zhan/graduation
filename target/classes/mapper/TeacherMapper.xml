@@ -231,6 +231,7 @@
   </resultMap>
   <resultMap type="cn.lynu.model.Teacher" id="teacherPlus2" extends="teacherPlus">
   	<association property="noChooseProject" column="teacher_id" select="cn.lynu.mapper.ProjectMapper.noChooseProject"></association>
+  	<association property="dept" column="dept_id" select="cn.lynu.mapper.DeptMapper.selectByPrimaryKey"></association>
   </resultMap>
   
   <select id="getAllTeacher" resultMap="teacherPlus2">

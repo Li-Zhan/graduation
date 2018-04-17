@@ -28,7 +28,7 @@
 			</ol>
 			<div class="am-panel am-panel-default">
 				<div class="am-panel-bd">
-				<div style="margin-bottom: 10px;">
+				<div id="ktbg_title" style="margin-bottom: 10px;">
 					<span class="am-text-lg">是否审核通过：</span>
 					<select id="ktbg_select" data-am-selected placeholder="请选择" id="demo-default-selected">
 					  <option selected value=""></option>
@@ -83,17 +83,6 @@
 				</div>
 			</div>
 	</div>
-	
-<!-- <div class="am-modal am-modal-no-btn" tabindex="-1" id="noktbg-modal">
-  <div class="am-modal-dialog">
-    <div class="am-modal-hd">
-      <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
-    </div>
-    <div class="am-modal-bd">
-      该学生没有填写开题报告
-    </div>
-  </div>
-</div> -->
 
 <script src="/graduation/js/jquery.min.js"></script>
 <script src="/graduation/amazeui/js/amazeui.min.js"></script>
@@ -130,7 +119,6 @@
 						$('#ktbg_btn').append($('<input>').attr('type','hidden').val(data.ktbg.ktbgId));
 				   }else{
 					   $('#ktbg_btn').attr('disabled','disabled').text('该学生没有填写开题报告');
-					 //  $('#noktbg-modal').modal('open');
 				   }
 			   }
 			 });
@@ -147,14 +135,15 @@
 				   ktbgId:$('#ktbg_btn').find('input:hidden').val()
 			   },
 			   success: function(data){
-				  if(!isNull(data.ktbgStatus)){
-					  $('#ktbg_btn').attr('disabled','disabled').text('已审核');
+				  if(data.ktbgStatus!=null){
+					  $('#ktbg_btn').text('更新'+'(上次审核结果为: '+(data.ktbgStatus==1?'是':'否')+')');
+					  $('#ktbg_btn').append($('<input>').attr('type','hidden').val(data.ktbgId));
 				  }
 			   }
 		 });
 		}
 		
-		//点击提交开题报告按钮ktbg_btn
+		//点击提交开题报告按钮
 		$('#ktbg_btn').click(function () {
 			  var $btn = $(this);
 			  var status=$('#ktbg_select option:selected').val();

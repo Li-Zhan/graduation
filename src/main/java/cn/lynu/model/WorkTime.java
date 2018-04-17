@@ -1,9 +1,12 @@
 package cn.lynu.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class WorkTime {
-    private Integer workTimeId;
+public class WorkTime implements Serializable{
+	private static final long serialVersionUID = -6603077902200027098L;
+
+	private Integer workTimeId;
 
     private String workTimeInfo;
 

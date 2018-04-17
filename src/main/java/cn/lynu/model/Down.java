@@ -1,9 +1,12 @@
 package cn.lynu.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Down {
-    private Integer downId;
+public class Down implements Serializable{
+	private static final long serialVersionUID = -3835701865423130130L;
+
+	private Integer downId;
 
     private String downTitle;
 

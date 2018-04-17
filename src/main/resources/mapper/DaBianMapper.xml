@@ -179,8 +179,10 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   
-  <select id="getThisStudentScore" resultType="integer">
-  	select  dabian_score from dabian where student_id = #{studentId}
+  <select id="getThisStudentScore" resultType="cn.lynu.model.DaBian">
+  	select
+  	<include refid="Base_Column_List" />
+  	from dabian where student_id = #{studentId}
   </select>
   
 </mapper>

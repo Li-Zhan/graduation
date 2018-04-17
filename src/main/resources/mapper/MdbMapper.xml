@@ -7,6 +7,7 @@
     <result column="column2" jdbcType="VARCHAR" property="column2" />
     <result column="column3" jdbcType="VARCHAR" property="column3" />
     <result column="student_id" jdbcType="CHAR" property="studentId" />
+    <result column="mdb_status" jdbcType="INTEGER" property="mdbStatus" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -67,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    mdb_id, column1, column2, column3, student_id
+    mdb_id, column1, column2, column3, student_id, mdb_status
   </sql>
   <select id="selectByExample" parameterType="cn.lynu.model.MdbExample" resultMap="BaseResultMap">
     select

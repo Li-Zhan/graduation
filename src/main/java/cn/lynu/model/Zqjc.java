@@ -1,7 +1,7 @@
 package cn.lynu.model;
 
-public class Zqjc {
-    private Integer zqjcId;
+public class Zqjc{
+	private Integer zqjcId;
 
     private String column1;
 

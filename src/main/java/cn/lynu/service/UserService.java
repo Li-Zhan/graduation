@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-
 import cn.lynu.mapper.UserMapper;
 import cn.lynu.model.User;
 
@@ -27,4 +26,25 @@ public class UserService {
 	public User login(String account,String password) {
 		return userMapper.login(account, password);
 	}
+
+	@Transactional(propagation=Propagation.SUPPORTS)
+	public boolean ispassword(String password, String userId) {
+		User user = userMapper.selectByPrimaryKey(userId);
+		if(user!=null) {
+			if(password.equals(user.getUserPassword())) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	@Transactional(propagation=Propagation.REQUIRED)
+	public boolean updateUserInfo(User user) {
+		int bool = userMapper.updateByPrimaryKeySelective(user);
+		if(bool>0) {
+			return true;
+		}
+		return false;
+	}
+	
 }

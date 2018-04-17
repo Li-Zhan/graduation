@@ -2,8 +2,8 @@ package cn.lynu.model;
 
 import java.util.Date;
 
-public class Inform {
-    private Integer informId;
+public class Inform{
+	private Integer informId;
 
     private String informTitle;
 

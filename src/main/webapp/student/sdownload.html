@@ -51,31 +51,6 @@
 						  </button>
 				      </td>
 				    </tr>
-				    <!--  <tr>
-				     	<th>开题报告表</th>
-				     	<th>中期检查反馈表</th>
-				     	<th>免答辩申请表</th>
-				     </tr>
-				     <tr>
-				     	<td>
-					     	<button id="ktbg_down" class="am-btn am-btn-primary am-btn-sm">
-							  下载
-							  <i class="am-icon-cloud-download"></i>
-							</button>
-				     	</td>
-				     	<td>
-				     		<button id="zqjc_down" class="am-btn am-btn-primary am-btn-sm">
-							  下载
-							  <i class="am-icon-cloud-download"></i>
-							</button>
-				     	</td>
-				     	<td>
-				     		<button id="mdb_down" class="am-btn am-btn-primary am-btn-sm">
-							  下载
-							  <i class="am-icon-cloud-download"></i>
-							</button>
-				     	</td>
-				     </tr> -->
 				  </table>
 			  </div>
 		</div>
@@ -88,6 +63,28 @@
 	<script type="text/javascript">
 		$(function() {
 			//查数据库得出该学发是否已填写这些下载项信息,没有则下载空白表格。
+			
+			$.get('/graduation/studentController/hasChooseProject',function(data){
+					if(!isNull(data.studentId)){
+						$('#ktbg_down').click(function(){
+							window.location.href ='/graduation/studentController/downKtbg';
+						});
+						
+						$('#zqjc_down').click(function(){
+							window.location.href ='/graduation/studentController/downZqjc';
+						});
+						
+						$('#mdb_down').click(function(){
+							window.location.href ='/graduation/studentController/downMdb';
+						});
+					}else{
+						$('#ktbg_down').attr('disabled','disabled');
+						$('#zqjc_down').attr('disabled','disabled');
+						$('#mdb_down').attr('disabled','disabled');
+					}
+				},'json');
+			
+			
 		});
 	</script>
 </body>

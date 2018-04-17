@@ -1,7 +1,7 @@
 package cn.lynu.model;
 
-public class Ktbg {
-    private Integer ktbgId;
+public class Ktbg{
+	private Integer ktbgId;
 
     private String column1;
 

@@ -2,8 +2,8 @@ package cn.lynu.model;
 
 import java.util.Date;
 
-public class Lunwen {
-    private Integer lunwenId;
+public class Lunwen{
+	private Integer lunwenId;
 
     private String lunwenName;
 
@@ -14,8 +14,9 @@ public class Lunwen {
     private String studentId;
 
     private Integer lunwenStatus;
+    
 
-    public Integer getLunwenId() {
+	public Integer getLunwenId() {
         return lunwenId;
     }
 

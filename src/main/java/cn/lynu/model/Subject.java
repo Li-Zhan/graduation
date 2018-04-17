@@ -1,7 +1,11 @@
 package cn.lynu.model;
 
-public class Subject {
-    private Integer subjectId;
+import java.io.Serializable;
+
+public class Subject implements Serializable{
+	private static final long serialVersionUID = -3649425445693175127L;
+
+	private Integer subjectId;
 
     private String subjectName;
 

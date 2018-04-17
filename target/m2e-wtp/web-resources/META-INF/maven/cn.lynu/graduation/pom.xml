@@ -93,6 +93,12 @@
 			<artifactId>spring-webmvc</artifactId>
 			<version>4.3.8.RELEASE</version>
 		</dependency>
+		<!-- mybatis-ehcache -->
+		<dependency>
+			<groupId>org.mybatis.caches</groupId>
+			<artifactId>mybatis-ehcache</artifactId>
+			<version>1.1.0</version>
+		</dependency>
 
 		<!-- mybatis -->
 		<dependency>
@@ -100,6 +106,7 @@
 			<artifactId>mybatis</artifactId>
 			<version>3.4.4</version>
 		</dependency>
+		
 
 		<!-- mybatis-spring -->
 		<dependency>
@@ -119,7 +126,7 @@
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.42</version>
+			<version>5.1.46</version>
 		</dependency>
 
 		<!-- JSTL Servlet junit log4j -->
@@ -177,15 +184,24 @@
 			<artifactId>jackson-databind</artifactId>
 			<version>2.9.0</version>
 		</dependency>
-
-		<!-- JSR校验 使用 hibernate-validator实现 -->
-		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-validator -->
+		
+		<!-- 文件上传 -->
 		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-validator</artifactId>
-			<version>5.4.1.Final</version>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.3.2</version>
 		</dependency>
-
+		
+		<!-- freemarker模板 -->
+		<!-- https://mvnrepository.com/artifact/org.freemarker/freemarker -->
+		<dependency>
+		    <groupId>org.freemarker</groupId>
+		    <artifactId>freemarker</artifactId>
+		    <version>2.3.28</version>
+		</dependency>
+		
+				
+		
 	</dependencies>
 
 

@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-
 import cn.lynu.mapper.DaBianMapper;
+import cn.lynu.model.DaBian;
 
 @Service
 public class DabianService {
@@ -15,11 +15,27 @@ public class DabianService {
 	
 	@Transactional(propagation=Propagation.SUPPORTS)
 	public Integer getThisStudentScore(String studentId) {
-		Integer score=daBianMapper.getThisStudentScore(studentId);
-		if(score!=null) {
-			return score;
+		DaBian daBian = daBianMapper.getThisStudentScore(studentId);
+		if(daBian!=null) {
+			return daBian.getDabianScore();
 		}
 		return -1;
+	}
+
+	@Transactional(propagation=Propagation.REQUIRED)
+	public boolean insertDabian(DaBian daBian) {
+		if(daBianMapper.insertSelective(daBian)>0) {
+			return true;
+		}
+		return false;
+	}
+
+	@Transactional(propagation=Propagation.REQUIRED)
+	public boolean updateDabian(DaBian daBian) {
+		if(daBianMapper.updateByPrimaryKeySelective(daBian)>0) {
+			return true;
+		}
+		return false;
 	}
 
 }

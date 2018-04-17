@@ -4,11 +4,11 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	version="2.5">
 	<display-name>graduation</display-name>
+
 	<welcome-file-list>
 		<welcome-file>login.html</welcome-file>
 	</welcome-file-list>
 
-	<!-- 字符编码过滤器,一定要放在所有filter之前 -->
 	<filter>
 		<filter-name>characterEncodingFilter</filter-name>
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -29,8 +29,6 @@
 		<filter-name>characterEncodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-	
-	<!--使用Rest风格的URI，将页面普通的post请求转为指定的delete或者put请求 -->
 	<filter>
 		<filter-name>HiddenHttpMethodFilter</filter-name>
 		<filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
@@ -48,7 +46,19 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 
-	<!-- SpringMVC -->
+	<filter>
+		<filter-name>UserFilter</filter-name>
+		<filter-class>cn.lynu.filter.UserFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>UserFilter</filter-name>
+		<url-pattern>/student/*</url-pattern>
+	</filter-mapping>
+ 	<filter-mapping>
+		<filter-name>UserFilter</filter-name>
+		<url-pattern>/teacher/*</url-pattern>
+	</filter-mapping> 
+
 	<servlet>
 		<servlet-name>springDispatcherServlet</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -59,7 +69,6 @@
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 
-	<!-- Spring -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>classpath:spring/applicationContext.xml</param-value>
@@ -67,5 +76,5 @@
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
-	
+
 </web-app>

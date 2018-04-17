@@ -1,7 +1,7 @@
 package cn.lynu.model;
 
-public class Project {
-    private Integer projectId;
+public class Project{
+	private Integer projectId;
 
     private String projectName;
 

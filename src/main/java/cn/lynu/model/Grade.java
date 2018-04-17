@@ -1,7 +1,11 @@
 package cn.lynu.model;
 
-public class Grade {
-    private Integer gradeId;
+import java.io.Serializable;
+
+public class Grade implements Serializable{
+	private static final long serialVersionUID = -7986245317958849894L;
+
+	private Integer gradeId;
 
     private String gradeName;
 

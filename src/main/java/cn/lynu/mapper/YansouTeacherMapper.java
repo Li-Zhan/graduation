@@ -30,5 +30,5 @@ public interface YansouTeacherMapper {
     
     YansouTeacher selectTeacherInfoByYansouTeamId(Integer yansouTeamId);
     
-    Integer selectYansouTeamIdByTeacherId(String teacherId);
+    YansouTeacher selectYansouTeacherByTeacherId(String teacherId);
 }

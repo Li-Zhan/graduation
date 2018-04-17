@@ -54,18 +54,17 @@
 		$.get('/graduation/lunwenController/getLunwenBySid',{
 			studentId:studentId
 		},function(data){
-			if(isNull(data.lunwen_id)){
+			if(isNull(data.lunwenId)){
 				$('#lunwen_btn').attr('disabled','disabled').text('该学生没有提交论文');
 				return;
 			}
-			if(!isNull(data.lunwenStatus)){
-				$('#lunwen_btn').attr('disabled','disabled').text('已审核');
-			}else{
-				$('#lunwen_btn').append($('<input>').attr('type','hidden').val(data.lunwenId));
+			if(data.lunwenStatus!=null){
+				$('#lunwen_btn').text('更新'+'(上次审核结果为: '+(data.lunwenStatus==1?'评审打分':'退回修改')+')');
 			}
+			$('#lunwen_btn').append($('<input>').attr('type','hidden').val(data.lunwenId));
 		});
 		
-		//点击提交评审论文按钮lunwen_btn
+		//点击提交评审论文按钮
 	 	$('#lunwen_btn').click(function () {
 			  var $btn = $(this);
 			  var status=$('input[name=radio10]:checked').val();
@@ -84,7 +83,6 @@
 					  }, 3000);
 				  }
 			  });
-			    
 			});
 		
 	});

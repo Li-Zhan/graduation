@@ -1,7 +1,11 @@
 package cn.lynu.model;
 
-public class Admin {
-    private String adminId;
+import java.io.Serializable;
+
+public class Admin implements Serializable{
+	private static final long serialVersionUID = 81402464279278347L;
+
+	private String adminId;
 
     private String userId;
 

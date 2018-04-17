@@ -1,7 +1,7 @@
 package cn.lynu.model;
 
-public class Mdb {
-    private Integer mdbId;
+public class Mdb{
+	private Integer mdbId;
 
     private String column1;
 
@@ -10,8 +10,19 @@ public class Mdb {
     private String column3;
 
     private String studentId;
+    
+    private Integer mdbStatus;
+    
 
-    public Integer getMdbId() {
+    public Integer getMdbStatus() {
+		return mdbStatus;
+	}
+
+	public void setMdbStatus(Integer mdbStatus) {
+		this.mdbStatus = mdbStatus;
+	}
+
+	public Integer getMdbId() {
         return mdbId;
     }
 

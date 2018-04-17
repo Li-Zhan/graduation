@@ -36,20 +36,20 @@
 					imgSrc='../img/user01.png';
 				}
 				var p=$('<p>').append($('<img>').addClass('am-circle am-center am-img-thumbnail')
-						.attr({'src':imgSrc,'height':'140px','width':'140px'}).css('margin-top','1.6rem'));
+						.attr('src',imgSrc).css({'margin-top':'1.6rem','width':'140px','height':'140px'}));
 				var div2=$('<div>').addClass('am-thumbnail-caption');
 				var div2_p=$('<p>').addClass('am-text-center').text(value.user.userName);
-				var a1=$('<a>').addClass('am-btn am-btn-default am-btn-primary a1').attr('role','button').text('开题报告');
-				var a2=$('<a>').addClass('am-btn am-btn-default am-btn-primary a2').attr('role','button').text('中期检查');
-				var a3=$('<a>').addClass('am-btn am-btn-default am-btn-primary a3').attr('role','button').text('论文');
+				var a1=$('<a>').addClass('am-btn am-btn-default am-btn-primary a1')
+					.attr({'role':'button','href':'/graduation/ktbgController/gotoTktbg?studentId='+value.studentId}).text('开题报告');
+				var a2=$('<a>').addClass('am-btn am-btn-default am-btn-primary a2')
+					.attr({'role':'button','href':'/graduation/zqjcController/gotoTzqjc?studentId='+value.studentId}).text('中期检查');
+				var a3=$('<a>').addClass('am-btn am-btn-default am-btn-primary a3')
+					.attr({'role':'button','href':'/graduation/lunwenController/gotoTstudentlunwen?studentId='+value.studentId}).text('论文');
 				var div2_div=$('<div>').addClass('am-btn-group am-btn-group-justify').append(a1).append(a2).append(a3);
 				div2.append(div2_p).append(div2_div);
 				div1.append(p).append(div2);
 				div.append(div1);
 				$('#ref_page').append(div);
-				$('.a1').attr('href','/graduation/ktbgController/gotoTktbg?studentId='+value.studentId);
-				$('.a2').attr('href','/graduation/zqjcController/gotoTzqjc?studentId='+value.studentId);
-				$('.a3').attr('href','/graduation/lunwenController/gotoTstudentlunwen?studentId='+value.studentId);
 			});
 		});
 		

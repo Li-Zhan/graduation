@@ -1,7 +1,11 @@
 package cn.lynu.model;
 
-public class Roles {
-    private Integer rolesId;
+import java.io.Serializable;
+
+public class Roles implements Serializable{
+	private static final long serialVersionUID = 5994994988422788236L;
+
+	private Integer rolesId;
 
     private String rolesName;
 

@@ -70,7 +70,7 @@
 						</table>
 						<button id="zqjc_btn" type="button" class="am-btn am-btn-primary am-radius am-fr"
 							data-am-loading="{spinner: 'circle-o-notch', loadingText: '提交中...', resetText: '提交完成'}">
-							提交中期检查反馈表</button>
+							提交</button>
 				</div>
 			</div>
 		</div>
@@ -97,7 +97,8 @@
 					$('#tr3').find('td').eq(3).text(data.user.userName);
 					$('#tr4').find('td').eq(1).text(data.teacher.user.userName);
 					$('#tr4').find('td').eq(3).text(data.teacher.zhicheng);
-					$('#zqjc_btn').append($('<input>').attr('type','hidden').val(data.studentId));
+					$('#zqjc_btn').append($('<input>').attr({'type':'hidden','name':'studentId'}).val(data.studentId));
+					beforeZqjc(data.studentId);
 				   }else{
 					   	$('#zqjc_btn').addClass('am-disabled').text('请先选择课题');
 						$('#column1').attr('disabled','disabled');
@@ -106,58 +107,78 @@
 			   }
 			 });
 		
-		 $.ajax({
-			   url: "/graduation/ktbgController/getKtbgByStudentId",
-			   type: 'get',
-			   dataType:'json',
-			   data:{
-				   studentId:$('#ktbg_btn').find('input:hidden').val()
-			   },
-			   async:false,
-			   success: function(data){
-				   if(isNull(data.studentId)){
-					   	$('#column1').attr('disabled','disabled');
-						$('#column2').attr('disabled','disabled');
-						$('#zqjc_btn').addClass('am-disabled').text('请先完成开题报告');
-					}
-			   }
-			 });
+		//中期检查之前需完成开题报告
+		function beforeZqjc(studentId) {
+			if(!isNull(studentId)&&studentId!='undefined'){
+				 $.ajax({
+					   url: "/graduation/ktbgController/getKtbgByStudentId",
+					   type: 'get',
+					   dataType:'json',
+					   data:{
+						   studentId:studentId
+					   },
+					   async:false,
+					   success: function(data){
+						   if(data.ktbgStatus==0){
+							   	$('#column1').attr('disabled','disabled');
+								$('#column2').attr('disabled','disabled');
+								$('#zqjc_btn').addClass('am-disabled').text('请先完成开题报告');
+							}else{
+								disBtn(data.studentId);
+							}
+					   }
+					 });
+			}
+		}
 		
 		//查询数据库是否应该禁用提交按钮
-		$.ajax({
-			   url: "/graduation/zqjcController/getzqjcByStudentId",
-			   type: 'get',
-			   data:{
-				   studentId:$('#zqjc_btn').find('input:hidden').val()
-			   },
-			   dataType:'json',
-			   async:false,
-			   success: function(data){
-				   if(!isNull(data.studentId)){
-						$('#zqjc_btn').addClass('am-disabled').text('已提交');
-						$('#column1').attr('disabled','disabled').text(data.column1);
-						$('#column2').attr('disabled','disabled').text(data.column2);
-					}
-			   },
-			 }); 
+		function disBtn(studentId) {
+			if(!isNull(studentId)&&studentId!='undefined'){
+				$.ajax({
+					   url: "/graduation/zqjcController/getzqjcByStudentId",
+					   type: 'get',
+					   data:{
+						   studentId:studentId
+					   },
+					   dataType:'json',
+					   async:false,
+					   success: function(data){
+						   if(!isNull(data.column3)){
+								$('#zqjc_btn').addClass('am-disabled').text('已审核');
+								$('#column1').attr('disabled','disabled').text(data.column1);
+								$('#column2').attr('disabled','disabled').text(data.column2);
+							}else if(!isNull(data.zqjcId)){
+								$('#zqjc_btn').text('更新');
+								$('#column1').text(data.column1);
+								$('#column2').text(data.column2);
+								$('#zqjc_btn').append($('<input>').attr({'type':'hidden','name':'studentId'}).val(data.studentId));
+								$('#zqjc_btn').append($('<input>').attr({'type':'hidden','name':'zqjcId'}).val(data.zqjcId));
+							}
+					   },
+					 }); 
+			}
+		}
 		
 		//提交中期检查
 		$('#zqjc_btn').click(function () {
+		    var $btn = $(this);
+		    var studentId=$btn.find('input:hidden[name=studentId]').val();
+		    var zqjcId=$btn.find('input:hidden[name=zqjcId]').val();
 			var column1=$('#column1').val();
 			var column2=$('#column2').val();
-			if(isNull(column1)||isNull(column2)){
+			if(isNull(column1)||isNull(column2)||isNull(studentId)){
 				return;
 			}
-			  var $btn = $(this);
 			  $.post('/graduation/zqjcController/insertSelective',{
-				  studentId:$btn.find('input:hidden').val(),
+				  zqjcId:zqjcId,
+				  studentId:studentId,
 				  column1:column1,
 				  column2:column2
 			  },function(data){
 				  if(data){
 					  $btn.button('loading');
 					    setTimeout(function(){
-					    	disableBtn('zqjc_btn','提交完成');
+					    	disableBtn('zqjc_btn','完成');
 					  }, 3000);
 				  }
 			  });

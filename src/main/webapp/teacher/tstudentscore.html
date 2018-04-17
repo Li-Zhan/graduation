@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="/graduation/teacher/css/app.css">
 </head>
 
-<body style="margin-left: 10px; overflow-x: hidden;">
+<body style="margin-left: 10px; overflow: hidden;">
 
 	<div id="ref_page" class="am-g">
 
@@ -204,7 +204,7 @@
 				  </table>
 				  <button id="pinjia_btn" type="button" class="am-btn am-btn-primary am-radius am-fr"
 								data-am-loading="{spinner: 'circle-o-notch', loadingText: '提交中...', resetText: '提交完成'}">
-								提交评价表</button>
+								提交</button>
 				</div>
 			  </div>
 		</div>
@@ -229,9 +229,9 @@
 				   },
 				   success: function(data){
 					  if(!isNull(data.studentScore)){
-						  //是否应该禁用提交按钮
-						  $('#pinjia_btn').attr('disabled','disabled').text('已评分');
-						  return;
+						  //是否更新
+						  $('#pinjia_btn').text('更新(上次评分为: '+data.studentScore+')');
+						  $('#teacherEvaluate').text(data.teacherEvaluate);
 					  }
 					  $('#tr1').find('td').eq(1).text(data.user.userAccount);
 					  $('#tr1').find('td').eq(3).text(data.user.userName);
@@ -286,7 +286,7 @@
 				$('#score').text(sum);
 			}
 			
-			//点击提交评价按钮pinjia_btn
+			//点击提交评价按钮
 			$('#pinjia_btn').click(function () {
 				  var $btn = $(this);
 				  var score=$('#score').text();
@@ -308,7 +308,6 @@
 					}); 
 				    
 				});
-			
 			
 		});
 	</script>

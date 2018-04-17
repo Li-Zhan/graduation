@@ -1,8 +1,12 @@
 package cn.lynu.controller;
 
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,12 +15,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-
 import cn.lynu.model.Project;
 import cn.lynu.model.Student;
 import cn.lynu.model.User;
 import cn.lynu.service.ProjectService;
 import cn.lynu.service.StudentService;
+import cn.lynu.util.WordUtils;
 
 @Controller
 @RequestMapping("/studentController")
@@ -40,9 +44,8 @@ public class StudentController {
 					return student;
 				}
 			}
-			return null;
 		}
-		return null;
+		return new Student();
 	}
 	
 	@ResponseBody
@@ -127,6 +130,7 @@ public class StudentController {
 		return new Student();
 	}
 	
+	
 	@ResponseBody
 	@RequestMapping("/getStuAndProjectAndTeacher")
 	public Student getStuAndProjectAndTeacher(HttpSession session,HttpServletResponse response) {
@@ -168,12 +172,6 @@ public class StudentController {
 		return null;
 	}
 	
-	@ResponseBody
-	@RequestMapping(value="/updateStudentInfo",method=RequestMethod.PUT)
-	public boolean updateStudentInfo(Student student) {
-		return studentService.updateStudentInfo(student);
-	}
-	
 	@RequestMapping("/gotoTstudentscore")
 	public ModelAndView gotoTstudentscore(@RequestParam(required=true)String studentId) {
 		return new ModelAndView("/teacher/tstudentscore.html?studentId="+studentId);
@@ -202,6 +200,141 @@ public class StudentController {
 	@RequestMapping("/getStudentAndMdbBySid")
 	public Student getStudentAndMdbBySid(String studentId) {
 		return studentService.getStudentAndMdbBySid(studentId);
+	}
+	
+	//下载开题报告
+	@ResponseBody
+	@RequestMapping(value="/downKtbg",method=RequestMethod.GET)
+	public void downKtbg(HttpSession session,
+			HttpServletRequest request,HttpServletResponse response,
+			String studentId) {
+		if(studentId!=null&&!studentId.isEmpty()) {
+			Student stuAndKtbg = studentService.getStudentAndKtbgBySid(studentId);
+			Map<String, Object> map=new HashMap<>();
+			map.put("user", stuAndKtbg.getUser());
+			map.put("classInfo", stuAndKtbg.getClassInfo());
+			map.put("project", stuAndKtbg.getProject());
+			map.put("ktbg", stuAndKtbg.getKtbg());
+			try {
+				 WordUtils.exportMillCertificateWord(request,response,map,"开题报告.ftl","开题报告.doc");  
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return;
+		}else {
+			User user=(User) session.getAttribute("user");
+			if(user!=null) {
+				Student student = studentService.getStudentByUserId(user.getUserId());
+				if(student!=null) {
+					if(student.getProjectId()!=null&&student.getProjectId()!=0) {
+						Student stuAndKtbg = studentService.getStudentAndKtbgBySid(student.getStudentId());
+						Map<String, Object> map=new HashMap<>();
+						map.put("user", stuAndKtbg.getUser());
+						map.put("classInfo", stuAndKtbg.getClassInfo());
+						map.put("project", stuAndKtbg.getProject());
+						map.put("ktbg", stuAndKtbg.getKtbg());
+						try {
+							WordUtils.exportMillCertificateWord(request,response,map,"开题报告.ftl","开题报告.doc");  
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					}
+				}
+			}
+			return;
+		}
+	}
+	
+	//下载免答辩
+	@ResponseBody
+	@RequestMapping(value="/downMdb",method=RequestMethod.GET)
+	public void downMdb(HttpSession session,
+			HttpServletRequest request,HttpServletResponse response,
+			String studentId) {
+		if(studentId!=null&&!studentId.isEmpty()) {
+			Student stuAndMdb = studentService.getStudentAndMdbBySid(studentId);
+			Map<String, Object> map=new HashMap<>();
+			map.put("user", stuAndMdb.getUser());
+			map.put("classInfo", stuAndMdb.getClassInfo());
+			map.put("project", stuAndMdb.getProject());
+			map.put("mdb", stuAndMdb.getMdb());
+			map.put("teacher", stuAndMdb.getTeacher());
+			try {
+				 WordUtils.exportMillCertificateWord(request,response,map,"免答辩申请表.ftl","免答辩申请表.doc");  
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return;
+		}else {
+			User user=(User) session.getAttribute("user");
+			if(user!=null) {
+				Student student = studentService.getStudentByUserId(user.getUserId());
+				if(student!=null) {
+					if(student.getProjectId()!=null&&student.getProjectId()!=0) {
+						Student stuAndMdb = studentService.getStudentAndMdbBySid(student.getStudentId());
+						Map<String, Object> map=new HashMap<>();
+						map.put("user", stuAndMdb.getUser());
+						map.put("classInfo", stuAndMdb.getClassInfo());
+						map.put("project", stuAndMdb.getProject());
+						map.put("mdb", stuAndMdb.getMdb());
+						map.put("teacher", stuAndMdb.getTeacher());
+						try {
+							WordUtils.exportMillCertificateWord(request,response,map,"免答辩申请表.ftl","免答辩申请表.doc");  
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+						return;
+					}
+				}
+			}
+		}
+	}
+	
+	//下载中期检查
+	@ResponseBody
+	@RequestMapping(value="/downZqjc",method=RequestMethod.GET)
+	public void downZqjc(HttpSession session,
+			HttpServletRequest request,HttpServletResponse response,
+			String studentId) {
+		if(studentId!=null&&!studentId.isEmpty()) {
+			Student stuAndZqjc = studentService.getStudentAndZqjcBySid(studentId);
+			Map<String, Object> map=new HashMap<>();
+			map.put("user", stuAndZqjc.getUser());
+			map.put("project", stuAndZqjc.getProject());
+			map.put("zqjc", stuAndZqjc.getZqjc());
+			map.put("teacher", stuAndZqjc.getTeacher());
+			try {
+				 WordUtils.exportMillCertificateWord(request,response,map,"中期检查表.ftl","中期检查表.doc");  
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return;
+		}else {
+			User user=(User) session.getAttribute("user");
+			if(user!=null) {
+				Student student = studentService.getStudentByUserId(user.getUserId());
+				if(student!=null) {
+					if(student.getProjectId()!=null&&student.getProjectId()!=0) {
+						Student stuAndZqjc = studentService.getStudentAndZqjcBySid(student.getStudentId());
+						Map<String, Object> map=new HashMap<>();
+						map.put("user", stuAndZqjc.getUser());
+						map.put("project", stuAndZqjc.getProject());
+						if(stuAndZqjc.getZqjc()!=null) {
+							map.put("zqjc", stuAndZqjc.getZqjc());
+						}else {
+							map.put("zqjc", null);
+						}
+						map.put("teacher", stuAndZqjc.getTeacher());
+						try {
+							WordUtils.exportMillCertificateWord(request,response,map,"中期检查表.ftl","中期检查表.doc");  
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+						return;
+					}
+				}
+			}
+		}
 	}
 	
 }

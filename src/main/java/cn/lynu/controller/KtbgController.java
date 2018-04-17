@@ -23,7 +23,11 @@ public class KtbgController {
 	@ResponseBody
 	@RequestMapping(value="/insertSelective",method=RequestMethod.POST)
 	public boolean insertSelective(Ktbg ktbg) {
-		return ktbgService.insertSelective(ktbg);
+		if(ktbg.getKtbgId()==null) {
+			return ktbgService.insertSelective(ktbg);
+		}else {
+			return ktbgService.updateColumn(ktbg);
+		}
 	}
 	
 	@ResponseBody

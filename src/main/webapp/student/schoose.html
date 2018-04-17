@@ -19,9 +19,8 @@
 
 <body style="overflow:hidden;" >
 
-	<div id="ref_page" class="am-g" style="position: relative;">
-	
-			<div class="teacher_search_title am-panel am-panel-default">
+	<div id="ref_page" style="height: 500px;">
+	    <div class="teacher_search_title am-panel am-panel-default">
 		    <div class="am-panel-bd">
 				<div class="am-cf">
 				  <div class=" am-fl"><span class="tpl-content-page-title">教师列表</span></div>
@@ -36,48 +35,60 @@
 				</div>
 		    </div>
 		</div>
-		
-		<div id="chooseBody"></div>
-				
-		<div class="am-fr" style="margin-right: 16px;position: absolute;right: 10px;bottom: -30px;">
-		   <div id="news-Pagination-1"></div>
+		<div class="teacher_search_title am-panel am-panel-default">
+			<div class="am-panel am-panel-default">
+				<div class="am-panel-bd am-scrollable-horizontal">
+	                    <table class="am-table am-table-centered am-table-striped am-table-hover">
+	                        <thead>
+	                            <tr>
+	                                <th>姓名</th>
+	                                <th>教学方向</th>
+	                                <th>性别</th>
+	                                <th>联系方式</th>
+	                                <th>科室</th>
+	                                <th>剩余课题数</th>
+	                                <th>操作</th>
+	                            </tr>
+	                        </thead>
+	                        <tbody id="chooseBody"></tbody>
+	                    </table>
+	                </div>
+	                <footer class="am-panel-footer" style="height: 50px;">
+						<div class="am-fr">
+						   <div id="news-Pagination-1"></div>
+						</div>
+	                </footer>
+			</div>
 		</div>
-				  
 	</div>
 
 <script src="../js/jquery.min.js"></script>
 <script src="../amazeui/js/amazeui.min.js"></script>
 <script src="../js/jquery.pagination.js"></script>
 <script type="text/javascript">
-		$(function() {
+ 	 	$(function() {
 			
 			function chooseBody(data) {
 				for(var num=0;num<data.list.length;num++){
-					var div1=$('<div>').addClass('am-u-lg-3 am-u-md-3 am-u-sm-6');
-					var div2=$('<div>').addClass('am-thumbnail chooseStyle');
-					var p=$('<p>').addClass('noChooseProjectNum');
-					var i=$('<i>').addClass('am-icon-exclamation-triangle');
-					var span=$('<span>').addClass('ketiNum').text(data.list[num].noChooseProject).append($('<span>').text('个课题未选'));
-					p.append(i).append(span);
-					var imgPath=data.list[num].user.userPortrait;
-					if(imgPath==null){
-						imgPath='../img/user01.png';
+					var td1=$('<td>').text(data.list[num].user.userName);
+					var td2=$('<td>').text(data.list[num].teacherDescribe);
+					var td3=$('<td>').text(data.list[num].user.userGender==1?'男':'女');
+					var td4=$('<td>').text(data.list[num].user.userTel);
+					var dept=data.list[num].dept;
+					if(dept!=null){
+						var td5=$('<td>').text(dept.deptName);
+					}else{
+						var td5=$('<td>');
 					}
-					var img=$('<img>').css({'width':'140px','height':'140px'}).attr({src:imgPath,width:'140',height:'140'}).addClass('am-circle am-center am-img-thumbnail');
-					var p2=$('<p>').append(img);
-					div2.append(p).append(p2);
-					var div3=$('<div>').addClass('am-thumbnail-caption').append($('<p>').addClass('am-text-center').text(data.list[num].user.userName));
-					var p3=$('<p>').append($('<button>').addClass('am-btn am-btn-primary am-btn-block').text('选择该老师的课题'));
-					p3.append($('<input>').addClass('teacherId').attr('type','hidden').val(data.list[num].teacherId));
-					//点击按钮后选择课题
-					p3.find('button').on('click',function() {
-						var url='sproject.html?teacherId='+$(this).parent().find('input:hidden').val();
-						window.location.href=url;
-					});
-					div3.append(p3);
-					div2.append(div3);
-					div1.append(div2);
-					$('#chooseBody').append(div1);
+					var noChooseProject=data.list[num].noChooseProject;
+					var td6=$('<td>').addClass('noChooseProjectNum').text(noChooseProject);
+					if(noChooseProject>0){
+						var td7=$('<td>').append($('<a>').attr('href','sproject.html?teacherId='+data.list[num].teacherId).text('选择该老师的课题'));
+					}else{
+						var td7=$('<td>').append($('<a>').attr('href','javascript:;').text('选择该老师的课题'));
+					}
+					var tr=$('<tr>').append(td1).append(td2).append(td3).append(td4).append(td5).append(td6).append(td7);
+					$('#chooseBody').append(tr);
 				}
 			}
 			
@@ -185,7 +196,7 @@
  							$('#news-Pagination-1').css('display','none');
  						}
 					});
- 				}
+ 				} 
 
 		});
 </script>

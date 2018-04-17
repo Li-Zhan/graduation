@@ -392,6 +392,16 @@ $(function(){
 	
 	//点击文件上传按钮出现模态框
 	$('#open_file_btn').click(function() {
+	 	$.ajax({
+		   url: "/graduation/lunwenController/getLunwenBySid",
+		   type: 'get',
+		   dataType:'json',
+		   success: function(data){
+			   if(!isNull(data.lunwenId)){
+				   $('#lunwen_uploadBtn').text('更新(上次提交的论文是: '+data.lunwenName.substring(0,30)+')');
+				}else{}
+		   }
+		 });
 		$('#file-modal').modal('open');
 	});
 
@@ -405,17 +415,6 @@ $(function(){
 							+ '</span> ';
 				});
 				$('#file-list').html(fileNames);
-	});
-	
-	//查询数据库是否应该禁用上传按钮disableBtn(id)
-	//提交论文
-	$('#lunwen_uploadBtn').click(function () {
-		  var $btn = $(this);
-		  $btn.button('loading');
-		    setTimeout(function(){
-		    	disableBtn('lunwen_uploadBtn','上传完成');
-		  }, 3000);
-		    
 	});
 	
 });

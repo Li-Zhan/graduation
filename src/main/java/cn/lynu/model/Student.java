@@ -1,7 +1,7 @@
 package cn.lynu.model;
 
-public class Student {
-    private String studentId;
+public class Student{
+	private String studentId;
 
     private Integer projectNum;
 
@@ -29,7 +29,25 @@ public class Student {
     private Ktbg ktbg;
     private Zqjc zqjc;
     private Mdb mdb;
+    private Lunwen lunwen;
+    private DaBian daBian;
     
+
+	public DaBian getDaBian() {
+		return daBian;
+	}
+
+	public void setDaBian(DaBian daBian) {
+		this.daBian = daBian;
+	}
+
+	public Lunwen getLunwen() {
+		return lunwen;
+	}
+
+	public void setLunwen(Lunwen lunwen) {
+		this.lunwen = lunwen;
+	}
 
 	public Mdb getMdb() {
 		return mdb;

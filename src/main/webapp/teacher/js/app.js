@@ -407,17 +407,6 @@ $(function(){
 				$('#file-list').html(fileNames);
 	});
 	
-	//查询数据库是否应该禁用上传按钮disableBtn(id)
-	//提交论文
-	$('#lunwen_uploadBtn').click(function () {
-		  var $btn = $(this);
-		  $btn.button('loading');
-		    setTimeout(function(){
-		    	disableBtn('lunwen_uploadBtn','上传完成');
-		  }, 3000);
-		    
-	});
-	
 });
 
 function isNull(data) {

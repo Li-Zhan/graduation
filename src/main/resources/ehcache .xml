@@ -1,0 +1,11 @@
+<ehcache>
+    <diskStore path="java.io.tmpdir"/>
+    <!--默认的缓存配置-->
+    <defaultCache
+        maxElementsInMemory="10000"
+        eternal="false"
+        timeToIdleSeconds="120"
+        timeToLiveSeconds="120"
+        overflowToDisk="true"
+        />
+</ehcache>

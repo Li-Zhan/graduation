@@ -1,7 +1,7 @@
 package cn.lynu.model;
 
-public class MangSheng {
-    private Integer id;
+public class MangSheng{
+	private Integer id;
 
     private String studentId;
 

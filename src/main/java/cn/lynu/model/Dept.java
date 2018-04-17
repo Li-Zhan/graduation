@@ -1,7 +1,11 @@
 package cn.lynu.model;
 
-public class Dept {
-    private Integer deptId;
+import java.io.Serializable;
+
+public class Dept implements Serializable{
+	private static final long serialVersionUID = -1515425566615914459L;
+
+	private Integer deptId;
 
     private String deptName;
 

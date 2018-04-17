@@ -62,4 +62,6 @@ public interface StudentMapper {
 	List<Student> getStudentByTeacherId2(String teacherId);
 
 	Student getStudentAndMdbBySid(String studentId);
+
+	List<Student> findStudentsByYansouId(Integer yansouTeamId);
 }
