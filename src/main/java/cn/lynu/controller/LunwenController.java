@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 import cn.lynu.model.Lunwen;
 import cn.lynu.model.Student;
 import cn.lynu.model.User;
@@ -35,8 +34,8 @@ public class LunwenController {
 	private StudentService studentService;
 	
 	@RequestMapping("/gotoTstudentlunwen")
-	public ModelAndView gotoTstudentlunwen(String studentId) {
-		return new ModelAndView("/teacher/tstudentlunwen.html?studentId="+studentId);
+	public String gotoTstudentlunwen(String studentId) {
+		return "redirect:http://localhost:8080/graduation/teacher/tstudentlunwen.html?studentId="+studentId;
 	}
 	
 	@ResponseBody

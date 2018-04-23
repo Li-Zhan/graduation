@@ -7,8 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
-
 import cn.lynu.model.Student;
 import cn.lynu.model.User;
 import cn.lynu.model.Zqjc;
@@ -59,8 +57,8 @@ public class ZqjcController {
 	}
 	
 	@RequestMapping("/gotoTzqjc")
-	public ModelAndView gotoTzqjc(@RequestParam(required=true)String studentId) {
-		return new ModelAndView("/teacher/tzqjc.html?studentId="+studentId);
+	public String gotoTzqjc(@RequestParam(required=true)String studentId) {
+		return "redirect:http://localhost:8080/graduation/teacher/tzqjc.html?studentId="+studentId;
 	}
 	
 	@ResponseBody

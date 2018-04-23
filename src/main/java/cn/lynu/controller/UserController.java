@@ -63,7 +63,7 @@ public class UserController {
 	@RequestMapping("/logout")
 	public String logout(HttpSession session) {
 		session.removeAttribute("user");
-		return "redirect:/login.html";
+		return "redirect:http://localhost:8080/graduation/login.html";
 	}
 	
 	

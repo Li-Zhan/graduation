@@ -57,9 +57,9 @@
 											</td>
                                             <td>
                                                 <div class="am-btn-toolbar">
-                                                    <div class="am-btn-group am-btn-group-xse>
+                                                    <div class="am-btn-group am-btn-group-xs">
                                                         <button type="button" disabled class="am-btn am-btn-default am-btn-xs am-text-secondary update"><span class="am-icon-pencil-square-o"></span> 编辑</button>
-                                                        <button type="button" disabled class="am-btn am-btn-default am-btn-xs yes" ><span class="am-icon-check"></span>  提交</button>
+                                                        <button type="button" disabled class="am-btn am-btn-default am-btn-xs yes" ><span class="am-icon-check"></span> 提交</button>
                                                     </div>
                                                 </div>
                                             </td>
@@ -308,13 +308,6 @@
 					$(this).parent().parent().find('td:last').find('div div button').eq(1).attr('disabled','disabled');
 				}
 			});
-		/* 	$('input[type=text]').blur(function(){
-				if($(this).val()!=''){
-					$(this).parent().parent().find('td:last').find('div div button').eq(1).removeAttr('disabled');
-				}else{
-					$(this).parent().parent().find('td:last').find('div div button').eq(1).attr('disabled','disabled');
-				}
-			}); */
 			
 			$.get('/graduation/projectController/getProjectByTeacherId',function(data){
 				for(var i=0;i<data.length;i++){

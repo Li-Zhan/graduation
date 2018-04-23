@@ -3,7 +3,6 @@ package cn.lynu.controller;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 import cn.lynu.model.Project;
 import cn.lynu.model.Student;
 import cn.lynu.model.User;
@@ -173,8 +171,8 @@ public class StudentController {
 	}
 	
 	@RequestMapping("/gotoTstudentscore")
-	public ModelAndView gotoTstudentscore(@RequestParam(required=true)String studentId) {
-		return new ModelAndView("/teacher/tstudentscore.html?studentId="+studentId);
+	public String gotoTstudentscore(@RequestParam(required=true)String studentId) {
+		return "redirect:http://localhost:8080/graduation/teacher/tstudentscore.html?studentId="+studentId;
 	}
 	
 	@ResponseBody
