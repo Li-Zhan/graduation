@@ -1,6 +1,7 @@
 //刷新验证码
+  refresh();
   function refresh(){
-	    document.getElementById("imgValidate").src="/graduation/code.jsp?"+new Date();
+	 document.getElementById("imgValidate").src="/graduation/code.jsp?"+new Date();
   }
 
   $(function() {
