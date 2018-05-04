@@ -9,11 +9,9 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.net.URLEncoder;
 import java.util.Map;
-
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 
@@ -53,7 +51,8 @@ public class WordUtils {
             // 设置浏览器以下载的方式处理该文件名  
            // String fileName = "开题报告.doc";  
             response.setHeader("Content-Disposition", "attachment;filename="  
-                    .concat(String.valueOf(URLEncoder.encode(fileName, "UTF-8"))));  
+                   // .concat(String.valueOf(URLEncoder.encode(fileName, "UTF-8"))));  
+            		  .concat(String.valueOf(Utils.filenameEncoding(fileName, request))));  
   
             out = response.getOutputStream();  
             byte[] buffer = new byte[512];  // 缓冲区  

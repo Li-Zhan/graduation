@@ -59,7 +59,7 @@
 				return;
 			}
 			if(data.lunwenStatus!=null){
-				$('#lunwen_btn').text('更新'+'(上次审核结果为: '+(data.lunwenStatus==1?'评审打分':'退回修改')+')');
+				$('#lunwen_btn').text('更新'+'(上次审核结果为: '+(data.lunwenStatus==1?'审核评分':'退回修改')+')');
 			}
 			$('#lunwen_btn').append($('<input>').attr('type','hidden').val(data.lunwenId));
 		});

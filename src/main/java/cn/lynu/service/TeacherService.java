@@ -1,18 +1,17 @@
 package cn.lynu.service;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-
 import cn.lynu.mapper.StudentMapper;
 import cn.lynu.mapper.TeacherMapper;
 import cn.lynu.mapper.UserMapper;
 import cn.lynu.mapper.YansouTeacherMapper;
 import cn.lynu.mapper.YansouTeamMapper;
-import cn.lynu.model.Project;
 import cn.lynu.model.Student;
 import cn.lynu.model.Teacher;
 import cn.lynu.model.User;
@@ -20,6 +19,7 @@ import cn.lynu.model.YansouTeacher;
 import cn.lynu.model.YansouTeam;
 
 @Service
+@Scope(value="singleton",proxyMode=ScopedProxyMode.TARGET_CLASS)
 public class TeacherService {
 	
 	@Autowired

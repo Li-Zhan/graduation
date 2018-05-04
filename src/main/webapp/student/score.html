@@ -73,7 +73,20 @@
 			var score1=$('#score').find('td').eq(0).text();
 			var score2=$('#score').find('td').eq(1).text();
 			if(!isNaN(score1)&&!isNaN(score2)){
-				$('#score').find('td').eq(2).text((parseInt(score1)+parseInt(score2)));
+				var sum=parseInt(score1)+parseInt(score2);
+				var grade;
+				if(sum>=90){
+					grade='优秀';
+				}else if(sum<90&&sum>=80){
+					grade='良好';
+				}else if(sum<80&&sum>=70){
+					grade='中等';
+				}else if(sum<70&&sum>=60){
+					grade='及格';
+				}else if(sum<60){
+					grade='不及格';
+				}
+				$('#score').find('td').eq(2).text(sum+'[ '+grade+' ]');
 			}
 			
 		});

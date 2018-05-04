@@ -37,22 +37,34 @@ public class UserController {
 		return false;
 	}
 	
-	@ResponseBody
+@ResponseBody
 	@RequestMapping(value="/login",method=RequestMethod.POST)
 	public String login(HttpSession session,String randStr,String account,String password) {
 		String randStr2=(String) session.getAttribute("randStr");
 			if(randStr2!=null&&randStr2.equals(randStr)) {
 				password=Utils.md5(password);
-				User user = userService.login(account, password);
-				if(user!=null) {
-					if(2==user.getUserRoles()) {
-						session.setAttribute("user", user);
-						return "student/sindex.html";
-					}
-					if(1==user.getUserRoles()) {
-						session.setAttribute("user", user);
-						return "teacher/tindex.html";
-					}
+				Subject currentUser = SecurityUtils.getSubject();
+				if (!currentUser.isAuthenticated()) {
+					//把用户名和密码封装为UsernamePasswordToken
+		            UsernamePasswordToken token = new UsernamePasswordToken(account, password);
+		            try {
+		            	System.out.println("token:"+token.hashCode());
+		            	//执行登录
+		                currentUser.login(token);
+		                User user = userService.login(account, password);
+		                if(2==user.getUserRoles()) {
+							session.setAttribute("user", user);
+							return "student/sindex.html";
+						}
+						if(1==user.getUserRoles()) {
+							session.setAttribute("user", user);
+							return "teacher/tindex.html";
+						}
+		            }
+		            //用户不存在
+		            catch (UnknownAccountException ae) {
+		            	return "passwordError";
+		            }
 				}
 			}else {
 				return "randStrError";

@@ -10,8 +10,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="renderer" content="webkit">
 <meta http-equiv="Cache-Control" content="no-siteapp" />
-<link rel="icon" type="image/png" href="/img/lysf.ico">
-<link rel="stylesheet" href="/amazeui/css/amazeui.min.css" />
+<link rel="icon" type="image/png" href="../img/lysf.ico">
+<link rel="stylesheet" href="../amazeui/css/amazeui.min.css" />
 <link rel="stylesheet" href="css/admin.css">
 <link rel="stylesheet" href="css/app.css">
 </head>
@@ -119,7 +119,7 @@
 					   },
 					   async:false,
 					   success: function(data){
-						   if(data.ktbgStatus==0){
+						   if(data.ktbgStatus==0||data.ktbgStatus==null){
 							   	$('#column1').attr('disabled','disabled');
 								$('#column2').attr('disabled','disabled');
 								$('#zqjc_btn').addClass('am-disabled').text('请先完成开题报告');

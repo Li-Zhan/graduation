@@ -16,10 +16,30 @@
 <link rel="stylesheet" href="css/app.css">
 </head>
 
-<body style="overflow:hidden;" >
+<body style="margin-left: 10px; overflow:hidden;" >
 
 	<div id="ref_page" class="am-g">
-		<div class="tpl-content-page-title" style="margin:0 0 10px 16px;">学生列表</div>
+		<div class="tpl-content-page-title" style="margin-bottom: 10px;">学生列表</div>
+	</div>
+	<div class="am-panel am-panel-default">
+		<div class="am-panel-bd am-scrollable-horizontal">
+			<div class="am-u-sm-12">
+				<table
+					class="am-table am-table-centered am-table-striped am-table-hover table-main">
+					<thead>
+						<tr>
+							<th>编号</th>
+							<th>课题名</th>
+							<th>选题学生</th>
+							<th>班级</th>
+							<th>电话号码</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+					<tbody id="slist"></tbody>
+				</table>
+			</div>
+		</div>
 	</div>
 
 <script src="../js/jquery.min.js"></script>
@@ -29,27 +49,22 @@
 		
 		$.get('/graduation/teacherController/getStudentByTeacherId',function(data){
 			$(data).each(function(index,value){
-				var div=$('<div>').addClass('am-u-lg-3 am-u-md-3 am-u-sm-6');
-				var div1=$('<div>').addClass('am-thumbnail chooseStyle');
-				var imgSrc=value.user.userPortrait;
-				if(imgSrc==null){
-					imgSrc='../img/user01.png';
-				}
-				var p=$('<p>').append($('<img>').addClass('am-circle am-center am-img-thumbnail')
-						.attr('src',imgSrc).css({'margin-top':'1.6rem','width':'140px','height':'140px'}));
-				var div2=$('<div>').addClass('am-thumbnail-caption');
-				var div2_p=$('<p>').addClass('am-text-center').text(value.user.userName);
-				var a1=$('<a>').addClass('am-btn am-btn-default am-btn-primary a1')
+				var td1=$('<td>').text(index+1);
+				var td2=$('<td>').text(value.project.projectName);
+				var td3=$('<td>').text(value.user.userName);
+				var td4=$('<td>').text(value.classInfo.className);
+				var td5=$('<td>').text(value.user.userTel);
+				var td6=$('<td>');
+					var a1=$('<a>').addClass('am-btn am-btn-default am-btn-primary a1')
 					.attr({'role':'button','href':'/graduation/ktbgController/gotoTktbg?studentId='+value.studentId}).text('开题报告');
-				var a2=$('<a>').addClass('am-btn am-btn-default am-btn-primary a2')
+					var a2=$('<a>').addClass('am-btn am-btn-default am-btn-primary a2')
 					.attr({'role':'button','href':'/graduation/zqjcController/gotoTzqjc?studentId='+value.studentId}).text('中期检查');
-				var a3=$('<a>').addClass('am-btn am-btn-default am-btn-primary a3')
+					var a3=$('<a>').addClass('am-btn am-btn-default am-btn-primary a3')
 					.attr({'role':'button','href':'/graduation/lunwenController/gotoTstudentlunwen?studentId='+value.studentId}).text('论文');
-				var div2_div=$('<div>').addClass('am-btn-group am-btn-group-justify').append(a1).append(a2).append(a3);
-				div2.append(div2_p).append(div2_div);
-				div1.append(p).append(div2);
-				div.append(div1);
-				$('#ref_page').append(div);
+					var div2_div=$('<div>').addClass('am-btn-group').append(a1).append(a2).append(a3);
+				td6.append(div2_div);
+				var tr=$('<tr>').append(td1).append(td2).append(td3).append(td4).append(td5).append(td6);
+				$('#slist').append(tr);
 			});
 		});
 		

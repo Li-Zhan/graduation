@@ -2,8 +2,6 @@ package cn.lynu.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URLDecoder;
-import java.net.URLEncoder;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -23,6 +21,7 @@ import cn.lynu.model.Student;
 import cn.lynu.model.User;
 import cn.lynu.service.LunwenService;
 import cn.lynu.service.StudentService;
+import cn.lynu.util.Utils;
 
 @Controller
 @RequestMapping("/lunwenController")
@@ -101,7 +100,8 @@ public class LunwenController {
     }
 	
 	 @RequestMapping("/downloadResource")
-	 public @ResponseBody void downloadResource(HttpServletResponse response,String studentId) throws Exception {
+	 public @ResponseBody void downloadResource(HttpServletResponse response,
+			 HttpServletRequest request,String studentId) throws Exception {
 	     if(studentId==null||studentId.isEmpty()) {
 	    	 return;
 	     }
@@ -110,24 +110,18 @@ public class LunwenController {
 	    	 return;
 	     }
 		 String dataDir=lunwen.getLunwenPath();
-	     String fileName;
-		 try {
-	        	fileName=URLDecoder.decode(lunwen.getLunwenName(),"utf-8");
-			} catch (Exception e1) {
-				e1.printStackTrace();
-				return;
+	     String fileName=lunwen.getLunwenName();
+		 Path path=Paths.get(dataDir);
+		 if(Files.exists(path)) {
+			response.setContentType("application/octet-stream");
+			response.addHeader("Content-Disposition", "attachment;filename="+Utils.filenameEncoding(fileName, request));
+			try {
+				Files.copy(path, response.getOutputStream());
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
-	        Path path=Paths.get(dataDir);
-	        if(Files.exists(path)) {
-	            response.setContentType("application/octet-stream");
-		        response.addHeader("Content-Disposition", "attachment;filename="+URLEncoder.encode(fileName, "utf-8"));
-	            try {
-	                Files.copy(path, response.getOutputStream());
-	            } catch (IOException e) {
-	                e.printStackTrace();
-	            }
-	        }
-	        return;
+		 }
+		return;
 	  }
 
 }

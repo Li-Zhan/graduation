@@ -4,7 +4,7 @@
 <!-- 验证码 -->
 <html>
   <head>
-    <title>网上书店</title>
+    <title>验证码</title>
   </head>
   
   <body>

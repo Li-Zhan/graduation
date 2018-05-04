@@ -28,10 +28,12 @@
                       <table class="am-table am-table-centered am-table-striped am-table-hover table-main">
                           <thead>
                               <tr>
-                                  <th class="table-id">编号</th>
-                                  <th class="table-title">课题名</th>
+                                  <th>编号</th>
+                                  <th>课题名</th>
                                   <th>选题学生</th>
-                                  <th class="table-set"><span class="am-fr">操作</span></th>
+                                  <th>班级</th>
+                                  <th>电话号码</th>
+                                  <th><span style="margin-left: 50%;">操作</span></th>
                               </tr>
                           </thead>
                           <tbody id="tsureBody"></tbody>
@@ -56,21 +58,22 @@
 						   var student_id;
 						   if(student!=null){
 							   var td1=$('<td>').addClass('am-text-middle').text((i+1));
-							   var td2=$('<td>').addClass('am-text-middle').append($('<span>').text(data.projectList[i].projectName));
-							  // var td3=$('<td>').addClass('am-text-middle').append($('<textarea>').attr('disabled','disabled').css({'height':'40px','overflow-x':'hidden'}).val(data.projectList[i].projectDescribe));
-							   var td4=$('<td>').addClass('am-text-middle').text(student.user.userName);
+							   var td2=$('<td>').addClass('am-text-middle').text(data.projectList[i].projectName);
+							   var td3=$('<td>').addClass('am-text-middle').text(student.user.userName);
+							   var td4=$('<td>').addClass('am-text-middle').text(student.classInfo.className);
+							   var td5=$('<td>').addClass('am-text-middle').text(student.user.userTel);
 							   student_id=student.studentId;
 							   var btn1=$('<button>').attr('type','button').addClass('am-btn am-btn-default am-btn-xs am-text-secondary yes_btn').append($('<span>').addClass('am-icon-check')).append($('<span>').text(' 确定'));
 							   var btn2=$('<button>').attr('type','button').addClass('am-btn am-btn-default am-btn-xs am-text-danger no_btn').append($('<span>').addClass('am-icon-times')).append($('<span>').text(' 取消'));
-							   var td5=$('<td>').addClass('am-text-middle').append($('<div>').addClass('am-btn-toolbar')
+							   var td6=$('<td>').addClass('am-text-middle').append($('<div>').addClass('am-btn-toolbar')
 									   			.append($('<div>').addClass('am-btn-group am-btn-group-xs').css('float','right').append(btn1).append(btn2)));
 							   if(student_id!=null&&student_id!=''){
-								   td5.append($('<input>').addClass('studentId').attr('type','hidden').val(student_id));
+								   td6.append($('<input>').addClass('studentId').attr('type','hidden').val(student_id));
 								   student_id='';
 							   }
-							   td5.append($('<input>').addClass('teacherId').attr('type','hidden').val(data.teacherId));
-							   td5.append($('<input>').addClass('projectId').attr('type','hidden').val(data.projectList[i].projectId));
-							   var tr=$('<tr>').append(td1).append(td2).append(td4).append(td5);
+							   td6.append($('<input>').addClass('teacherId').attr('type','hidden').val(data.teacherId));
+							   td6.append($('<input>').addClass('projectId').attr('type','hidden').val(data.projectList[i].projectId));
+							   var tr=$('<tr>').append(td1).append(td2).append(td3).append(td4).append(td5).append(td6);
 							   $('#tsureBody').append(tr);
 						   }
 					   }

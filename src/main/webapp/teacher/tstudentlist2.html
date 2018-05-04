@@ -16,10 +16,30 @@
 <link rel="stylesheet" href="css/app.css">
 </head>
 
-<body style="overflow:hidden;" >
+<body style="margin-left: 10px; overflow:hidden;" >
 
 	<div id="ref_page" class="am-g">
-		<div class="tpl-content-page-title" style="margin:0 0 10px 16px;">学生列表</div>
+		<div class="tpl-content-page-title" style="margin-bottom: 10px;">学生列表</div>
+	</div>
+	<div class="am-panel am-panel-default">
+		<div class="am-panel-bd am-scrollable-horizontal">
+			<div class="am-u-sm-12">
+				<table
+					class="am-table am-table-centered am-table-striped am-table-hover table-main">
+					<thead>
+						<tr>
+							<th>编号</th>
+							<th>课题名</th>
+							<th>选题学生</th>
+							<th>班级</th>
+							<th>电话号码</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+					<tbody id="slist"></tbody>
+				</table>
+			</div>
+		</div>
 	</div>
 
 <script src="../js/jquery.min.js"></script>
@@ -29,30 +49,22 @@
 			
 			$.get('/graduation/teacherController/getStudentByTeacherId',function(data){
 				$(data).each(function(index,value){
-					var div=$('<div>').addClass('am-u-lg-3 am-u-md-3 am-u-sm-6');
-					var div1=$('<div>').addClass('am-thumbnail chooseStyle');
-					var imgSrc=value.user.userPortrait;
-					if(imgSrc==null){
-						imgSrc='../img/user01.png';
-					}
-					var p=$('<p>').append($('<img>').addClass('am-circle am-center am-img-thumbnail')
-							.attr('src',imgSrc).css({'margin-top':'1.6rem','width':'140px','height':'140px'}));
-					var div2=$('<div>').addClass('am-thumbnail-caption');
-					var div2_p1=$('<p>').addClass('am-text-center').text(value.user.userName);
-					var pinfen_btn;
-					var studentScore = value.studentScore;
-					pinfen_btn=$('<button>').attr('type','button').addClass('am-btn am-btn-primary am-btn-block').text('进入评分');
-					var div2_p2=$('<p>').append(pinfen_btn);
-					div2_p2.find('button').click(function() {
-						var url='/graduation/studentController/gotoTstudentscore?studentId='+value.studentId;
-						var form=$('<form>').attr({'action':url,'method':'post'});
-						$('body').append(form);
-						form.submit();
-					});
-					div2.append(div2_p1).append(div2_p2);
-					div1.append(p).append(div2);
-					div.append(div1);
-					$('#ref_page').append(div);
+					var td1=$('<td>').text(index+1);
+					var td2=$('<td>').text(value.project.projectName);
+					var td3=$('<td>').text(value.user.userName);
+					var td4=$('<td>').text(value.classInfo.className);
+					var td5=$('<td>').text(value.user.userTel);
+						var studentScore = value.studentScore;
+						var pinfen_btn=$('<button>').attr('type','button').addClass('am-btn am-btn-primary am-btn-block').text('进入评分');
+					var td6=$('<td>').append(pinfen_btn);
+						td6.find('button').click(function() {
+							var url='/graduation/studentController/gotoTstudentscore?studentId='+value.studentId;
+							var form=$('<form>').attr({'action':url,'method':'post'});
+							$('body').append(form);
+							form.submit();
+						});
+					var tr=$('<tr>').append(td1).append(td2).append(td3).append(td4).append(td5).append(td6);
+					$('#slist').append(tr);
 				});
 			});
 

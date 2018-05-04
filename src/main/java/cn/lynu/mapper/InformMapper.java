@@ -17,6 +17,8 @@ public interface InformMapper {
     int insertSelective(Inform record);
 
     List<Inform> selectByExample(InformExample example);
+    
+    List<Inform> selectTitleAndId();
 
     Inform selectByPrimaryKey(Integer informId);
 

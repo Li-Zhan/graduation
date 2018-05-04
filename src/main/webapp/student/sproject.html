@@ -135,7 +135,12 @@
 				$.get('/graduation/studentController/hasChooseProject',function(data){
 					if(data.studentId!=null){
 						$('input:hidden').each(function(index,value){
-							if($(this).val()==data.studentId){
+							var value=$(this).val();
+							if(value==''||value==null){
+								//清除按钮
+								del_projectBtn();
+							}
+							if(value==data.studentId){
 								//清除按钮
 								del_projectBtn();
 							}

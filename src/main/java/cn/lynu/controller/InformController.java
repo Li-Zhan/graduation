@@ -31,4 +31,10 @@ public class InformController {
 		return pageInfo;
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="/getSubInformById",method=RequestMethod.GET)
+	public Inform getSubInformById(int informId) {
+		return informService.getSubInformById(informId);
+	}
+	
 }

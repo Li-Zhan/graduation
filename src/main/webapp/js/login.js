@@ -1,5 +1,5 @@
 //刷新验证码
-  refresh();
+  $('#imgValidate').css('src',"/graduation/code.jsp?"+new Date());
   function refresh(){
 	 document.getElementById("imgValidate").src="/graduation/code.jsp?"+new Date();
   }
@@ -42,17 +42,29 @@
 	//登录
 	$(document).keyup(function(event){
 		if(event.keyCode ==13){
-			login();
-			 }
+			var account=$('#user-account').val().trim();
+	 		var password=$('#user-password').val().trim();
+	 		var randStr=$('#randStr').val().trim();
+	 		if(account==''||password==''||randStr==''){
+	 			return;
+	 		}
+	 		login(account,password,randStr);
+		}
 	});
  	$('#login_btn').click(function() {
- 		login();
+ 		var account=$('#user-account').val().trim();
+ 		var password=$('#user-password').val().trim();
+ 		var randStr=$('#randStr').val().trim();
+ 		if(account==''||password==''||randStr==''){
+ 			return;
+ 		}
+ 		login(account,password,randStr);
 	}); 
- 	function login() {
+ 	function login(account,password,randStr) {
  		$.post("/graduation/userController/login", { 
-			account: $('#user-account').val().trim(),
-			password: $('#user-password').val().trim(),
-			randStr: $('#randStr').val().trim()
+			account: account,
+			password: password,
+			randStr: randStr
 			},
 			   function(data){
 			     if(data=="randStrError"){
@@ -101,10 +113,14 @@
  			var a=$('<a>').attr('href','#').addClass('am-text-truncate');
  			a.append($('<span>').text(data.list[i].informTitle));
  			a.append($('<span>').text(getMyDate(data.list[i].createDate)));
- 			a.append($('<span>').text(data.list[i].informBody).css('display','none'));
+ 			a.append($('<span>').text(data.list[i].informId).css('display','none'));
  			a.on('click',function(){
- 				$('#modal_title').find('span').text($(this).find('span').eq(0).text());
- 				$('#model_body').html($(this).find('span').eq(2).text());
+ 				$.get('/graduation/informController/getSubInformById',{
+ 					'informId':$(this).find('span').eq(2).text()
+	 				},function(data){
+	 					$('#model_body').html(data.informBody);
+	 				});
+	 			$('#inform-modal').modal({width:'600px'});
  				$('#inform-modal').modal('open');
  				return false;
  			});

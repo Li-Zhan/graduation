@@ -1,8 +1,6 @@
 package cn.lynu.controller;
 
 import java.io.IOException;
-import java.net.URLDecoder;
-import java.net.URLEncoder;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -20,6 +18,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import cn.lynu.model.Down;
 import cn.lynu.service.DownService;
+import cn.lynu.util.Utils;
 
 @Controller
 @RequestMapping("/downController")
@@ -44,15 +43,10 @@ public class DownController {
 	    	 return null;
 	     }   
 		 String dataDir=request.getServletContext().getRealPath("/WEB-INF/file");
-	        try {
-	        	fileName=URLDecoder.decode(fileName,"utf-8");
-			} catch (Exception e1) {
-				e1.printStackTrace();
-			}
-	        Path path=Paths.get(dataDir, fileName);
-	        if(Files.exists(path)) {
+	     Path path=Paths.get(dataDir, fileName);
+	     if(Files.exists(path)) {
 	            response.setContentType("application/octet-stream");
-		        response.addHeader("Content-Disposition", "attachment;filename="+URLEncoder.encode(fileName, "utf-8"));
+		        response.addHeader("Content-Disposition", "attachment;filename="+Utils.filenameEncoding(fileName, request));
 	            try {
 	                Files.copy(path, response.getOutputStream());
 	            } catch (IOException e) {
@@ -61,5 +55,5 @@ public class DownController {
 	        }
 	        return null;
 	  }
-
+	 
 }

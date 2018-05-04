@@ -26,7 +26,7 @@
 			<div class="am-panel-bd am-scrollable-horizontal">
 				
 				<div class="am-u-sm-12">
-                    <table class="am-table am-table-centered am-table-striped am-table-hover">
+                    <table class="am-table am-table-centered am-table-striped am-table-hover table-main">
                         <thead>
                             <tr>
                                 <th>学号</th>
@@ -130,7 +130,7 @@
 				},function(data){
 					//清除之前的数据
  					$('#yansou_stulist').empty();
-					if(data.list.length!=0){
+					if(if(data.list.length!=0&&data.list[0].teacher!=null){){
 						yansouStuBody(data);
 						$('#news-Pagination-1').css('display','');
 						if(j==1){

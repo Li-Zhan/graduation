@@ -213,7 +213,7 @@
 
 	<script src="http://localhost:8080/graduation/js/jquery.min.js"></script>
 	<script src="http://localhost:8080/graduation/amazeui/js/amazeui.min.js"></script>
-	<script src="http://localhost:8080/graduationn/teacher/js/app.js"></script>
+	<script src="http://localhost:8080/graduation/teacher/js/app.js"></script>
 	<script type="text/javascript">
 		$(function() {
 			
@@ -287,27 +287,37 @@
 			}
 			
 			//点击提交评价按钮
-			$('#pinjia_btn').click(function () {
-				  var $btn = $(this);
-				  var score=$('#score').text();
-				  if(isNull(score)){
-					  return;
-				  }
-				  $.post('/graduation/studentController/updateScore',{
-						'_method':'put',
-						studentScore:score,
-						teacherEvaluate:$('#teacherEvaluate').val(),
-						studentId:studentId
-					},function(data){
-						if(data){
-							  $btn.button('loading');
-							    setTimeout(function(){
-							    	disableBtn('pinjia_btn','提交完成');
-							  }, 3000);
-						}
-					}); 
-				    
-				});
+			$.get('/graduation/lunwenController/getLunwenBySid',{
+				studentId:studentId
+			},function(data){
+				if(data.lunwenStatus!=null&&data.lunwenStatus==1){
+					$('#pinjia_btn').removeClass('am-disabled').text('提交');
+					$('#pinjia_btn').click(function () {
+						  var $btn = $(this);
+						  var score=$('#score').text();
+						  if(isNull(score)){
+							  return;
+						  }
+						  $.post('/graduation/studentController/updateScore',{
+								'_method':'put',
+								studentScore:score,
+								teacherEvaluate:$('#teacherEvaluate').val(),
+								studentId:studentId
+							},function(data){
+								if(data){
+									  $btn.button('loading');
+									    setTimeout(function(){
+									    	disableBtn('pinjia_btn','提交完成');
+									  }, 3000);
+								}
+							}); 
+						    
+						});
+				}else{
+					$('#pinjia_btn').addClass('am-disabled').text('请先审核论文');
+				}
+			});
+			
 			
 		});
 	</script>

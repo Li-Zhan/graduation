@@ -242,4 +242,14 @@
       admin_id = #{adminId,jdbcType=CHAR}
     where inform_id = #{informId,jdbcType=INTEGER}
   </update>
+  
+  <resultMap type="cn.lynu.model.Inform" id="titleAndId">
+  	<id property="informId" column="inform_id"/>
+  	<result property="informTitle" column="inform_title"/>
+  	<result property="createDate" column="create_date"/>
+  </resultMap>
+  <select id="selectTitleAndId" resultMap="titleAndId">
+  	select inform_id,inform_title,create_date from inform
+  </select>
+  
 </mapper>

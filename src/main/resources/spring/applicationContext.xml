@@ -7,6 +7,8 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 	
+		<import resource="spring-shiro.xml"/>
+	
 		<context:property-placeholder location="classpath:jdbc.properties"/>
 		<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
 			<property name="url" value="${jdbc.jdbcUrl}"></property>
