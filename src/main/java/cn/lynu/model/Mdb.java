@@ -1,6 +1,10 @@
 package cn.lynu.model;
 
-public class Mdb{
+import java.io.Serializable;
+
+public class Mdb implements Serializable{
+	private static final long serialVersionUID = -6217898367611951524L;
+	
 	private Integer mdbId;
 
     private String column1;

@@ -1,8 +1,11 @@
 package cn.lynu.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Lunwen{
+public class Lunwen implements Serializable{
+	private static final long serialVersionUID = 8314940987124771477L;
+	
 	private Integer lunwenId;
 
     private String lunwenName;

@@ -1,6 +1,10 @@
 package cn.lynu.model;
 
-public class Ktbg{
+import java.io.Serializable;
+
+public class Ktbg  implements Serializable{
+	private static final long serialVersionUID = 5666133656817701116L;
+	
 	private Integer ktbgId;
 
     private String column1;

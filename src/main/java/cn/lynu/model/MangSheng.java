@@ -1,6 +1,10 @@
 package cn.lynu.model;
 
-public class MangSheng{
+import java.io.Serializable;
+
+public class MangSheng implements Serializable{
+	private static final long serialVersionUID = 3851149247942903537L;
+	
 	private Integer id;
 
     private String studentId;

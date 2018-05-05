@@ -1,6 +1,10 @@
 package cn.lynu.model;
 
-public class Project{
+import java.io.Serializable;
+
+public class Project implements Serializable{
+	private static final long serialVersionUID = -7818290024619870851L;
+	
 	private Integer projectId;
 
     private String projectName;

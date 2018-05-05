@@ -1,6 +1,10 @@
 package cn.lynu.model;
 
-public class DaBian{
+import java.io.Serializable;
+
+public class DaBian implements Serializable{
+	private static final long serialVersionUID = -9000649275655068218L;
+	
 	private Integer id;
 
     private String studentId;

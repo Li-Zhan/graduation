@@ -1,6 +1,10 @@
 package cn.lynu.model;
 
-public class Zqjc{
+import java.io.Serializable;
+
+public class Zqjc implements Serializable{
+	private static final long serialVersionUID = 2234223632477485386L;
+	
 	private Integer zqjcId;
 
     private String column1;

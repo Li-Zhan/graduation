@@ -1,8 +1,11 @@
 package cn.lynu.model;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Teacher{
+public class Teacher implements Serializable{
+	private static final long serialVersionUID = -7142905687688445947L;
+	
 	private String teacherId;
 
     private String teacherDescribe;
