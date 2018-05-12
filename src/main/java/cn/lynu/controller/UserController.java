@@ -37,7 +37,7 @@ public class UserController {
 		return false;
 	}
 	
-@ResponseBody
+	@ResponseBody
 	@RequestMapping(value="/login",method=RequestMethod.POST)
 	public String login(HttpSession session,String randStr,String account,String password) {
 		String randStr2=(String) session.getAttribute("randStr");
@@ -48,27 +48,38 @@ public class UserController {
 					//把用户名和密码封装为UsernamePasswordToken
 		            UsernamePasswordToken token = new UsernamePasswordToken(account, password);
 		            try {
-		            	System.out.println("token:"+token.hashCode());
 		            	//执行登录
 		                currentUser.login(token);
-		                User user = userService.login(account, password);
-		                if(2==user.getUserRoles()) {
-							session.setAttribute("user", user);
-							return "student/sindex.html";
-						}
-						if(1==user.getUserRoles()) {
-							session.setAttribute("user", user);
-							return "teacher/tindex.html";
-						}
+		                return toUI(session,account,password);
 		            }
 		            //用户不存在
 		            catch (UnknownAccountException ae) {
 		            	return "passwordError";
 		            }
+		            //用户被锁定
+		            catch (LockedAccountException e) {
+		            	return "passwordError";
+					}
+				}else {
+					return toUI(session,account,password);
 				}
 			}else {
 				return "randStrError";
 			}
+	}
+	
+	private String toUI(HttpSession session,String account,String password) {
+		User user = userService.login(account, password);
+		if(user!=null) {
+			if(2==user.getUserRoles()) {
+				session.setAttribute("user", user);
+				return "student/sindex.html";
+			}
+			if(1==user.getUserRoles()) {
+				session.setAttribute("user", user);
+				return "teacher/tindex.html";
+			}
+		}
 		return "passwordError";
 	}
 	

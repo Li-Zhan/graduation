@@ -63,8 +63,21 @@
 
 				for(var i=0;i<data.list.length;i++){
 					var tr=$('<tr>').css('height','60px').append($('<td>').addClass('am-text-middle').append($('<a>').attr('href','javascript:;').text(data.list[i].projectName)));
-	              	var textarea=$('<textarea>').attr('disabled','disabled').css('height','40px').text(data.list[i].projectDescribe);
-					tr.append($('<td>').addClass('am-text-middle').append(textarea));
+	              	/*  var textarea=$('<textarea>').attr('disabled','disabled').css('height','40px').text(data.list[i].projectDescribe);
+ 	              	tr.append($('<td>').addClass('am-text-middle').append(textarea)); */
+        			var textarea=data.list[i].projectDescribe;
+        			var textareaBtn=$('<button>').attr({'type':'button'}).addClass('am-btn am-btn-default').text('点击查看详情')
+        							.append($('<input>').attr('type','hidden').val(textarea));
+					tr.append($('<td>').addClass('am-text-middle').append(textareaBtn));
+					textareaBtn.click(function(){
+						var content=$(this).find('input:hidden').val();
+						if(content.trim()==''){
+							content='没有填写';
+						}
+					 	$(this).popover({
+						    content: content
+						  });  
+					}); 
 	              	tr.append($('<td>').addClass('am-text-middle').text(data.list[i].projectFrom.projectFromName));
 	              	tr.append($('<td>').addClass('am-text-middle').text(data.list[i].teacher.user.userName));
 	              	tr.append($('<td>').addClass('am-text-middle').text(data.list[i].teacher.user.userTel));

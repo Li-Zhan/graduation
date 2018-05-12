@@ -5,6 +5,7 @@ import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.realm.AuthenticatingRealm;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,9 @@ public class LoginRealm extends AuthenticatingRealm{
         User user = userService.login(userName, password);
         if(user==null) {
         	throw new UnknownAccountException("用户不存在");
+        }
+        if(user.getUserRoles()==null||user.getUserRoles()==3){
+            throw new LockedAccountException("用户被锁定");
         }
         //4.根据用户信息构建AuthenticationInfo，我们常用其子类：
         //1).principal 用户实体信息  可以是userName，也可以是数据表对应的实体类信息
