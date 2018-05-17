@@ -17,7 +17,7 @@
 
 ## 部分界面
 - 登录(学生,教师统一使用该登录界面进行登录)
-!["登录"](screen/login.webp)
+!["登录"](screen/login.jpg)
 
 - 主页(主页可以看到一些内容概要与相关提示)
 !["主页"](screen/index.png)
@@ -26,4 +26,4 @@
 !["教师列表"](screen/choose.png)
 
 - 申报课题(教师只有填写课题名之后才可以申报课题)
-!["申报课题"](screen/kt.webp)
+!["申报课题"](screen/kt.png)
