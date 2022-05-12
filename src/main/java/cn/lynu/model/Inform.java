@@ -1,8 +1,9 @@
 package cn.lynu.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Informimplements Serializable{
+public class Inform implements Serializable {
 
 	private static final long serialVersionUID = 6362674348755025887L;
 
